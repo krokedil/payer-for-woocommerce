@@ -95,6 +95,12 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			wp_localize_script( 'payer_checkout', 'payer_checkout_params', $checkout_localize_params );
 
 			wp_enqueue_script( 'payer_checkout' );
+
+			wp_register_style(
+				'payer_style',
+				plugin_dir_url( __FILE__ ) . '/assets/css/checkout.css'
+			);
+			wp_enqueue_style( 'payer_style' );
 		}
 
 		public static function log( $message ) {

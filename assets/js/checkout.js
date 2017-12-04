@@ -11,7 +11,7 @@ jQuery( function( $ ) {
 
         addGetAddressButton: function() {
             var pno_field   = $('#billing_pno_field'),
-                button      = '<div class="payer_get_address_button button" id="payer_get_address">Get Address</div>';
+                button      = '<button type="button" class="payer_get_address_button button" id="payer_get_address">Get Address</button>';
 
             pno_field.after(button);
         },

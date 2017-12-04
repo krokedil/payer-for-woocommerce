@@ -1,0 +1,11 @@
+#billing_pno_field, #billing_postcode_field{
+    max-width:50%;
+    display:inline-block;
+}
+#billing_postcode_field{
+    padding-right:10px;
+}
+#payer_get_address{
+    clear:both;
+    display:block;
+}
