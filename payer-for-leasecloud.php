@@ -58,13 +58,16 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 			// Include request classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-create-client.php' );
-			include_once( PAYER_PLUGIN_DIR .'/classes/requests/payer-create-purchase.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-create-purchase.php' );
 
 			// Include request helper classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-payment.php' );
-			include_once( PAYER_PLUGIN_DIR .'/classes/requests/helpers/payer-get-purchase.php' );
-			include_once( PAYER_PLUGIN_DIR .'/classes/requests/helpers/payer-get-items.php' );
-			include_once( PAYER_PLUGIN_DIR .'/classes/requests/helpers/payer-get-customer.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-purchase.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-items.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-customer.php' );
+
+			// Include classes
+			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-callbacks.php' );
 		}
 
 		public function define() {

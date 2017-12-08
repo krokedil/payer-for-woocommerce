@@ -13,6 +13,9 @@ class Payer_Get_Payment {
             case 'payer_card_payment' :
                 $method = 'card';
                 break;
+            case 'payer_bank_payment' :
+                $method = '';
+                break;
             default :
                 $method = 'card';
                 break;

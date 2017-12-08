@@ -36,10 +36,6 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 		);
 	}
 
-	public function payer_thankyou( $order_id ) {		
-		
-	}
-
 	public function add_pno_field( $fields ) {
 		$fields['billing']['billing_pno'] = array(
 			'label'     	=> __('Personal number', 'payer-for-woocommerce'),

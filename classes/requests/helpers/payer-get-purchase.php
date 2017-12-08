@@ -5,7 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Payer_Get_Purchase {
     public static function get_purchase( $order_id ) {
-        $payer_settings = get_option( 'woocommerce_payer_settings' );
+        $order = wc_get_order( $order_id );
+        $payment_method = $order->get_payment_method();
+        $payer_settings = get_option( 'woocommerce_' . $payment_method . '_settings' );        
         if ( 'yes' === $payer_settings['test_mode'] ) {
             $test_mode = true;
         } else {
@@ -14,14 +16,12 @@ class Payer_Get_Purchase {
 
         $order = wc_get_order( $order_id );
 
-        $order_number = $order->get_order_number();
-
         return array(
-            'reference_id'  =>  $order_number,
+            'reference_id'  =>  $order_id,
             'customer'      =>  Payer_Get_Customer::get_customer( $order_id ),
             'items'         =>  Payer_Get_Items::get_items( $order_id ),
             'currency'      =>  get_woocommerce_currency(),
-            'test_mode'     =>  true,
+            'test_mode'     =>  $test_mode,
             'client_ip'     =>  get_post_meta( $order_id, '_customer_ip_address', true ),
         );
     }
