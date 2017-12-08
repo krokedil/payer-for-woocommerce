@@ -17,11 +17,23 @@ jQuery( function( $ ) {
         },
 
         getAddress: function() {
-            console.log('click');
+            var personal_number = $('#billing_pno').val();
+
+            var data = {
+                'action': 'get_address',
+                'personal_number': personal_number,
+            }
+            jQuery.post(payer_checkout_params.get_adress, data, function (data) {
+                if (true === data.success) {
+                    console.log(data);
+                }
+            });
         },
     }
     wc_payer_checkout.moveInputFields();
-    wc_payer_checkout.addGetAddressButton();
+    if ( payer_checkout_params.locale === 'SE' ) {
+        wc_payer_checkout.addGetAddressButton();
+    }
     $( "#payer_get_address" ).click(function() { 
             wc_payer_checkout.getAddress();
     });

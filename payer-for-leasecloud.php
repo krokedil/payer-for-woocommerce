@@ -73,6 +73,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 			// Include classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-callbacks.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-ajax.php' );
 		}
 
 		public function define() {
@@ -97,7 +98,9 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			);
 
 			$checkout_localize_params = array(
-
+				'ajaxurl'		=>	admin_url( 'admin-ajax.php' ),
+				'locale'		=>	WC()->customer->get_billing_country(),
+				'get_adress'	=>	WC_AJAX::get_endpoint( 'get_adress' ),
 			);
 
 			wp_localize_script( 'payer_checkout', 'payer_checkout_params', $checkout_localize_params );
