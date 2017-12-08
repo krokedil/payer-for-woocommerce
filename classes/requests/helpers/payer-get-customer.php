@@ -7,8 +7,8 @@ class Payer_Get_Customer {
     public static function get_customer( $order_id ) {
         $order = wc_get_order( $order_id );
        return array(
-            'id'                =>  ( null !== get_post_meta( $order_id, '_customer_user', true ) ) ? '' : get_post_meta( $order_id, '_customer_user', true ),
-            'identity_number'   =>  ( null !== get_post_meta( $order_id, '_billing_pno', true ) ) ? '' : get_post_meta( $order_id, '_billing_pno', true ),
+            'id'                =>  ( null === get_post_meta( $order_id, '_customer_user', true ) ) ? '' : get_post_meta( $order_id, '_customer_user', true ),
+            'identity_number'   =>  ( null === get_post_meta( $order_id, '_billing_pno', true ) ) ? '' : get_post_meta( $order_id, '_billing_pno', true ),
             'organisation'      =>  ( false == $order->get_billing_company() ) ? '' : $order->get_billing_company(),
             'your_reference'    =>  '',
             'first_name'        =>  ( false == $order->get_billing_first_name() ) ? '' : $order->get_billing_first_name(),
