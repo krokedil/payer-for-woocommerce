@@ -5,9 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Payer_Get_Purchase {
     public static function get_purchase( $order_id ) {
-        $order = wc_get_order( $order_id );
-        $payment_method = $order->get_payment_method();
-        $payer_settings = get_option( 'woocommerce_' . $payment_method . '_settings' );        
+        $payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );        
         if ( 'yes' === $payer_settings['test_mode'] ) {
             $test_mode = true;
         } else {

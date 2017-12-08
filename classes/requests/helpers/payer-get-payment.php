@@ -14,7 +14,19 @@ class Payer_Get_Payment {
                 $method = 'card';
                 break;
             case 'payer_bank_payment' :
-                $method = '';
+                $method = 'bank';
+                break;
+            case 'payer_invoice_payment' :
+                $method = 'invoice';
+                break;
+            case 'payer_installment_payment' :
+                $method = 'installment';
+                break;
+            case 'payer_swish_payment' :
+                $method = 'swish';
+                break;
+            case 'payer_einvoice_payment' :
+                $method = 'einvoice';
                 break;
             default :
                 $method = 'card';

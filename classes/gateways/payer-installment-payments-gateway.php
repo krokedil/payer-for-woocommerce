@@ -3,12 +3,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class Payer_Card_Payments_Gateway extends Payer_Factory_Gateway {
+class Payer_Installment_Payments_Gateway extends Payer_Factory_Gateway {
 	public function __construct() {
 		parent::__construct();
 
-		$this->id                   = 'payer_card_payment';
-		$this->method_title         = __( 'Payer Card Payments', 'payer-for-woocommerce' );
+		$this->id                   = 'payer_installment_payment';
+		$this->method_title         = __( 'Payer Installment Payments', 'payer-for-woocommerce' );
 		$this->method_description   = __( 'Allows payments through ' . $this->method_title . '.', 'payer-for-woocommerce' );
 
 		$this->title       		    = $this->get_option( 'title' );
@@ -27,10 +27,10 @@ class Payer_Card_Payments_Gateway extends Payer_Factory_Gateway {
 	}
 }
 
-add_filter( 'woocommerce_payment_gateways', 'add_payer_card_gateway' );
+add_filter( 'woocommerce_payment_gateways', 'add_payer_installment_gateway' );
 
-function add_payer_card_gateway( $methods ) {
-	$methods[] = 'Payer_Card_Payments_Gateway';
+function add_payer_installment_gateway( $methods ) {
+	$methods[] = 'Payer_Installment_Payments_Gateway';
 
 	return $methods;
 }

@@ -3,10 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-// Add the gateway
-add_filter( 'woocommerce_payment_gateways', 'add_payer_gateway' );
-
-class Payer_Card_Payments_Gateway extends Payer_Factory_Gateway {
+class Payer_Bank_Payments_Gateway extends Payer_Factory_Gateway {
 	public function __construct() {
 		parent::__construct();
 
@@ -29,8 +26,11 @@ class Payer_Card_Payments_Gateway extends Payer_Factory_Gateway {
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 	}
 }
-function add_payer_gateway( $methods ) {
-	$methods[] = 'Payer_Card_Payments_Gateway';
+
+add_filter( 'woocommerce_payment_gateways', 'add_payer_bank_gateway' );
+
+function add_payer_bank_gateway( $methods ) {
+	$methods[] = 'Payer_Bank_Payments_Gateway';
 
 	return $methods;
 }

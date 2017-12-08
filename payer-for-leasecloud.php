@@ -55,6 +55,11 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			// Include the gateway classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-factory-gateway.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-card-payments-gateway.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-bank-payments-gateway.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-invoice-payments-gateway.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-installment-payments-gateway.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-swish-payments-gateway.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-einvoice-payments-gateway.php' );
 
 			// Include request classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-create-client.php' );

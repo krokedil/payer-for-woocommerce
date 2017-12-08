@@ -6,7 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	public function __construct() {
 		add_filter( 'woocommerce_checkout_fields' , array( $this, 'add_pno_field' ) );
-		add_action( 'woocommerce_thankyou_payer_card_payment', array( $this, 'payer_thankyou' ) );
 	}
 
 	public function init_form_fields() {
