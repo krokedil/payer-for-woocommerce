@@ -72,7 +72,7 @@ if ( $this->id === 'payer_card_payment' ) {
 		'description'   => __( 'Enter your Payer REST API key', 'payer-for-woocommerce' ),
 		'default'       => '',
 		'desc_tip'      => true,
-	)
+	);
 
 	$settings['test_mode_settings_title'] = array(
 		'title' => __( 'Test Mode Settings', 'payer-for-woocommerce' ),
