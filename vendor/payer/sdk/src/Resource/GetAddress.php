@@ -113,7 +113,6 @@ class GetAddress extends PayerResource
                 $response->getData()
             )
         );
-
         return array(
             'status'            => $customer['status'],
             'identity_number'   => $customer['identity_number'],

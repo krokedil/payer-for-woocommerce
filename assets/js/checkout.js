@@ -17,17 +17,40 @@ jQuery( function( $ ) {
         },
 
         getAddress: function() {
-            var personal_number = $('#billing_pno').val();
-
+            var personal_number = $('#billing_pno').val(),
+                zip_code = $('#billing_postcode').val();
+            // Set AJAX data
             var data = {
                 'action': 'get_address',
                 'personal_number': personal_number,
+                'zip_code' : zip_code,
             }
-            jQuery.post(payer_checkout_params.get_adress, data, function (data) {
+            // Make AJAX call
+            jQuery.post(payer_checkout_params.get_address, data, function (data) {
                 if (true === data.success) {
-                    console.log(data);
+                    var address_data = data.data;
+                    wc_payer_checkout.populateAddressFields( address_data );
                 }
             });
+        },
+        populateAddressFields: function( address_data ) {
+            // Set fields
+            var first_name      = $('#billing_first_name'),
+                last_name       = $('#billing_last_name'),
+                organisation    = $('#billing_company'),
+                city            = $('#billing_city'),
+                zip_code        = $('#billing_postcode'),
+                address_1       = $('#billing_address_1'),
+                address_2       = $('#billing_address_2');
+
+            // Populate fields - Needs to be masked.
+            first_name.val( address_data.first_name );
+            last_name.val( address_data.last_name );
+            organisation.val( address_data.organisation );
+            city.val( address_data.city );
+            zip_code.val( address_data.zip_code );
+            address_1.val( address_data.address_1 );
+            address_2.val( address_data.address_2 );
         },
     }
     wc_payer_checkout.moveInputFields();

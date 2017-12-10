@@ -62,14 +62,17 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-einvoice-payments-gateway.php' );
 
 			// Include request classes
-			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-create-client.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-create-purchase.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-get-address.php' );
 
 			// Include request helper classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-payment.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-purchase.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-items.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-customer.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-challenge.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-client.php' );
+			
 
 			// Include classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-callbacks.php' );
@@ -100,7 +103,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			$checkout_localize_params = array(
 				'ajaxurl'		=>	admin_url( 'admin-ajax.php' ),
 				'locale'		=>	WC()->customer->get_billing_country(),
-				'get_adress'	=>	WC_AJAX::get_endpoint( 'get_adress' ),
+				'get_address'	=>	WC_AJAX::get_endpoint( 'get_address' ),
 			);
 
 			wp_localize_script( 'payer_checkout', 'payer_checkout_params', $checkout_localize_params );
