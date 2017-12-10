@@ -123,7 +123,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 				if ( empty( self::$log ) ) {
 					self::$log = new WC_Logger();
 				}
-				self::$log->add( 'leasecloud', $message );
+				self::$log->add( 'payer', $message );
 			}
 		}
 	}
