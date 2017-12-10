@@ -66,6 +66,14 @@ if ( $this->id === 'payer_card_payment' ) {
 		'desc_tip'      => true,
 	);
 
+	$settings['payer_rest_key_1'] = array(
+		'title'         => __( 'REST API key', 'payer-for-woocommerce' ),
+		'type'          => 'text',
+		'description'   => __( 'Enter your Payer REST API key', 'payer-for-woocommerce' ),
+		'default'       => '',
+		'desc_tip'      => true,
+	)
+
 	$settings['test_mode_settings_title'] = array(
 		'title' => __( 'Test Mode Settings', 'payer-for-woocommerce' ),
 		'type'  => 'title',
