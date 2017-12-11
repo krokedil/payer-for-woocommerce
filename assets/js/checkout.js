@@ -41,16 +41,34 @@ jQuery( function( $ ) {
                 city            = $('#billing_city'),
                 zip_code        = $('#billing_postcode'),
                 address_1       = $('#billing_address_1'),
-                address_2       = $('#billing_address_2');
+                address_2       = $('#billing_address_2'),
+                identity_number = $('#billing_pno');
 
             // Populate fields - Needs to be masked.
-            first_name.val( address_data.first_name );
-            last_name.val( address_data.last_name );
-            organisation.val( address_data.organisation );
-            city.val( address_data.city );
-            zip_code.val( address_data.zip_code );
-            address_1.val( address_data.address_1 );
-            address_2.val( address_data.address_2 );
+            first_name.val( wc_payer_checkout.maskFormField( address_data.first_name ) ).prop( 'readonly', true );
+            last_name.val( wc_payer_checkout.maskFormField( address_data.last_name ) ).prop( 'readonly', true );
+            organisation.val( wc_payer_checkout.maskFormField( address_data.organisation ) ).prop( 'readonly', true );
+            city.val( wc_payer_checkout.maskFormField( address_data.city ) ).prop( 'readonly', true );
+            zip_code.val( wc_payer_checkout.maskFormField( address_data.zip_code ) ).prop( 'readonly', true );
+            address_1.val( wc_payer_checkout.maskFormField( address_data.address_1 ) ).prop( 'readonly', true );
+            address_2.val( wc_payer_checkout.maskFormField( address_data.address_2 ) ).prop( 'readonly', true );
+            identity_number.val( wc_payer_checkout.maskFormField( address_data.identity_number ) ).prop( 'readonly', true );
+        },
+        maskFormField: function( field ) {
+            if ( field !== '' ) {
+                var field_split = field.split( ' ' );
+                var field_masked = new Array();
+    
+                $.each(field_split, function ( i, val ) {
+                    if ( isNaN( val ) ) {
+                        field_masked.push( val.charAt( 0 ) + Array( val.length ).join( '*' ) );
+                    } else {
+                        field_masked.push( '**' + val.substr( val.length - 3 ) );
+                    }
+                });
+    
+                return field_masked.join( ' ' );
+            }
         },
     }
     wc_payer_checkout.moveInputFields();
