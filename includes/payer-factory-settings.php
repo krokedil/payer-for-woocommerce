@@ -35,7 +35,7 @@ if ( $this->id === 'payer_card_payment' ) {
 	);
 
 	$settings['payer_soap_id'] = array(
-		'title'         => __( 'Soap Id', 'payer-for-woocommerce' ),
+		'title'         => __( 'Soap ID', 'payer-for-woocommerce' ),
 		'type'          => 'text',
 		'description'   => __( 'Enter your Payer SOAP ID', 'payer-for-woocommerce' ),
 		'default'       => '',
@@ -67,9 +67,9 @@ if ( $this->id === 'payer_card_payment' ) {
 	);
 
 	$settings['payer_rest_key_1'] = array(
-		'title'         => __( 'REST API key', 'payer-for-woocommerce' ),
+		'title'         => __( 'Rest key', 'payer-for-woocommerce' ),
 		'type'          => 'text',
-		'description'   => __( 'Enter your Payer REST API key', 'payer-for-woocommerce' ),
+		'description'   => __( 'Enter your Payer Rest key', 'payer-for-woocommerce' ),
 		'default'       => '',
 		'desc_tip'      => true,
 	);

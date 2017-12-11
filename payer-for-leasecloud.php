@@ -77,6 +77,9 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			// Include classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-callbacks.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-ajax.php' );
+
+			// Include function files
+			include_once( PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php' );
 		}
 
 		public function define() {

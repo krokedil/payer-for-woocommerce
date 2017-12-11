@@ -24,6 +24,16 @@ class Payer_Invoice_Payments_Gateway extends Payer_Factory_Gateway {
 		$this->init_settings();
 
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
+
+		add_filter( 'woocommerce_page_wc-settings', array( $this, 'show_keys_in_settings' ) );				
+	}
+
+	public function show_keys_in_settings() {
+		if ( isset( $_GET['section'] ) ) {
+			if ( $this->id === $_GET['section'] ) {
+				payer_show_credentials_form();
+			}
+		}
 	}
 }
 
