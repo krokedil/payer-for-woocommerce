@@ -13,9 +13,6 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	}
 
 	public function process_payment( $order_id ) {
-		if( isset( $_POST['billing_pno'] ) ) {
-			update_post_meta( $order_id, '_billing_pno', $_POST['billing_pno'] );
-		}
 		$order = wc_get_order( $order_id );
 
 		global $woocommerce;
@@ -28,6 +25,8 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 			),
 			$checkout_url
 		);
+
+		$this->clear_sessions();
 
 		return array(
 			'result'   => 'success',
@@ -45,5 +44,9 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 		 );
 	
 		 return $fields;
+	}
+
+	private function clear_sessions() {
+		WC()->session->__unset( 'payer_customer_details' );
 	}
 }

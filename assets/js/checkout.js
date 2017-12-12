@@ -41,8 +41,7 @@ jQuery( function( $ ) {
                 city            = $('#billing_city'),
                 zip_code        = $('#billing_postcode'),
                 address_1       = $('#billing_address_1'),
-                address_2       = $('#billing_address_2'),
-                identity_number = $('#billing_pno');
+                address_2       = $('#billing_address_2');
 
             // Populate fields - Needs to be masked.
             first_name.val( wc_payer_checkout.maskFormField( address_data.first_name ) ).prop( 'readonly', true );
@@ -52,7 +51,6 @@ jQuery( function( $ ) {
             zip_code.val( wc_payer_checkout.maskFormField( address_data.zip_code ) ).prop( 'readonly', true );
             address_1.val( wc_payer_checkout.maskFormField( address_data.address_1 ) ).prop( 'readonly', true );
             address_2.val( wc_payer_checkout.maskFormField( address_data.address_2 ) ).prop( 'readonly', true );
-            identity_number.val( wc_payer_checkout.maskFormField( address_data.identity_number ) ).prop( 'readonly', true );
         },
         maskFormField: function( field ) {
             if ( field !== '' ) {

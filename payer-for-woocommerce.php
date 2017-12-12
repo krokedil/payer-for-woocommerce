@@ -36,6 +36,14 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			add_action( 'plugins_loaded', array( $this, 'init' ) );
 			// Load scripts
 			add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
+
+			add_filter( 'woocommerce_process_checkout_field_billing_first_name', array( $this, 'filter_pre_checked_value' ) );
+			add_filter( 'woocommerce_process_checkout_field_billing_last_name', array( $this, 'filter_pre_checked_value' ) );
+			add_filter( 'woocommerce_process_checkout_field_billing_address_1', array( $this, 'filter_pre_checked_value' ) );
+			add_filter( 'woocommerce_process_checkout_field_billing_address_2', array( $this, 'filter_pre_checked_value' ) );
+			add_filter( 'woocommerce_process_checkout_field_billing_postcode', array( $this, 'filter_pre_checked_value' ) );
+			add_filter( 'woocommerce_process_checkout_field_billing_city', array( $this, 'filter_pre_checked_value' ) );
+			add_filter( 'woocommerce_process_checkout_field_billing_company', array( $this, 'filter_pre_checked_value' ) );
 		}
 
 		public function payer_make_purchase() {
@@ -128,6 +136,30 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 				}
 				self::$log->add( 'payer', $message );
 			}
+		}
+
+		public function filter_pre_checked_value( $value ) {
+			error_log('filter_pre_checked_value');
+			// Only do this for Payer methods
+			$chosen_payment_method = WC()->session->get( 'chosen_payment_method' );
+			if ( strpos( $chosen_payment_method, 'payer' ) !== false ) {
+				$current_filter = current_filter();
+				$current_field  = str_replace( array(
+					'woocommerce_process_checkout_field_billing_',
+					'woocommerce_process_checkout_field_shipping_'
+				), '', $current_filter );
+				if ( strpos($value, '**') !== false ) {
+					$customer_details = WC()->session->get( 'payer_customer_details' );
+					if ( isset( $customer_details[ $current_field ] ) && '' != $customer_details[ $current_field ] ) {
+						return $customer_details[ $current_field ];
+					} else {
+						return $value;
+					}
+				} else {
+					return $value;
+				}
+			}
+			return $value;
 		}
 	}
 	new Payer_For_Woocommerce();
