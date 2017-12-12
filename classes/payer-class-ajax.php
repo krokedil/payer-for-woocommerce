@@ -40,7 +40,7 @@ class Payer_Ajax extends WC_AJAX {
 					'address_2'		=> 	$payer_address_information['address_2'],
 					'company'			=>	$payer_address_information['company'],
 					'city'				=>	$payer_address_information['city'],
-					'post_code'		=>	$payer_address_information['zip_code'],
+					'postcode'		=>	$payer_address_information['zip_code'],
 					'payer_pno'		=>	$payer_address_information['identity_number']
 			);
 
