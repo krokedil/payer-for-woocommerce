@@ -40,8 +40,6 @@ class Payer_Ajax extends WC_AJAX {
 					'address_2'		=> 	$payer_address_information['address_2'],
 					'company'			=>	$payer_address_information['company'],
 					'city'				=>	$payer_address_information['city'],
-					'postcode'		=>	$payer_address_information['zip_code'],
-					'payer_pno'		=>	$payer_address_information['identity_number']
 			);
 
 			WC()->session->set( 'payer_customer_details', $payer_customer_details );

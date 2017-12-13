@@ -39,7 +39,7 @@ jQuery( function( $ ) {
                 last_name       = $('#billing_last_name'),
                 organisation    = $('#billing_company'),
                 city            = $('#billing_city'),
-                zip_code        = $('#billing_postcode'),
+                //zip_code        = $('#billing_postcode'),
                 address_1       = $('#billing_address_1'),
                 address_2       = $('#billing_address_2');
 
@@ -48,7 +48,7 @@ jQuery( function( $ ) {
             last_name.val( wc_payer_checkout.maskFormField( address_data.last_name ) ).prop( 'readonly', true );
             organisation.val( wc_payer_checkout.maskFormField( address_data.organisation ) ).prop( 'readonly', true );
             city.val( wc_payer_checkout.maskFormField( address_data.city ) ).prop( 'readonly', true );
-            zip_code.val( wc_payer_checkout.maskFormField( address_data.zip_code ) ).prop( 'readonly', true );
+            //zip_code.val( wc_payer_checkout.maskFormField( address_data.zip_code ) ).prop( 'readonly', true );
             address_1.val( wc_payer_checkout.maskFormField( address_data.address_1 ) ).prop( 'readonly', true );
             address_2.val( wc_payer_checkout.maskFormField( address_data.address_2 ) ).prop( 'readonly', true );
         },
@@ -69,8 +69,8 @@ jQuery( function( $ ) {
             }
         },
     }
-    wc_payer_checkout.moveInputFields();
     if ( payer_checkout_params.locale === 'SE' ) {
+        wc_payer_checkout.moveInputFields();        
         wc_payer_checkout.addGetAddressButton();
     }
     $( "#payer_get_address" ).click(function() { 

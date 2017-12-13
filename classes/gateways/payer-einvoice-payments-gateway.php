@@ -13,8 +13,6 @@ class Payer_Einvoice_Payments_Gateway extends Payer_Factory_Gateway {
 
 		$this->title       		    = $this->get_option( 'title' );
 		$this->description 		    = $this->get_option( 'description' );
-		$this->payer_agent_id       = $this->get_option( 'payer_agent_id' );
-		$this->payer_password       = $this->get_option( 'payer_password' );
 		$this->test_mode            = $this->get_option( 'test_mode' );
 		$this->debug_mode           = $this->get_option( 'debug_mode' );
 

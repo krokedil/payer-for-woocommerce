@@ -15,6 +15,8 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	public function process_payment( $order_id ) {
 		$order = wc_get_order( $order_id );
 
+		update_post_meta( $order_id, '_billing_pno', $_POST['billing_pno'] );
+
 		global $woocommerce;
 		$checkout_url = $woocommerce->cart->get_checkout_url();
 

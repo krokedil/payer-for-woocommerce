@@ -69,11 +69,14 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-installment-payments-gateway.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-swish-payments-gateway.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-einvoice-payments-gateway.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-direct-invoice-gateway.php' );
 
 			// Include request classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-create-purchase.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-get-address.php' );
-
+			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-create-order.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-commit-order.php' );
+			
 			// Include request helper classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-payment.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-purchase.php' );
@@ -82,7 +85,6 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-challenge.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-client.php' );
 			
-
 			// Include classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-callbacks.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-ajax.php' );
