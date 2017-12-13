@@ -8,7 +8,7 @@ class Payer_Card_Payments_Gateway extends Payer_Factory_Gateway {
 		parent::__construct();
 
 		$this->id                   = 'payer_card_payment';
-		$this->method_title         = __( 'Payer Card Payments', 'payer-for-woocommerce' );
+		$this->method_title         = __( 'Payer Card', 'payer-for-woocommerce' );
 		$this->method_description   = __( 'Allows payments through ' . $this->method_title . '.', 'payer-for-woocommerce' );
 
 		$this->title       		    = $this->get_option( 'title' );

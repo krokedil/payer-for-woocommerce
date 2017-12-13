@@ -3,12 +3,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class Payer_Einvoice_Payments_Gateway extends Payer_Factory_Gateway {
+class Payer_Masterpass_Gateway extends Payer_Factory_Gateway {
 	public function __construct() {
 		parent::__construct();
 
-		$this->id                   = 'payer_einvoice_payment';
-		$this->method_title         = __( 'Payer EInvoice', 'payer-for-woocommerce' );
+		$this->id                   = 'payer_masterpass';
+		$this->method_title         = __( 'Payer Masterpass', 'payer-for-woocommerce' );
 		$this->method_description   = __( 'Allows payments through ' . $this->method_title . '.', 'payer-for-woocommerce' );
 
 		$this->title       		    = $this->get_option( 'title' );
@@ -23,7 +23,7 @@ class Payer_Einvoice_Payments_Gateway extends Payer_Factory_Gateway {
 
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 
-		add_filter( 'woocommerce_page_wc-settings', array( $this, 'show_keys_in_settings' ) );				
+		add_filter( 'woocommerce_page_wc-settings', array( $this, 'show_keys_in_settings' ) );		
 	}
 
 	public function show_keys_in_settings() {
@@ -35,10 +35,10 @@ class Payer_Einvoice_Payments_Gateway extends Payer_Factory_Gateway {
 	}
 }
 
-add_filter( 'woocommerce_payment_gateways', 'add_payer_einvoice_gateway' );
+add_filter( 'woocommerce_payment_gateways', 'add_payer_masterpass_gateway' );
 
-function add_payer_einvoice_gateway( $methods ) {
-	$methods[] = 'Payer_Einvoice_Payments_Gateway';
+function add_payer_masterpass_gateway( $methods ) {
+	$methods[] = 'Payer_Masterpass_Gateway';
 
 	return $methods;
 }

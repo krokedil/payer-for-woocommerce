@@ -28,6 +28,9 @@ class Payer_Get_Payment {
             case 'payer_einvoice_payment' :
                 $method = 'einvoice';
                 break;
+            case 'payer_masterpass' :
+                $method = 'masterpass';
+                break;
             default :
                 $method = 'card';
                 break;

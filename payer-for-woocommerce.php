@@ -70,6 +70,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-swish-payments-gateway.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-einvoice-payments-gateway.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-direct-invoice-gateway.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-masterpass-gateway.php' );
 
 			// Include request classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-create-purchase.php' );
