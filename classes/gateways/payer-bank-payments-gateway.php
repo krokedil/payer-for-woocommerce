@@ -38,7 +38,8 @@ class Payer_Bank_Payments_Gateway extends Payer_Factory_Gateway {
 add_filter( 'woocommerce_payment_gateways', 'add_payer_bank_gateway' );
 
 function add_payer_bank_gateway( $methods ) {
-	$methods[] = 'Payer_Bank_Payments_Gateway';
-
+	if ( ! defined( 'UNSET_PAYER_BANK_PAYMENTS' ) ) {
+		$methods[] = 'Payer_Bank_Payments_Gateway';
+	}
 	return $methods;
 }

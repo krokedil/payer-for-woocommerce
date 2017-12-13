@@ -38,7 +38,8 @@ class Payer_Installment_Payments_Gateway extends Payer_Factory_Gateway {
 add_filter( 'woocommerce_payment_gateways', 'add_payer_installment_gateway' );
 
 function add_payer_installment_gateway( $methods ) {
-	$methods[] = 'Payer_Installment_Payments_Gateway';
-
+	if ( ! defined( 'UNSET_PAYER_INSTALLMENT_PAYMENTS' ) ) {		
+		$methods[] = 'Payer_Installment_Payments_Gateway';
+	}
 	return $methods;
 }

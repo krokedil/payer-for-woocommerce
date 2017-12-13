@@ -33,8 +33,6 @@ class Payer_Direct_Invoice_Gateway extends Payer_Factory_Gateway {
 
 		// Create an order
 		Payer_Create_Order::create_order( $order_id );
-		// Commit an order to get invoice_number to save as post meta to order.
-		Payer_Commit_Order::commit_order( $order_id );
 
 		$order->payment_complete();
 
@@ -56,7 +54,8 @@ class Payer_Direct_Invoice_Gateway extends Payer_Factory_Gateway {
 add_filter( 'woocommerce_payment_gateways', 'add_payer_direct_invoice_gateway' );
 
 function add_payer_direct_invoice_gateway( $methods ) {
-	$methods[] = 'Payer_Direct_Invoice_Gateway';
-
+	if ( ! defined( 'UNSET_PAYER_DIRECT_INVOICE_PAYMENTS' ) ) {		
+		$methods[] = 'Payer_Direct_Invoice_Gateway';
+	}
 	return $methods;
 }

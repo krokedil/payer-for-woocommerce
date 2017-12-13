@@ -38,7 +38,8 @@ class Payer_Einvoice_Payments_Gateway extends Payer_Factory_Gateway {
 add_filter( 'woocommerce_payment_gateways', 'add_payer_einvoice_gateway' );
 
 function add_payer_einvoice_gateway( $methods ) {
-	$methods[] = 'Payer_Einvoice_Payments_Gateway';
-
+	if ( ! defined( 'UNSET_PAYER_EINVOICE_PAYMENTS' ) ) {		
+		$methods[] = 'Payer_Einvoice_Payments_Gateway';
+	}
 	return $methods;
 }

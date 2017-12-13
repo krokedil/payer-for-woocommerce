@@ -38,7 +38,8 @@ class Payer_Masterpass_Gateway extends Payer_Factory_Gateway {
 add_filter( 'woocommerce_payment_gateways', 'add_payer_masterpass_gateway' );
 
 function add_payer_masterpass_gateway( $methods ) {
-	$methods[] = 'Payer_Masterpass_Gateway';
-
+	if ( ! defined( 'UNSET_PAYER_MASTERPASS_PAYMENTS' ) ) {
+		$methods[] = 'Payer_Masterpass_Gateway';
+	}
 	return $methods;
 }
