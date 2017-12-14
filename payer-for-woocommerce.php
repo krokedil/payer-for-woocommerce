@@ -133,7 +133,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 		}
 
 		public static function log( $message ) {
-			$payer_settings = get_option( 'woocommerce_payer_settings' );
+			$payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );
 			if ( 'yes' === $payer_settings['debug_mode'] ) {
 				if ( empty( self::$log ) ) {
 					self::$log = new WC_Logger();

@@ -10,7 +10,8 @@ class Payer_Create_Order {
         $data = Payer_Get_Purchase::get_purchase( $order_id );
         $order = new Payer\Sdk\Resource\Order( $gateway );
         $payer_order_id = $order->create( $data );
-        error_log( var_export( $payer_order_id, true ) );                        
         update_post_meta( $order_id, '_payer_order_id', $payer_order_id );
+        Payer_For_Woocommerce::log( 'Payer Create Order: '. $order_id . ' $data: ' . var_export( $data, true ) );
+        
     }
 }

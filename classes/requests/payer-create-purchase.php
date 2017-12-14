@@ -12,6 +12,7 @@ class Payer_Create_Purchase {
             'purchase'  =>  Payer_Get_Purchase::get_purchase( $order_id ),
         );
         $purchase = new Payer\Sdk\Resource\Purchase( $gateway );
+        Payer_For_Woocommerce::log( 'Payer Create Purchase: '. $order_id . ' $data: ' . var_export( $data, true ) );
         $purchase->create( $data );
     }
 }

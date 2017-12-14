@@ -13,7 +13,6 @@ class Payer_Commit_Order {
         );
         $order = new Payer\Sdk\Resource\Order( $gateway );
         $invoice_number = $order->commit( $data );
-        error_log( var_export( $invoice_number, true ) );
         update_post_meta( $order_id, '_payer_invoice_number', $invoice_number );
     }
 }
