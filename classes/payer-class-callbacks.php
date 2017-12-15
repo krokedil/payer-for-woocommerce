@@ -34,7 +34,10 @@ class Payer_Callbacks {
     }
 
     private function settlement_reply( $order_id ) {
-        $this->set_gateway();        
+        $this->set_gateway();
+        if( $_GET['address'] ) {
+            $this->populate_order();
+        }        
         $data = array(
             'payment'   =>  Payer_Get_Payment::get_payment( $order_id ),
             'purchase'  =>  Payer_Get_Purchase::get_purchase( $order_id ),
@@ -109,6 +112,10 @@ class Payer_Callbacks {
 
     private function set_gateway() {
         $this->gateway = Payer_Create_Client::create_client();
+    }
+
+    private function populate_order() {
+        
     }
 }
 new Payer_Callbacks;

@@ -49,7 +49,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 		public function payer_make_purchase() {
 			if( isset( $_GET['payer-redirect'] ) && '1' === $_GET['payer-redirect'] ) {
-				$order_id = $_GET['order_id'];
+				$order_id = $_GET['order_id']; 
 				Payer_Create_Purchase::create_purchase( $order_id );
 				die();
 			}
@@ -89,6 +89,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			// Include classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-callbacks.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-ajax.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-masterpass-populate-order.php' );
 
 			// Include function files
 			include_once( PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php' );
@@ -104,10 +105,6 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 		}
 
 		public function load_scripts() {
-			if ( ! is_checkout() ) {
-				return;
-			}
-
 			wp_register_script(
 				'payer_checkout',
 				plugins_url( 'assets/js/checkout.js', __FILE__ ),
@@ -116,14 +113,44 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			);
 
 			$checkout_localize_params = array(
-				'ajaxurl'		=>	admin_url( 'admin-ajax.php' ),
-				'locale'		=>	WC()->customer->get_billing_country(),
-				'get_address'	=>	WC_AJAX::get_endpoint( 'get_address' ),
+				'ajaxurl'			=>	admin_url( 'admin-ajax.php' ),
+				'locale'			=>	WC()->customer->get_billing_country(),
+				'get_address'		=>	WC_AJAX::get_endpoint( 'get_address' ),
 			);
 
 			wp_localize_script( 'payer_checkout', 'payer_checkout_params', $checkout_localize_params );
 
 			wp_enqueue_script( 'payer_checkout' );
+
+			$payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' ); 
+			if ( 'yes' === $payer_masterpass_settings['instant_masterpass_checkout'] && ( is_product() || is_cart() ) ) {
+				wp_register_script( 
+					'payer_instant_checkout',
+					plugins_url( 'assets/js/instant-checkout.js', __FILE__ ),
+					array( 'jquery', 'wc-cart' ),
+					PAYER_VERSION_NUMBER 
+				);
+
+				if ( is_product() ) {
+					$page_type = 'product';
+				} else if ( is_cart() ) {
+					$page_type = 'cart';
+				} else {
+					$page_type = '';
+				}
+
+				$instant_checkout_params = array(
+					'ajaxurl'					=>	admin_url( 'admin-ajax.php' ),
+					'locale'					=>	WC()->customer->get_billing_country(),
+					'instant_product_purchase'	=>	WC_AJAX::get_endpoint( 'instant_product_purchase' ),
+					'instant_cart_purchase'		=>	WC_AJAX::get_endpoint( 'instant_cart_purchase' ),
+					'page_type'					=>	$page_type,
+				);
+
+				wp_localize_script( 'payer_instant_checkout', 'payer_instant_checkout_params', $instant_checkout_params );
+
+				wp_enqueue_script( 'payer_instant_checkout' );
+			}
 
 			wp_register_style(
 				'payer_style',

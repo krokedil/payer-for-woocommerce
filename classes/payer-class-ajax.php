@@ -9,17 +9,19 @@ class Payer_Ajax extends WC_AJAX {
     }
     
     public static function add_ajax_events() {
-		$ajax_events = array(
-			'get_address' => true,
-		);
-		foreach ( $ajax_events as $ajax_event => $nopriv ) {
-			add_action( 'wp_ajax_woocommerce_' . $ajax_event, array( __CLASS__, $ajax_event ) );
-			if ( $nopriv ) {
-				add_action( 'wp_ajax_nopriv_woocommerce_' . $ajax_event, array( __CLASS__, $ajax_event ) );
-				// WC AJAX can be used for frontend ajax requests.
-				add_action( 'wc_ajax_' . $ajax_event, array( __CLASS__, $ajax_event ) );
+			$ajax_events = array(
+				'get_address' 							=> true,
+				'instant_product_purchase'	=> true,
+				'instant_cart_purchase'			=> true,
+			);
+			foreach ( $ajax_events as $ajax_event => $nopriv ) {
+				add_action( 'wp_ajax_woocommerce_' . $ajax_event, array( __CLASS__, $ajax_event ) );
+				if ( $nopriv ) {
+					add_action( 'wp_ajax_nopriv_woocommerce_' . $ajax_event, array( __CLASS__, $ajax_event ) );
+					// WC AJAX can be used for frontend ajax requests.
+					add_action( 'wc_ajax_' . $ajax_event, array( __CLASS__, $ajax_event ) );
+				}
 			}
-		}
     }
     
     public static function get_address() {
@@ -43,6 +45,39 @@ class Payer_Ajax extends WC_AJAX {
 			);
 
 			WC()->session->set( 'payer_customer_details', $payer_customer_details );
+		}
+
+		public static function instant_product_purchase() {
+			$product_id 	= $_POST['product_id'];
+			$variation_id 	= $_POST['variation_id'];
+			$quantity 		= $_POST['quantity'];
+			// Empty the current cart to prevent incorrect orders.
+			WC()->cart->empty_cart();
+
+			Payer_Masterpass_Populate_Order::add_item_to_cart( $product_id, $quantity, $variation_id );
+
+			error_log( var_export( WC()->cart->get_cart(), true ) );
+
+			$order 	= wc_create_order();
+			error_log( var_export( $order, true ) );
+			$order_id = $order->get_id();
+
+			Payer_Masterpass_Populate_Order::set_gateway( $order );
+
+			$redirect_url = WC()->cart->get_checkout_url();
+			
+			$redirect_url = add_query_arg(
+				array(
+					'payer-redirect'	=>	'1',
+					'order_id'			=>	$order_id,
+				),
+				$redirect_url
+			);
+			wp_send_json_success( $redirect_url );
+			wp_die();
+		}		
+		public static function instant_cart_purchase() {
+			
 		}
 }
 Payer_Ajax::init();

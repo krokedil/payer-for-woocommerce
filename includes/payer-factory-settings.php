@@ -25,6 +25,15 @@ $settings = array(
 	)
 );
 
+if ( $this->id === 'payer_masterpass' ) {
+	$settings['instant_masterpass_checkout'] = array(
+		'title'         => __( 'Instant MasterPass checkout', 'payer-for-woocommerce' ),
+		'type'          => 'checkbox',
+		'label'         => __( 'Enable instant MasterPass checkout for products and cart page.', 'payer-for-woocommerce' ),
+		'default'       => 'no',
+	);
+}
+
 if ( $this->id === 'payer_card_payment' ) {
 	$settings['payer_agent_id'] = array(
 		'title'         => __( 'Agent ID', 'payer-for-woocommerce' ),
