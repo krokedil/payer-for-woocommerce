@@ -10,9 +10,9 @@ class Payer_Ajax extends WC_AJAX {
     
     public static function add_ajax_events() {
 			$ajax_events = array(
-				'get_address' 							=> true,
+				'get_address' 				=> true,
 				'instant_product_purchase'	=> true,
-				'instant_cart_purchase'			=> true,
+				'instant_cart_purchase'		=> true,
 			);
 			foreach ( $ajax_events as $ajax_event => $nopriv ) {
 				add_action( 'wp_ajax_woocommerce_' . $ajax_event, array( __CLASS__, $ajax_event ) );
@@ -40,8 +40,8 @@ class Payer_Ajax extends WC_AJAX {
 					'last_name'		=>	$payer_address_information['last_name'],
 					'address_1'		=>	$payer_address_information['address_1'],
 					'address_2'		=> 	$payer_address_information['address_2'],
-					'company'			=>	$payer_address_information['company'],
-					'city'				=>	$payer_address_information['city'],
+					'company'		=>	$payer_address_information['company'],
+					'city'			=>	$payer_address_information['city'],
 			);
 
 			WC()->session->set( 'payer_customer_details', $payer_customer_details );
@@ -56,11 +56,10 @@ class Payer_Ajax extends WC_AJAX {
 
 			Payer_Masterpass_Populate_Order::add_item_to_cart( $product_id, $quantity, $variation_id );
 
-			error_log( var_export( WC()->cart->get_cart(), true ) );
-
 			$order 	= wc_create_order();
-			error_log( var_export( $order, true ) );
 			$order_id = $order->get_id();
+
+			Payer_Masterpass_Populate_Order::add_order_details( $order );
 
 			Payer_Masterpass_Populate_Order::set_gateway( $order );
 
@@ -77,7 +76,24 @@ class Payer_Ajax extends WC_AJAX {
 			wp_die();
 		}		
 		public static function instant_cart_purchase() {
+			$order 	= wc_create_order();
+			$order_id = $order->get_id();
+
+			Payer_Masterpass_Populate_Order::add_order_details( $order );
 			
+			Payer_Masterpass_Populate_Order::set_gateway( $order );
+
+			$redirect_url = WC()->cart->get_checkout_url();
+			
+			$redirect_url = add_query_arg(
+				array(
+					'payer-redirect'	=>	'1',
+					'order_id'			=>	$order_id,
+				),
+				$redirect_url
+			);
+			wp_send_json_success( $redirect_url );
+			wp_die();
 		}
 }
 Payer_Ajax::init();

@@ -64,14 +64,22 @@ jQuery( function( $ ) {
             // Make AJAX call
             jQuery.post(payer_instant_checkout_params.instant_product_purchase, data, function (data) {
                 if ( true === data.success ) {
-                    console.log( data.data );
                     window.location.replace( data.data );
                 }
             });
         },
 
         makePurchaseCartPage: function() {
-
+                // Set AJAX data
+                    var data = {
+                        'action': 'instant_cart_purchase',
+                    }
+             // Make AJAX call
+             jQuery.post(payer_instant_checkout_params.instant_cart_purchase, data, function (data) {
+                if ( true === data.success ) {
+                    window.location.replace( data.data );
+                }
+            });
         },
     }
     var page_type = payer_instant_checkout_params.page_type;

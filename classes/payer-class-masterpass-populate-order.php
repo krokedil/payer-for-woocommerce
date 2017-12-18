@@ -15,4 +15,14 @@ class Payer_Masterpass_Populate_Order {
         $order->set_payment_method( $payment_method );
         $order->save();
     }
+
+    public static function add_order_details( $order ) {
+			WC()->checkout()->create_order_line_items( $order, WC()->cart );
+			WC()->checkout()->create_order_fee_lines( $order, WC()->cart );
+			WC()->checkout()->create_order_shipping_lines( $order, WC()->session->get( 'chosen_shipping_methods' ), WC()->shipping->get_packages() );
+			WC()->checkout()->create_order_tax_lines( $order, WC()->cart );
+            WC()->checkout()->create_order_coupon_lines( $order, WC()->cart );
+            $order->calculate_totals();
+			$order->save();
+    }
 }

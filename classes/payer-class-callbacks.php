@@ -35,8 +35,8 @@ class Payer_Callbacks {
 
     private function settlement_reply( $order_id ) {
         $this->set_gateway();
-        if( $_GET['address'] ) {
-            $this->populate_order();
+        if( isset( $_GET['address'] ) ) {
+            $this->populate_customer_data( $order_id, $_GET['address'] );
         }        
         $data = array(
             'payment'   =>  Payer_Get_Payment::get_payment( $order_id ),
@@ -114,8 +114,23 @@ class Payer_Callbacks {
         $this->gateway = Payer_Create_Client::create_client();
     }
 
-    private function populate_order() {
+    private function populate_customer_data( $order_id, $address ) {
+        $address = base64_decode( $address );
+        $address = json_decode( utf8_decode( $address ) );
+        error_log( var_export( $address, true ) );
+        $order = wc_get_order( $order_id );
+
+        $order->set_billing_first_name( sanitize_text_field( $address->firstName ) );
+		$order->set_billing_last_name( sanitize_text_field( $address->lastName ) );
+		$order->set_billing_country( sanitize_text_field( $address->countryId ) );
+		$order->set_billing_address_1( sanitize_text_field( $address->address1 ) );
+		$order->set_billing_address_2( sanitize_text_field( $address->address2 ) );
+		//$order->set_billing_city( sanitize_text_field( $address->city ) );
+		$order->set_billing_postcode( sanitize_text_field( $address->postalCode  ) );
+		$order->set_billing_phone( sanitize_text_field( $address->phone ) );
+        $order->set_billing_email( sanitize_text_field( $address->email ) );
         
+        $order->save();
     }
 }
 new Payer_Callbacks;
