@@ -33,6 +33,14 @@ class Payer_Installment_Payments_Gateway extends Payer_Factory_Gateway {
 			}
 		}
 	}
+
+	public function is_available() {
+		if ( 999 < $this->get_order_total() ) {
+			return true;
+		}
+
+		return false;
+	}
 }
 
 add_filter( 'woocommerce_payment_gateways', 'add_payer_installment_gateway' );
