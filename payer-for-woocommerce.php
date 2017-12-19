@@ -90,6 +90,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-callbacks.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-ajax.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-masterpass-populate-order.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-masterpass-functions.php' );
 
 			// Include function files
 			include_once( PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php' );
@@ -123,7 +124,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			wp_enqueue_script( 'payer_checkout' );
 
 			$payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' ); 
-			if ( 'yes' === $payer_masterpass_settings['instant_masterpass_checkout'] && ( is_product() || is_cart() ) ) {
+			if ( 'yes' === $payer_masterpass_settings['instant_masterpass_checkout'] && ( is_product() || is_cart() || is_shop() || is_product_category() ) ) {
 				wp_register_script( 
 					'payer_instant_checkout',
 					plugins_url( 'assets/js/instant-checkout.js', __FILE__ ),
