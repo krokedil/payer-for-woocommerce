@@ -155,7 +155,9 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 			wp_register_style(
 				'payer_style',
-				plugin_dir_url( __FILE__ ) . '/assets/css/checkout.css'
+				plugin_dir_url( __FILE__ ) . '/assets/css/checkout.css',
+				array(), 
+				PAYER_VERSION_NUMBER
 			);
 			wp_enqueue_style( 'payer_style' );
 		}

@@ -9,3 +9,9 @@
     clear:both;
     display:block;
 }
+.payer_instant_checkout {
+    cursor: pointer;
+}
+.payer_instant_checkout img {
+    margin-top:5px;
+}

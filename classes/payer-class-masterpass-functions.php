@@ -13,7 +13,7 @@ class Payer_Masterpass_Functions {
     public function add_button() {
         $payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' ); 
         if ( 'yes' === $payer_masterpass_settings['instant_masterpass_checkout'] ) {
-            echo '<button type="button" class="payer_instant_checkout button" id="payer_instant_checkout">Instant Checkout with MasterPass</button>';
+            echo '<object type="image/svg" class="payer_instant_checkout" id="payer_instant_checkout"><img src="https://static.masterpass.com/dyn/img/btn/global/mp_chk_btn_147x034px.svg" alt="MasterPass"/> </object>';
         }
     }
     public function add_button_shop() {
@@ -24,7 +24,7 @@ class Payer_Masterpass_Functions {
         }
         $payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' ); 
         if ( 'yes' === $payer_masterpass_settings['instant_masterpass_checkout'] ) {
-            echo '<button type="button" class="payer_instant_checkout button" id="payer_instant_checkout_' . $id . '" data-product_id="' . $id . '">Instant Checkout with MasterPass</button>';
+            echo '<object type="image/svg" class="payer_instant_checkout" id="payer_instant_checkout_' . $id . '" data-product_id="' . $id . '"><img src="https://static.masterpass.com/dyn/img/btn/global/mp_chk_btn_147x034px.svg" alt="MasterPass"/> </object>';
         }
     }
 }
