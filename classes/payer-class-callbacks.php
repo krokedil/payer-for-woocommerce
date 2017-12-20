@@ -20,6 +20,7 @@ class Payer_Callbacks {
         if ( isset( $_GET['payer_added_fee'] ) ) {
             $payer_added_fee = $_GET['payer_added_fee'];
         }
+        Payer_For_Woocommerce::log( 'Payer Callback: '. $order_id . ' $_GET: ' . var_export( $_GET, true ) );
         switch ( $callback_type ) {
             case 'auth':
                 $this->authorize_reply( $order_id );
