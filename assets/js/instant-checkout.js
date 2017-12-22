@@ -81,13 +81,10 @@ jQuery( function( $ ) {
                 }
             });
         },
-        makePurchaseShopPage: function( product_id ) {
+        makePurchaseShopPage: function() {
             // Set AJAX data
                 var data = {
-                'action': 'instant_product_purchase',
-                'product_id': product_id,
-                'variation_id': '',
-                'quantity': 1,
+                'action': 'instant_cart_purchase',
             }
             // Make AJAX call
             jQuery.post(payer_instant_checkout_params.instant_product_purchase, data, function (data) {
@@ -103,14 +100,14 @@ jQuery( function( $ ) {
     $(document).on('change', "input[name='variation_id']", function(){
         wc_payer_instant_checkout.maybeHideButton();
     });
-    $( ".payer_instant_checkout" ).click(function() {
+    $('body').on('click', '#payer_instant_checkout', function() {
+        console.log( 'click' );
         if( 'product' === page_type ) {
             wc_payer_instant_checkout.makePurchaseProductPage();
         } else if ( 'cart' === page_type ) {
             wc_payer_instant_checkout.makePurchaseCartPage();            
         } else {
-            var product_id = $(this).data('product_id');
-            wc_payer_instant_checkout.makePurchaseShopPage( product_id );
+            wc_payer_instant_checkout.makePurchaseShopPage();
         }
     });
 });

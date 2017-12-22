@@ -76,23 +76,27 @@ class Payer_Ajax extends WC_AJAX {
 			wp_die();
 		}		
 		public static function instant_cart_purchase() {
-			$order 	= wc_create_order();
-			$order_id = $order->get_id();
+			if ( WC()->cart->get_cart_contents_count() > 0 ) {
+				$order 	= wc_create_order();
+				$order_id = $order->get_id();
 
-			Payer_Masterpass_Populate_Order::add_order_details( $order );
-			
-			Payer_Masterpass_Populate_Order::set_gateway( $order );
+				Payer_Masterpass_Populate_Order::add_order_details( $order );
+				
+				Payer_Masterpass_Populate_Order::set_gateway( $order );
 
-			$redirect_url = WC()->cart->get_checkout_url();
-			
-			$redirect_url = add_query_arg(
-				array(
-					'payer-redirect'	=>	'1',
-					'order_id'			=>	$order_id,
-				),
-				$redirect_url
-			);
-			wp_send_json_success( $redirect_url );
+				$redirect_url = WC()->cart->get_checkout_url();
+				
+				$redirect_url = add_query_arg(
+					array(
+						'payer-redirect'	=>	'1',
+						'order_id'			=>	$order_id,
+					),
+					$redirect_url
+				);
+				wp_send_json_success( $redirect_url );
+				wp_die();
+			}
+			wp_send_json_error();
 			wp_die();
 		}
 }
