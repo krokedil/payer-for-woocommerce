@@ -35,7 +35,22 @@ class Payer_Installment_Payments_Gateway extends Payer_Factory_Gateway {
 	}
 
 	public function is_available() {
-		if ( 999 < $this->get_order_total() ) {
+		
+		switch ( get_woocommerce_currency() ) {
+			case 'SEK' :
+				$amount_limit = 999;
+				break;
+			case 'NOK' :
+				$amount_limit = 999;
+				break;
+			case 'EUR' :
+				$amount_limit = 99;
+				break;
+			default :
+				return false;
+		}
+
+		if ( $amount_limit < $this->get_order_total() ) {
 			return true;
 		}
 

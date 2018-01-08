@@ -21,3 +21,7 @@
     padding-left: 1.41575em;
     padding-right: 1.41575em;
 }
+
+.payment_method_payer_card_payment img{
+    max-width: 125px;
+}

@@ -99,6 +99,8 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 		public function define() {
 			// Set plugin directory
 			define( 'PAYER_PLUGIN_DIR' , untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+			// Set URL
+			define( 'PAYER_PLUGIN_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 			// Set version number
 			define( 'PAYER_VERSION_NUMBER', '0.0.1' );
 			// Set path to SDK
