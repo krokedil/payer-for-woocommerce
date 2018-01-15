@@ -22,6 +22,17 @@
     padding-right: 1.41575em;
 }
 
-.payment_method_payer_card_payment img{
-    max-width: 125px;
+.payment_method_payer_card_payment img, 
+.payment_method_payer_bank_payment img, 
+.payment_method_payer_invoice_payment img,
+.payment_method_payer_installment_payment img,
+.payment_method_payer_swish_payment img,
+.payment_method_payer_einvoice_payment img,
+.payment_method_payer_direct_invoice_gateway img,
+.payment_method_payer_masterpass img {
+    max-height: 2.5em !important;
+    vertical-align: middle;
+    display: inline;
+    margin: 0 10px;
+    float: right !important;
 }
