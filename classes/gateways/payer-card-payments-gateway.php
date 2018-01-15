@@ -10,7 +10,7 @@ class Payer_Card_Payments_Gateway extends Payer_Factory_Gateway {
 		$this->id                   = 'payer_card_payment';
 		$this->method_title         = __( 'Payer Card', 'payer-for-woocommerce' );
 		$this->method_description   = __( 'Allows payments through ' . $this->method_title . '.', 'payer-for-woocommerce' );
-		$this->icon					= PAYER_PLUGIN_URL . '/assets/img/Payer_checkout_card_horizontal_01.png';
+		$this->icon					= $this->set_icon();
 
 		$this->title       		    = $this->get_option( 'title' );
 		$this->description 		    = $this->get_option( 'description' );
@@ -18,7 +18,9 @@ class Payer_Card_Payments_Gateway extends Payer_Factory_Gateway {
 		$this->payer_password       = $this->get_option( 'payer_password' );
 		$this->test_mode            = $this->get_option( 'test_mode' );
 		$this->debug_mode           = $this->get_option( 'debug_mode' );
-
+		//$this->icon_url				= ( '' === $this->get_option( 'payer_card_payment_icon' ) ) ? '' : $this->get_option( 'payer_card_payment_icon' );	
+		$this->icon_url				= $this->get_option( 'payer_card_payment_icon' );	
+		$this->icon					= $this->set_icon();				
 		// Load the form fields.
 		$this->init_form_fields();
 		// Load the settings.

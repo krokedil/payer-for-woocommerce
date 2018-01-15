@@ -48,6 +48,40 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 		 return $fields;
 	}
 
+	public function set_icon() {
+		switch ( $this->id ) {
+			case 'payer_bank_payment':
+				$default_img = 'payer-icon-payment_method-bank.png';
+				break;
+			case 'payer_card_payment':
+				$default_img = 'payer-icon-payment_method-card_01.png';
+				break;
+			case 'payer_direct_invoice_gateway':
+				$default_img = 'payer-icon-payment_method-invoice.png';
+				break;
+			case 'payer_einvoice_payment':
+				$default_img = 'payer-icon-payment_method-invoice.png';
+				break;
+			case 'payer_installment_payment':
+				$default_img = 'payer-icon-payment_method-invoice.png';
+				break;
+			case 'payer_invoice_payment':
+				$default_img = 'payer-icon-payment_method-invoice.png';
+				break;
+			case 'payer_masterpass':
+				$default_img = 'payer-icon-payment_method-masterpass.png';
+				break;
+			case 'payer_swish_payment':
+				$default_img = 'payer-icon-payment_method-swish.png';
+				break;
+		}
+		if( '' !== $this->icon_url ) {
+			return $this->icon_url;
+		} else {
+			return PAYER_PLUGIN_URL . '/assets/img/' . $default_img;		
+		}
+	}
+
 	private function clear_sessions() {
 		WC()->session->__unset( 'payer_customer_details' );
 	}

@@ -14,6 +14,6 @@ class Payer_Post_Checkout {
     }
 
     public function payer_order_cancel( $order_id ) {
-
+        
     }
 }
