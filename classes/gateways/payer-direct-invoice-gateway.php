@@ -33,6 +33,9 @@ class Payer_Direct_Invoice_Gateway extends Payer_Factory_Gateway {
 
 		update_post_meta( $order_id, '_billing_pno', $_POST['billing_pno'] );		
 
+		// Check if customer changed any of the data from get_address
+		$this->check_posted_data( $order_id );
+
 		// Create an order
 		Payer_Create_Order::create_order( $order_id );
 

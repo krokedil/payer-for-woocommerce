@@ -28,10 +28,10 @@ class Payer_Ajax extends WC_AJAX {
         $personal_number = $_POST['personal_number'];
         $zip_code = $_POST['zip_code'];
 
-				$payer_address_information = Payer_Get_Address::get_address( $personal_number, $zip_code );
-				self::set_address( $payer_address_information );
-        wp_send_json_success( $payer_address_information );
-        wp_die();
+		$payer_address_information = Payer_Get_Address::get_address( $personal_number, $zip_code );
+			self::set_address( $payer_address_information );
+			wp_send_json_success( $payer_address_information );
+			wp_die();
 		}
 		
 		private static function set_address( $payer_address_information ) {

@@ -15,10 +15,12 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	public function process_payment( $order_id ) {
 		$order = wc_get_order( $order_id );
 
+		// Check if customer changed any of the data from get_address
+		$this->check_posted_data( $order_id );
+
 		update_post_meta( $order_id, '_billing_pno', $_POST['billing_pno'] );
 
-		global $woocommerce;
-		$checkout_url = $woocommerce->cart->get_checkout_url();
+		$checkout_url = WC()->cart->get_checkout_url();
 
 		$redirect_url = add_query_arg(
 			array(
@@ -80,6 +82,26 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 		} else {
 			return PAYER_PLUGIN_URL . '/assets/img/' . $default_img;		
 		}
+	}
+
+	public function check_posted_data( $order_id ) {
+		if( WC()->session->get( 'payer_customer_details' ) ) {
+			$get_address_data = WC()->session->get( 'payer_customer_details' );
+			$order = wc_get_order( $order_id );
+			$order_data = array(
+				'first_name'	=>	$order->get_billing_first_name(),
+				'last_name'		=>	$order->get_billing_last_name(),
+				'address_1'		=>  $order->get_billing_address_1(),
+				'address_2'		=> 	$order->get_billing_address_2(),
+				'company'		=>	$order->get_billing_company(),
+				'city'			=>	$order->get_billing_city(),
+			);		
+			if( $get_address_data != $order_data ) {
+				$order->add_order_note( 'The address information was changed by the customer from the get address information.', 'payer-for-woocommerce' );
+			}
+
+		}
+
 	}
 
 	private function clear_sessions() {

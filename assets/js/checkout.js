@@ -5,15 +5,15 @@ jQuery( function( $ ) {
                 post_code   = $('#billing_postcode_field'),
                 form        = $('form[name=checkout]');
             
+            form.prepend(post_code); 
             form.prepend(pno_field);  
-            form.prepend(post_code);          
         },
 
         addGetAddressButton: function() {
-            var pno_field   = $('#billing_pno_field'),
+            var post_code   = $('#billing_postcode_field'),
                 button      = '<button type="button" class="payer_get_address_button button" id="payer_get_address">Get Address</button>';
 
-            pno_field.after(button);
+            post_code.after(button);
         },
 
         getAddress: function() {
@@ -39,18 +39,16 @@ jQuery( function( $ ) {
                 last_name       = $('#billing_last_name'),
                 organisation    = $('#billing_company'),
                 city            = $('#billing_city'),
-                //zip_code        = $('#billing_postcode'),
                 address_1       = $('#billing_address_1'),
                 address_2       = $('#billing_address_2');
 
-            // Populate fields - Needs to be masked.
-            first_name.val( wc_payer_checkout.maskFormField( address_data.first_name ) ).prop( 'readonly', true );
-            last_name.val( wc_payer_checkout.maskFormField( address_data.last_name ) ).prop( 'readonly', true );
-            organisation.val( wc_payer_checkout.maskFormField( address_data.organisation ) ).prop( 'readonly', true );
-            city.val( wc_payer_checkout.maskFormField( address_data.city ) ).prop( 'readonly', true );
-            //zip_code.val( wc_payer_checkout.maskFormField( address_data.zip_code ) ).prop( 'readonly', true );
-            address_1.val( wc_payer_checkout.maskFormField( address_data.address_1 ) ).prop( 'readonly', true );
-            address_2.val( wc_payer_checkout.maskFormField( address_data.address_2 ) ).prop( 'readonly', true );
+            // Populate fields
+            first_name.val( wc_payer_checkout.maskFormField( address_data.first_name ) );
+            last_name.val( wc_payer_checkout.maskFormField( address_data.last_name ) );
+            organisation.val( wc_payer_checkout.maskFormField( address_data.organisation ) );
+            city.val( wc_payer_checkout.maskFormField( address_data.city ) );
+            address_1.val( wc_payer_checkout.maskFormField( address_data.address_1 ) );
+            address_2.val( wc_payer_checkout.maskFormField( address_data.address_2 ) );
         },
         maskFormField: function( field ) {
             if ( field !== '' ) {
