@@ -7,10 +7,7 @@ class Payer_Masterpass_Functions {
     public function __construct() {
         add_action( 'woocommerce_after_cart_totals', array( $this, 'add_button' ) );
         add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'add_button' ) );
-        //if( is_shop() ) {
-            add_action( 'woocommerce_after_mini_cart', array( $this, 'add_button' ) );
-        //}
-        //add_action( 'woocommerce_after_shop_loop_item', array( $this, 'add_button_shop' ), 15 );        
+        add_action( 'woocommerce_after_mini_cart', array( $this, 'add_button' ) );      
     }
 
     public function add_button() {
