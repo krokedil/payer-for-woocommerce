@@ -58,10 +58,11 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 		public function init() {
 			// Set definitions
 			$this->define();
+
 			// Include the SDK
 			require_once( 'vendor/autoload.php' );
 
-			// Include the gateway classes
+			/*// Include the gateway classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-factory-gateway.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-card-payments-gateway.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-bank-payments-gateway.php' );
@@ -93,7 +94,10 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-masterpass-functions.php' );
 
 			// Include function files
-			include_once( PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php' );
+			include_once( PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php' );*/
+			include_once( PAYER_PLUGIN_DIR . '/includes/payer-autoloader.php' );
+
+			payer_autoload();
 		}
 
 		public function define() {
