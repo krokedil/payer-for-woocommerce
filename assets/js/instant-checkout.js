@@ -87,7 +87,7 @@ jQuery( function( $ ) {
                 'action': 'instant_cart_purchase',
             }
             // Make AJAX call
-            jQuery.post(payer_instant_checkout_params.instant_product_purchase, data, function (data) {
+            jQuery.post(payer_instant_checkout_params.instant_cart_purchase, data, function (data) {
                 if ( true === data.success ) {
                     window.location.replace( data.data );
                 }
