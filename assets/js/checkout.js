@@ -76,7 +76,7 @@ jQuery( function( $ ) {
             wc_payer_checkout.addGetAddressButton();
         }
     });
-    $( "#payer_get_address" ).click(function() { 
+    $('body').on('click', '#payer_get_address', function() {
             wc_payer_checkout.getAddress();
     });
 });
