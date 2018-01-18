@@ -1,17 +1,17 @@
 [
     {
         "name": "payer/sdk",
-        "version": "1.1.7",
-        "version_normalized": "1.1.7.0",
+        "version": "1.1.10",
+        "version_normalized": "1.1.10.0",
         "source": {
             "type": "git",
             "url": "https://github.com/PayerPayment/Payer-PhpSdk.git",
-            "reference": "27b584c75ce0b9ae2e9f93d60bec34153d4c03e7"
+            "reference": "956ba43486087492ad507cf642efa9234b3d9e8e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PayerPayment/Payer-PhpSdk/zipball/27b584c75ce0b9ae2e9f93d60bec34153d4c03e7",
-            "reference": "27b584c75ce0b9ae2e9f93d60bec34153d4c03e7",
+            "url": "https://api.github.com/repos/PayerPayment/Payer-PhpSdk/zipball/956ba43486087492ad507cf642efa9234b3d9e8e",
+            "reference": "956ba43486087492ad507cf642efa9234b3d9e8e",
             "shasum": ""
         },
         "require": {
@@ -24,7 +24,7 @@
             "satooshi/php-coveralls": "~0.6",
             "squizlabs/php_codesniffer": "~2.3"
         },
-        "time": "2017-11-03T09:37:52+00:00",
+        "time": "2018-01-18T10:02:37+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

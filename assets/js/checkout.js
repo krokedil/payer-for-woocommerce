@@ -1,12 +1,15 @@
 jQuery( function( $ ) {
     var wc_payer_checkout = {
         moveInputFields: function() {
-            var pno_field   = $('#billing_pno_field'),
-                post_code   = $('#billing_postcode_field'),
-                form        = $('form[name=checkout]');
-            
-            form.prepend(post_code); 
-            form.prepend(pno_field);  
+            var pno_field           = $('#billing_pno_field'),
+                post_code           = $('#billing_postcode_field'),
+                customer_details    = $('div.woocommerce-billing-fields div');
+
+            pno_field.addClass('form-row-first');
+            post_code.addClass('form-row-last');
+            post_code.removeClass('form-row-wide');
+            customer_details.prepend(post_code);     
+            customer_details.prepend(pno_field);      
         },
 
         addGetAddressButton: function() {
@@ -67,10 +70,12 @@ jQuery( function( $ ) {
             }
         },
     }
-    if ( payer_checkout_params.locale === 'SE' ) {
-        wc_payer_checkout.moveInputFields();        
-        wc_payer_checkout.addGetAddressButton();
-    }
+    $( document ).ready( function() {
+        if ( payer_checkout_params.locale === 'SE' ) {
+            wc_payer_checkout.moveInputFields();        
+            wc_payer_checkout.addGetAddressButton();
+        }
+    });
     $( "#payer_get_address" ).click(function() { 
             wc_payer_checkout.getAddress();
     });

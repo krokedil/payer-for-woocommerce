@@ -107,7 +107,9 @@ try {
     $gateway = Client::create($credentials);
 
     $purchase = new Purchase($gateway);
-    $purchase->create($data);
+    $postData = $purchase->getPostData($data);
+    
+    var_dump($postData);
 
 } catch (PayerException $e) {
     var_dump($e);

@@ -2,6 +2,27 @@
         PAYER PHP SDK CHANGELOG
 ***************************************
 
+v1.1.10
+----------------
+Date: 2018-01-18
+
+    Mathias Åkerberg <mathias.akerberg@payer.se>
+        Removed iconv encoding in GetAddress Resource
+
+v1.1.9
+----------------
+Date: 2017-12-05
+
+    Mathias Åkerberg <mathias.akerberg@payer.se>
+        Added function GetPostData in Purchase
+
+v1.1.8
+----------------
+Date: 2017-11-07
+
+    Mathias Åkerberg <mathias.akerberg@payer.se>
+        Fixed HTTP Protocol filtering
+
 v1.1.7
 ----------------
 Date: 2017-11-03
