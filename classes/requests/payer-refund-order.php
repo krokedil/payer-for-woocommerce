@@ -6,15 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Payer_Refund_Order{
 
     public static function refund_order( $order_id, $amount, $reason ) {
+        $payment_id = get_post_meta( $order_id, '_payer_payment_id', true );
         $gateway = Payer_Create_Client::create_client();
-        $data = array(
-            'transaction_id'    =>  $order_id,
-            'reason'            =>  $reason,
-            'amount'            =>  $amount,
-            'vat_percentage'    =>  25,
-        );
+        $data = Payer_Create_Refund_Data::create_refund_data( $order_id, $amount, $reason, $payment_id );
         $purchase = new Payer\Sdk\Resource\Purchase( $gateway );
-        $invoice_number = $purchase->refund( $data );
-        update_post_meta( $order_id, '_payer_invoice_number', $invoice_number );
+        Payer_For_Woocommerce::log( 'Payer Refund Order Data: '. $order_id . ' $data: ' . var_export( $data, true ) );
+        $purchase->refund( $data );
     }
 }

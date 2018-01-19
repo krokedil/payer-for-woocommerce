@@ -44,12 +44,13 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	}
 
 	public function process_refund( $order_id, $amount = null, $reason = '' ) {
-		error_log( var_export( $amount, true ) );
 		$order = wc_get_order( $order_id );
         if( ! get_post_meta( $order_id, '_payer_order_refunded' ) ) {
 			Payer_Refund_Order::refund_order( $order_id, $amount, $reason );
             update_post_meta( $order_id, '_payer_order_refunded', 'true' );
-            $order->add_order_note( __( 'The order has been completed with Payer', 'payer-for-woocommerce' ) );
+			$order->add_order_note( __( 'The order has been completed with Payer', 'payer-for-woocommerce' ) );
+			
+			return true;
         } 
 	}
 

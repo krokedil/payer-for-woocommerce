@@ -87,6 +87,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-customer.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-challenge.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-client.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-refund-data.php' );			
 			
 			// Include classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-callbacks.php' );
@@ -97,6 +98,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 			// Include function files
 			include_once( PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php' );
+
 		}
 
 		public function define() {

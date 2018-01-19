@@ -35,6 +35,7 @@ class Payer_Callbacks {
     }
 
     private function settlement_reply( $order_id ) {
+        update_post_meta( $order_id, '_payer_payment_id', $_GET['payer_payment_id'] );        
         $this->set_gateway();
         if( isset( $_GET['address'] ) ) {
             $this->populate_customer_data( $order_id, $_GET['address'] );
