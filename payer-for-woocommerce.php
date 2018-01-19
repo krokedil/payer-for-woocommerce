@@ -78,6 +78,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-get-address.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-create-order.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-commit-order.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-refund-order.php' );
 			
 			// Include request helper classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-payment.php' );
@@ -92,6 +93,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-ajax.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-masterpass-populate-order.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-masterpass-functions.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-post-checkout.php' );
 
 			// Include function files
 			include_once( PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php' );
