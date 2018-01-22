@@ -18,6 +18,8 @@ class Payer_Create_Refund_Data {
                 'vat_percentage'    =>  self::calculate_tax( $refund_id ),
             );
         }
+
+        update_post_meta( $refund_id, '_krokedil_refunded', 'true' );
         return $data;
     }
 
@@ -31,7 +33,18 @@ class Payer_Create_Refund_Data {
 
         $refunds = get_posts( $query_args );
 
-        return array_search( $order_id, $refunds );
+        $refund_id = array_search( $order_id, $refunds );
+
+        if( is_array( $refund_id ) ) {
+            foreach( $refund_id as $key => $value ) {
+                if( ! get_post_meta( $value, '_krokedil_refunded' ) ) {
+                    $refund_id = $value;
+                    break;
+                }
+            }
+        }
+
+        return $refund_id;
     }
 
     private static function calculate_tax( $refund_id ) {
