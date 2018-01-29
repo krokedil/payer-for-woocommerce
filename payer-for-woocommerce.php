@@ -99,6 +99,9 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			// Include function files
 			include_once( PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php' );
 
+			// Include Krokedil Logger
+			include_once( PAYER_PLUGIN_DIR . '/krokedil-logger/krokedil-order-event-log.php' );			
+
 		}
 
 		public function define() {
@@ -159,10 +162,10 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 				wp_enqueue_script( 'payer_instant_checkout' );
 			}
-
+			
 			wp_register_style(
 				'payer_style',
-				plugin_dir_url( __FILE__ ) . '/assets/css/checkout.css',
+				plugin_dir_url( __FILE__ ) . 'assets/css/checkout.css',
 				array(), 
 				PAYER_VERSION_NUMBER
 			);

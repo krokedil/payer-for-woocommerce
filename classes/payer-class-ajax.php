@@ -30,6 +30,7 @@ class Payer_Ajax extends WC_AJAX {
 
 		$payer_address_information = Payer_Get_Address::get_address( $personal_number, $zip_code );
 			self::set_address( $payer_address_information );
+			krokedil_log_events( null, 'Payer Get Address Response', $payer_address_information );
 			wp_send_json_success( $payer_address_information );
 			wp_die();
 		}

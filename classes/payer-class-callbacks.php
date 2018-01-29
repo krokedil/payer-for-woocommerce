@@ -23,9 +23,11 @@ class Payer_Callbacks {
         Payer_For_Woocommerce::log( 'Payer Callback: '. $order_id . ' $_GET: ' . var_export( $_GET, true ) );
         switch ( $callback_type ) {
             case 'auth':
+                krokedil_log_events( $order_id, 'Payer Auth Callback', $_GET );                            
                 $this->authorize_reply( $order_id );
                 break;
             case 'settle':
+                krokedil_log_events( $order_id, 'Payer Settlement Callback', $_GET );
                 $this->maybe_add_fee( $payer_added_fee, $order_id );
                 $this->maybe_update_gateway( $order_id, $used_gateway );                
                 $order->payment_complete( $order_id, $used_gateway );
@@ -45,7 +47,8 @@ class Payer_Callbacks {
             'purchase'  =>  Payer_Get_Purchase::get_purchase( $order_id ),
         );
         $purchase = new Payer\Sdk\Resource\Purchase( $this->gateway );
-        $purchase->createSettlementResource( $data );
+        $response = $purchase->createSettlementResource( $data );
+        krokedil_log_response( $order_id, $response );
     }
 
     private function authorize_reply( $order_id ) {
@@ -55,7 +58,8 @@ class Payer_Callbacks {
             'purchase'  =>  Payer_Get_Purchase::get_purchase( $order_id ),
         );
         $purchase = new Payer\Sdk\Resource\Purchase( $this->gateway );
-        $purchase->createAuthorizeResource( $data );
+        $response = $purchase->createAuthorizeResource( $data );
+        krokedil_log_response( $order_id, $response );       
     }
 
     private function maybe_add_fee( $payer_added_fee, $order_id ) {
