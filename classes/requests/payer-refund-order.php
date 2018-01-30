@@ -11,6 +11,7 @@ class Payer_Refund_Order{
         $data = Payer_Create_Refund_Data::create_refund_data( $order_id, $amount, $reason, $payment_id );
         $purchase = new Payer\Sdk\Resource\Purchase( $gateway );
         Payer_For_Woocommerce::log( 'Payer Refund Order Data: '. $order_id . ' $data: ' . var_export( $data, true ) );
+        krokedil_log_events( $order_id, 'Payer Refund Order', $data );
         $purchase->refund( $data );
     }
 }

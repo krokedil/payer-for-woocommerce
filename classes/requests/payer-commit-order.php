@@ -14,7 +14,9 @@ class Payer_Commit_Order {
         $order = new Payer\Sdk\Resource\Order( $gateway );
         $invoice_number = $order->commit( $data );
         Payer_For_Woocommerce::log( 'Payer Commit order request: '. $order_id . ' $data: ' . var_export( $data, true ) );
+        krokedil_log_events( $order_id, 'Payer Commit order request', $data );
         Payer_For_Woocommerce::log( 'Payer Commit order response: '. $order_id . ' $invoice_number: ' . var_export( $invoice_number, true ) );
+        krokedil_log_events( $order_id, 'Payer Commit order response', $invoice_number );
         if( isset( $invoice_number['invoice_number'] ) ) {
             update_post_meta( $order_id, '_payer_invoice_number', $invoice_number['invoice_number'] );
             return true;

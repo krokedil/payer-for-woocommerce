@@ -61,7 +61,6 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 			// Include the SDK
 			require_once( 'vendor/autoload.php' );
-
 			// Include the gateway classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-factory-gateway.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-card-payments-gateway.php' );
@@ -97,13 +96,9 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-post-checkout.php' );
 
 			// Include function files
-			include_once( PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php' );
-
-			// Include Krokedil Logger
-			include_once( PAYER_PLUGIN_DIR . '/krokedil-logger/krokedil-order-event-log.php' );			
-
+			include_once( PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php' );	
 		}
-
+		
 		public function define() {
 			// Set plugin directory
 			define( 'PAYER_PLUGIN_DIR' , untrailingslashit( plugin_dir_path( __FILE__ ) ) );
@@ -139,7 +134,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 			wp_enqueue_script( 'payer_checkout' );
 
-			$payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' ); 
+			$payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' );
 			if ( 'yes' === $payer_masterpass_settings['instant_masterpass_checkout'] && ( is_product() || is_cart() || is_shop() || is_product_category() ) ) {
 				wp_register_script( 
 					'payer_instant_checkout',

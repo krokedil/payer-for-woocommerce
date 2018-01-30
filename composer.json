@@ -1,5 +1,6 @@
 {
     "require": {
-        "payer/sdk": "^1.1"
+        "payer/sdk": "^1.1",
+        "krokedil/krokedil-logger": "^1.0"
     }
 }

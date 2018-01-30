@@ -4,8 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd9e18e848cd1b95dd4d3585cf2ac66a7
+class ComposerStaticInitf6fa57e9c94c22d9ee178dce51620905
 {
+    public static $files = array (
+        'cad43f73916476d83565191d54c1f14b' => __DIR__ . '/..' . '/krokedil/krokedil-logger/src/krokedil-order-event-log.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
@@ -28,8 +32,8 @@ class ComposerStaticInitd9e18e848cd1b95dd4d3585cf2ac66a7
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd9e18e848cd1b95dd4d3585cf2ac66a7::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd9e18e848cd1b95dd4d3585cf2ac66a7::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf6fa57e9c94c22d9ee178dce51620905::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf6fa57e9c94c22d9ee178dce51620905::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

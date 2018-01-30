@@ -1,17 +1,63 @@
 [
     {
-        "name": "payer/sdk",
-        "version": "1.1.10",
-        "version_normalized": "1.1.10.0",
+        "name": "krokedil/krokedil-logger",
+        "version": "1.0.4",
+        "version_normalized": "1.0.4.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/PayerPayment/Payer-PhpSdk.git",
-            "reference": "956ba43486087492ad507cf642efa9234b3d9e8e"
+            "url": "https://github.com/krokedil/krokedil-logger.git",
+            "reference": "72c3710d542450d24fde732fa961810777dc8632"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PayerPayment/Payer-PhpSdk/zipball/956ba43486087492ad507cf642efa9234b3d9e8e",
-            "reference": "956ba43486087492ad507cf642efa9234b3d9e8e",
+            "url": "https://api.github.com/repos/krokedil/krokedil-logger/zipball/72c3710d542450d24fde732fa961810777dc8632",
+            "reference": "72c3710d542450d24fde732fa961810777dc8632",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.6.0"
+        },
+        "time": "2018-01-30T08:14:34+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/krokedil-order-event-log.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Krokedil",
+                "email": "info@krokedil.se",
+                "homepage": "https://www.krokedil.se",
+                "role": "Developer"
+            }
+        ],
+        "description": "Logging for WooCommerce Gateways",
+        "homepage": "https://www.krokedil.se",
+        "keywords": [
+            "log",
+            "logging",
+            "woocommerce"
+        ]
+    },
+    {
+        "name": "payer/sdk",
+        "version": "1.1.11",
+        "version_normalized": "1.1.11.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PayerPayment/Payer-PhpSdk.git",
+            "reference": "de0388ded310a8ba48e0e682be327cc45ac07893"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PayerPayment/Payer-PhpSdk/zipball/de0388ded310a8ba48e0e682be327cc45ac07893",
+            "reference": "de0388ded310a8ba48e0e682be327cc45ac07893",
             "shasum": ""
         },
         "require": {
@@ -24,7 +70,7 @@
             "satooshi/php-coveralls": "~0.6",
             "squizlabs/php_codesniffer": "~2.3"
         },
-        "time": "2018-01-18T10:02:37+00:00",
+        "time": "2018-01-19T15:05:24+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
