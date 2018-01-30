@@ -114,7 +114,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			// Set path to SDK
 			define( 'PAYER_SDK_DIR', '/vendor/' );
 			// Set Krokedil Logger Defines
-			define( 'KROKEDIL_LOGGER_GATEWAY', '_payer' );
+			define( 'KROKEDIL_LOGGER_GATEWAY', 'payer_' );
 			$payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );        
 			if ( 'yes' === $payer_settings['debug_mode'] ) {
 				define( 'KROKEDIL_LOGGER_ON', true );
