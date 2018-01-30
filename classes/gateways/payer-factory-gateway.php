@@ -36,7 +36,7 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 		);
 
 		$this->clear_sessions();
-		krokedil_set_order_version( $order_id, PAYER_VERSION_NUMBER );
+		krokedil_set_order_gateway_version( $order_id, PAYER_VERSION_NUMBER );
 		return array(
 			'result'   => 'success',
 			'redirect' => $redirect_url,

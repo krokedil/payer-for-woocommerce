@@ -40,7 +40,7 @@ class Payer_Direct_Invoice_Gateway extends Payer_Factory_Gateway {
 		Payer_Create_Order::create_order( $order_id );
 
 		$order->payment_complete();
-		krokedil_set_order_version( $order_id, PAYER_VERSION_NUMBER );		
+		krokedil_set_order_gateway_version( $order_id, PAYER_VERSION_NUMBER );		
 		return array(
 			'result'   => 'success',
 			'redirect' => $order->get_checkout_order_received_url(),
