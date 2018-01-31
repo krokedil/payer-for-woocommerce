@@ -12,7 +12,7 @@ class Payer_Create_Refund_Data {
         }
         if( null !== $refund_id ) {
             $data = array(
-                'transaction_id'    =>  $payment_id,
+                'transaction_id'    =>  get_post_meta( $order_id, '_payer_payment_id', true ),
                 'reason'            =>  $reason,
                 'amount'            =>  $amount,
                 'vat_percentage'    =>  self::calculate_tax( $refund_id ),

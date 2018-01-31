@@ -9,7 +9,7 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 
 		$this->supports = array(
 			'products',
-			'refunds',
+			//'refunds',
 		);
 	}
 

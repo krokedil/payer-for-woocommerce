@@ -25,8 +25,12 @@ class Payer_Ajax extends WC_AJAX {
     }
     
     public static function get_address() {
-        $personal_number = $_POST['personal_number'];
-        $zip_code = $_POST['zip_code'];
+		$personal_number = $_POST['personal_number'];
+		if( '' !== $_POST['zip_code'] ) {
+			$zip_code = $_POST['zip_code'];
+		} else {
+			$zip_code = 12345;
+		}
 
 		$payer_address_information = Payer_Get_Address::get_address( $personal_number, $zip_code );
 			self::set_address( $payer_address_information );
