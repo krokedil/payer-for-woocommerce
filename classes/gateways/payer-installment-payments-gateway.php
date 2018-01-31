@@ -15,6 +15,8 @@ class Payer_Installment_Payments_Gateway extends Payer_Factory_Gateway {
 		$this->description 		    = $this->get_option( 'description' );
 		$this->test_mode            = $this->get_option( 'test_mode' );
 		$this->debug_mode           = $this->get_option( 'debug_mode' );
+		$this->icon_url				= $this->get_option( 'payer_installment_payment_icon' );		
+		$this->icon					= $this->set_icon();
 
 		// Load the form fields.
 		$this->init_form_fields();
@@ -35,7 +37,22 @@ class Payer_Installment_Payments_Gateway extends Payer_Factory_Gateway {
 	}
 
 	public function is_available() {
-		if ( 999 < $this->get_order_total() ) {
+		
+		switch ( get_woocommerce_currency() ) {
+			case 'SEK' :
+				$amount_limit = 999;
+				break;
+			case 'NOK' :
+				$amount_limit = 999;
+				break;
+			case 'EUR' :
+				$amount_limit = 99;
+				break;
+			default :
+				return false;
+		}
+
+		if ( $amount_limit < $this->get_order_total() ) {
 			return true;
 		}
 

@@ -1,10 +1,3 @@
-#billing_pno_field, #billing_postcode_field {
-    max-width:50%;
-    display:inline-block;
-}
-#billing_postcode_field {
-    padding-right:10px;
-}
 #payer_get_address {
     clear:both;
     display:block;
@@ -14,4 +7,25 @@
 }
 .payer_instant_checkout img {
     margin-top:5px;
+    margin-bottom:0;        
+}
+
+.site-header-cart .payer_instant_checkout {
+    padding-left: 1.41575em;
+    padding-right: 1.41575em;
+}
+
+.payment_method_payer_card_payment img, 
+.payment_method_payer_bank_payment img, 
+.payment_method_payer_invoice_payment img,
+.payment_method_payer_installment_payment img,
+.payment_method_payer_swish_payment img,
+.payment_method_payer_einvoice_payment img,
+.payment_method_payer_direct_invoice_gateway img,
+.payment_method_payer_masterpass img {
+    max-height: 2.5em !important;
+    vertical-align: middle;
+    display: inline;
+    margin: 0 10px;
+    float: right !important;
 }

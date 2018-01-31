@@ -34,7 +34,94 @@ if ( $this->id === 'payer_masterpass' ) {
 	);
 }
 
+if ( $this->id === 'payer_bank_payment' ) {
+	$settings['payer_bank_payment_icon'] = array(
+		'title'         => __( 'Icon URL', 'payer-for-woocommerce' ),
+		'type'          => 'text',
+		'description'   => __( 'Put the URL to a new icon image here', 'payer-for-woocommerce' ),
+		'default'       => '',
+		'desc_tip'      => true,
+	);
+}
+
+if ( $this->id === 'payer_direct_invoice_gateway' ) {
+	$settings['payer_direct_invoice_payment_icon'] = array(
+		'title'         => __( 'Icon URL', 'payer-for-woocommerce' ),
+		'type'          => 'text',
+		'description'   => __( 'Put the URL to a new icon image here', 'payer-for-woocommerce' ),
+		'default'       => '',
+		'desc_tip'      => true,
+	);
+}
+
+if ( $this->id === 'payer_einvoice_payment' ) {
+	$settings['payer_einvoice_payment_icon'] = array(
+		'title'         => __( 'Icon URL', 'payer-for-woocommerce' ),
+		'type'          => 'text',
+		'description'   => __( 'Put the URL to a new icon image here', 'payer-for-woocommerce' ),
+		'default'       => '',
+		'desc_tip'      => true,
+	);
+}
+
+if ( $this->id === 'payer_installment_payment' ) {
+	$settings['payer_installment_payment_icon'] = array(
+		'title'         => __( 'Icon URL', 'payer-for-woocommerce' ),
+		'type'          => 'text',
+		'description'   => __( 'Put the URL to a new icon image here', 'payer-for-woocommerce' ),
+		'default'       => '',
+		'desc_tip'      => true,
+	);
+}
+if ( $this->id === 'payer_invoice_payment' ) {
+	$settings['payer_invoice_payment_icon'] = array(
+		'title'         => __( 'Icon URL', 'payer-for-woocommerce' ),
+		'type'          => 'text',
+		'description'   => __( 'Put the URL to a new icon image here', 'payer-for-woocommerce' ),
+		'default'       => '',
+		'desc_tip'      => true,
+	);
+}
+
+if ( $this->id === 'payer_masterpass' ) {
+	$settings['payer_masterpass_icon'] = array(
+		'title'         => __( 'Icon URL', 'payer-for-woocommerce' ),
+		'type'          => 'text',
+		'description'   => __( 'Put the URL to a new icon image here', 'payer-for-woocommerce' ),
+		'default'       => '',
+		'desc_tip'      => true,
+	);
+}
+
+if ( $this->id === 'payer_swish_payment' ) {
+	$settings['payer_swish_payment_icon'] = array(
+		'title'         => __( 'Icon URL', 'payer-for-woocommerce' ),
+		'type'          => 'text',
+		'description'   => __( 'Put the URL to a new icon image here', 'payer-for-woocommerce' ),
+		'default'       => '',
+		'desc_tip'      => true,
+	);
+}
+
 if ( $this->id === 'payer_card_payment' ) {
+	$settings['payer_card_payment_icon'] = array(
+		'title'         => __( 'Icon URL', 'payer-for-woocommerce' ),
+		'type'          => 'text',
+		'description'   => __( 'Put the URL to a new icon image here', 'payer-for-woocommerce' ),
+		'default'       => '',
+		'desc_tip'      => true,
+	);
+}
+
+if ( $this->id === 'payer_card_payment' ) {
+	$settings['payer_card_payment_icon'] = array(
+		'title'         => __( 'Icon URL', 'payer-for-woocommerce' ),
+		'type'          => 'text',
+		'description'   => __( 'Put the URL to a new icon image here', 'payer-for-woocommerce' ),
+		'default'       => '',
+		'desc_tip'      => true,
+	);
+
 	$settings['payer_agent_id'] = array(
 		'title'         => __( 'Agent ID', 'payer-for-woocommerce' ),
 		'type'          => 'text',

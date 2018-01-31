@@ -25,13 +25,18 @@ class Payer_Ajax extends WC_AJAX {
     }
     
     public static function get_address() {
-        $personal_number = $_POST['personal_number'];
-        $zip_code = $_POST['zip_code'];
+		$personal_number = $_POST['personal_number'];
+		if( '' !== $_POST['zip_code'] ) {
+			$zip_code = $_POST['zip_code'];
+		} else {
+			$zip_code = 12345;
+		}
 
-				$payer_address_information = Payer_Get_Address::get_address( $personal_number, $zip_code );
-				self::set_address( $payer_address_information );
-        wp_send_json_success( $payer_address_information );
-        wp_die();
+		$payer_address_information = Payer_Get_Address::get_address( $personal_number, $zip_code );
+			self::set_address( $payer_address_information );
+			krokedil_log_events( null, 'Payer Get Address Response', $payer_address_information );
+			wp_send_json_success( $payer_address_information );
+			wp_die();
 		}
 		
 		private static function set_address( $payer_address_information ) {
@@ -76,23 +81,27 @@ class Payer_Ajax extends WC_AJAX {
 			wp_die();
 		}		
 		public static function instant_cart_purchase() {
-			$order 	= wc_create_order();
-			$order_id = $order->get_id();
+			if ( WC()->cart->get_cart_contents_count() > 0 ) {
+				$order 	= wc_create_order();
+				$order_id = $order->get_id();
 
-			Payer_Masterpass_Populate_Order::add_order_details( $order );
-			
-			Payer_Masterpass_Populate_Order::set_gateway( $order );
+				Payer_Masterpass_Populate_Order::add_order_details( $order );
+				
+				Payer_Masterpass_Populate_Order::set_gateway( $order );
 
-			$redirect_url = WC()->cart->get_checkout_url();
-			
-			$redirect_url = add_query_arg(
-				array(
-					'payer-redirect'	=>	'1',
-					'order_id'			=>	$order_id,
-				),
-				$redirect_url
-			);
-			wp_send_json_success( $redirect_url );
+				$redirect_url = WC()->cart->get_checkout_url();
+				
+				$redirect_url = add_query_arg(
+					array(
+						'payer-redirect'	=>	'1',
+						'order_id'			=>	$order_id,
+					),
+					$redirect_url
+				);
+				wp_send_json_success( $redirect_url );
+				wp_die();
+			}
+			wp_send_json_error();
 			wp_die();
 		}
 }

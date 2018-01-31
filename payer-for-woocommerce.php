@@ -58,9 +58,9 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 		public function init() {
 			// Set definitions
 			$this->define();
+
 			// Include the SDK
 			require_once( 'vendor/autoload.php' );
-
 			// Include the gateway classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-factory-gateway.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-card-payments-gateway.php' );
@@ -77,6 +77,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-get-address.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-create-order.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-commit-order.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-refund-order.php' );
 			
 			// Include request helper classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-payment.php' );
@@ -85,24 +86,34 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-customer.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-challenge.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-client.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-refund-data.php' );			
 			
 			// Include classes
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-callbacks.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-ajax.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-masterpass-populate-order.php' );
 			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-masterpass-functions.php' );
+			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-post-checkout.php' );
 
 			// Include function files
-			include_once( PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php' );
+			include_once( PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php' );	
 		}
-
+		
 		public function define() {
 			// Set plugin directory
 			define( 'PAYER_PLUGIN_DIR' , untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+			// Set URL
+			define( 'PAYER_PLUGIN_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 			// Set version number
 			define( 'PAYER_VERSION_NUMBER', '0.0.1' );
 			// Set path to SDK
 			define( 'PAYER_SDK_DIR', '/vendor/' );
+			// Set Krokedil Logger Defines
+			define( 'KROKEDIL_LOGGER_GATEWAY', 'payer_' );
+			$payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );        
+			if ( 'yes' === $payer_settings['debug_mode'] ) {
+				define( 'KROKEDIL_LOGGER_ON', true );
+			}
 		}
 
 		public function load_scripts() {
@@ -123,7 +134,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 			wp_enqueue_script( 'payer_checkout' );
 
-			$payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' ); 
+			$payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' );
 			if ( 'yes' === $payer_masterpass_settings['instant_masterpass_checkout'] && ( is_product() || is_cart() || is_shop() || is_product_category() ) ) {
 				wp_register_script( 
 					'payer_instant_checkout',
@@ -152,10 +163,10 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 				wp_enqueue_script( 'payer_instant_checkout' );
 			}
-
+			
 			wp_register_style(
 				'payer_style',
-				plugin_dir_url( __FILE__ ) . '/assets/css/checkout.css',
+				plugin_dir_url( __FILE__ ) . 'assets/css/checkout.css',
 				array(), 
 				PAYER_VERSION_NUMBER
 			);

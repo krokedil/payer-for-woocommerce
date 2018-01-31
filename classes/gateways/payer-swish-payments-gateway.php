@@ -15,6 +15,8 @@ class Payer_Swish_Payments_Gateway extends Payer_Factory_Gateway {
 		$this->description 		    = $this->get_option( 'description' );
 		$this->test_mode            = $this->get_option( 'test_mode' );
 		$this->debug_mode           = $this->get_option( 'debug_mode' );
+		$this->icon_url				= $this->get_option( 'payer_swish_payment_icon' );
+		$this->icon					= $this->set_icon();
 
 		// Load the form fields.
 		$this->init_form_fields();

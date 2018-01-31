@@ -15,6 +15,8 @@ class Payer_Direct_Invoice_Gateway extends Payer_Factory_Gateway {
 		$this->description 		    = $this->get_option( 'description' );
 		$this->test_mode            = $this->get_option( 'test_mode' );
 		$this->debug_mode           = $this->get_option( 'debug_mode' );
+		$this->icon_url				= $this->get_option( 'payer_direct_invoice_payment_icon' );
+		$this->icon					= $this->set_icon();
 
 		// Load the form fields.
 		$this->init_form_fields();
@@ -31,23 +33,18 @@ class Payer_Direct_Invoice_Gateway extends Payer_Factory_Gateway {
 
 		update_post_meta( $order_id, '_billing_pno', $_POST['billing_pno'] );		
 
+		// Check if customer changed any of the data from get_address
+		$this->check_posted_data( $order_id );
+
 		// Create an order
 		Payer_Create_Order::create_order( $order_id );
 
 		$order->payment_complete();
-
+		krokedil_set_order_gateway_version( $order_id, PAYER_VERSION_NUMBER );		
 		return array(
 			'result'   => 'success',
 			'redirect' => $order->get_checkout_order_received_url(),
 		);
-	}
-
-	public function show_keys_in_settings() {
-		if ( isset( $_GET['section'] ) ) {
-			if ( $this->id === $_GET['section'] ) {
-				payer_show_credentials_form();
-			}
-		}
 	}
 }
 

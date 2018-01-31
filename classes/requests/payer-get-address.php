@@ -13,6 +13,7 @@ class Payer_Get_Address{
             'zip_code'          =>  $zip_code,
             'challenge_token'   =>  Payer_Create_Challenge::create_challenge(),
         );
+        krokedil_log_events( null, 'Payer Get Address Request', $data );        
         $get_address = new Payer\Sdk\Resource\GetAddress( $gateway );
         $get_address_response = $get_address->create( $data );
 

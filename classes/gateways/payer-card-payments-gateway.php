@@ -17,7 +17,8 @@ class Payer_Card_Payments_Gateway extends Payer_Factory_Gateway {
 		$this->payer_password       = $this->get_option( 'payer_password' );
 		$this->test_mode            = $this->get_option( 'test_mode' );
 		$this->debug_mode           = $this->get_option( 'debug_mode' );
-
+		$this->icon_url				= $this->get_option( 'payer_card_payment_icon' );	
+		$this->icon					= $this->set_icon();				
 		// Load the form fields.
 		$this->init_form_fields();
 		// Load the settings.
