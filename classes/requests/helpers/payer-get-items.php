@@ -23,12 +23,11 @@ class Payer_Get_Items {
     }
 
     private static function get_item( $item ) {
-
+        $product = $item->get_product();
+        
         if ( $item['variation_id'] ) {
-            $product = wc_get_product( $item['variation_id'] );
             $product_id = $item['variation_id'];
         } else {
-            $product = wc_get_product( $item['product_id'] );
             $product_id = $item['product_id'];
         }
         
@@ -36,7 +35,7 @@ class Payer_Get_Items {
             'type'                  =>  'Freeform',
             'article_number'        =>  self::get_sku( $product, $product_id ),
             'description'           =>  $product->get_name(),
-            'unit_price'            =>  wc_get_price_including_tax( $product ),
+            'unit_price'            =>  ( $item->get_total() + $item->get_total_tax() ) / $item['qty'],
             'unit_vat_percetage'    =>  self::calculate_tax( $product ),
             'quantity'              =>  $item['qty'],
         );
