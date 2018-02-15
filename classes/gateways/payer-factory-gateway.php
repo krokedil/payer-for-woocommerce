@@ -6,11 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	public function __construct() {
 		add_filter( 'woocommerce_checkout_fields' , array( $this, 'add_pno_field' ) );
-
-		$this->supports = array(
-			'products',
-			//'refunds',
-		);
 	}
 
 	public function init_form_fields() {
@@ -50,7 +45,6 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 				Payer_Refund_Order::refund_order( $order_id, $amount, $reason );
 				update_post_meta( $order_id, '_payer_order_refunded', 'true' );
 				$order->add_order_note( __( 'The order has been refunded with Payer', 'payer-for-woocommerce' ) );
-				throw new Exception( __( 'The order has been refunded with Payer', 'payer-for-woocommerce' ) );
 				return true;
 			} else {
 				throw new Exception( __( 'The order has already been refunded with Payer', 'payer-for-woocommerce' ) );
