@@ -15,7 +15,7 @@
  * Developer URI:   https://krokedil.se/
  * Text Domain:     payer-for-woocommerce	
  * Domain Path:     /languages
- * Copyright:       © 2009-2017 LeaseCloud AB.
+ * Copyright:       © Krokedil AB.
  * License:         GNU General Public License v3.0
  * License URI:     http://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -45,6 +45,9 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			add_filter( 'woocommerce_process_checkout_field_billing_city', array( $this, 'filter_pre_checked_value' ) );
 			add_filter( 'woocommerce_process_checkout_field_billing_company', array( $this, 'filter_pre_checked_value' ) );
 			add_filter( 'woocommerce_default_address_fields', array( $this, 'override_checkout_check' ) );
+
+			// Translations
+			load_plugin_textdomain( 'payer-for-woocommerce', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 		}
 
 		public function payer_make_purchase() {
