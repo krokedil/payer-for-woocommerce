@@ -122,6 +122,12 @@ if ( $this->id === 'payer_card_payment' ) {
 		'desc_tip'      => true,
 	);
 
+	$settings['payer_key_section'] = array(
+		'title' => __( 'Payer credentials', 'payer-for-woocommerce' ),
+		'type'  => 'title',
+		'description' => __( 'The key values can be found under the Settings/Account section in <a href="https://secure.payer.se/adminweb/inloggning/inloggning.php"> Payer Administration</a>. Contact Payer if you haven\'t got access to your login credentials', 'payer-for-woocommerce' ),
+	);
+
 	$settings['payer_agent_id'] = array(
 		'title'         => __( 'Agent ID', 'payer-for-woocommerce' ),
 		'type'          => 'text',
