@@ -23,9 +23,14 @@ class Payer_Swish_Payments_Gateway extends Payer_Factory_Gateway {
 		// Load the settings.
 		$this->init_settings();
 
+		$this->supports = array(
+			'products',
+			'refunds',
+		);
+
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 
-		add_filter( 'woocommerce_page_wc-settings', array( $this, 'show_keys_in_settings' ) );				
+		add_filter( 'woocommerce_page_wc-settings', array( $this, 'show_keys_in_settings' ) );	
 	}
 
 	public function show_keys_in_settings() {
