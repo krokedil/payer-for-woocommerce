@@ -176,6 +176,18 @@ if ( $this->id === 'payer_card_payment' ) {
 		'desc_tip'      => true,
 	);
 
+	$settings['address_lookup_settings_title'] = array(
+		'title' => __( 'Address Lookup Settings', 'payer-for-woocommerce' ),
+		'type'  => 'title',
+	);
+
+	$settings['address_lookup'] = array(
+		'title' => __( 'Address lookup' ),
+		'type' => 'checkbox',
+		'label' => __( 'Add the address lookup form to checkout.', 'payer-for-woocommerce' ),
+		'default' => 'no'
+	);
+
 	$settings['test_mode_settings_title'] = array(
 		'title' => __( 'Test Mode Settings', 'payer-for-woocommerce' ),
 		'type'  => 'title',
