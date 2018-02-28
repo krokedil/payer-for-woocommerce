@@ -8,7 +8,7 @@
  * Plugin Name:     Payer for WooCommerce
  * Plugin URI:      https://krokedil.se/payer/
  * Description:     Extends WooCommerce. Provides a <a href="https://https://www.payer.se/" target="_blank">Payer</a> checkout for WooCommerce.
- * Version:         0.1.0
+ * Version:         0.1.1
  * Author:          Krokedil
  * Author URI:      https://krokedil.se/
  * Developer:       Krokedil
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			// Set URL
 			define( 'PAYER_PLUGIN_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 			// Set version number
-			define( 'PAYER_VERSION_NUMBER', '0.1.0' );
+			define( 'PAYER_VERSION_NUMBER', '0.1.1' );
 			// Set path to SDK
 			define( 'PAYER_SDK_DIR', '/vendor/' );
 			// Set Krokedil Logger Defines
@@ -126,11 +126,13 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 				array( 'jquery', 'wc-cart' ),
 				PAYER_VERSION_NUMBER
 			);
-
+			$payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );
+        	$get_address = $payer_settings['get_address'];
 			$checkout_localize_params = array(
-				'ajaxurl'			=>	admin_url( 'admin-ajax.php' ),
-				'locale'			=>	WC()->customer->get_billing_country(),
-				'get_address'		=>	WC_AJAX::get_endpoint( 'get_address' ),
+				'ajaxurl'			 =>	admin_url( 'admin-ajax.php' ),
+				'locale'			 =>	WC()->customer->get_billing_country(),
+				'enable_get_address' => $get_address,
+				'get_address'		 =>	WC_AJAX::get_endpoint( 'get_address' ),
 			);
 
 			wp_localize_script( 'payer_checkout', 'payer_checkout_params', $checkout_localize_params );
@@ -189,7 +191,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 		public function filter_pre_checked_value( $value ) {
 			// Only do this for Payer methods
 			$chosen_payment_method = WC()->session->get( 'chosen_payment_method' );
-			if ( strpos( $chosen_payment_method, 'payer' ) !== false ) {
+			//if ( strpos( $chosen_payment_method, 'payer' ) !== false ) {
 				$current_filter = current_filter();
 				$current_field  = str_replace( array( 'woocommerce_process_checkout_field_billing_', ), '', $current_filter );
 				if ( strpos( $value, '**' ) !== false ) {
@@ -202,7 +204,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 				} else {
 					return $value;
 				}
-			}
+			//}
 			return $value;
 		}
 

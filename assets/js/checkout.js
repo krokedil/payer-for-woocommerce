@@ -55,20 +55,43 @@ jQuery( function( $ ) {
 
         getAddress: function() {
             var personal_number = $('#billing_pno').val(),
-                zip_code = $('#billing_postcode').val();
-            // Set AJAX data
-            var data = {
-                'action': 'get_address',
-                'personal_number': personal_number,
-                'zip_code' : zip_code,
-            }
-            // Make AJAX call
-            jQuery.post(payer_checkout_params.get_address, data, function (data) {
-                if (true === data.success) {
-                    var address_data = data.data;
-                    wc_payer_checkout.populateAddressFields( address_data );
+                zip_code = $('#billing_postcode').val()
+                button = $('#payer_get_address'),
+                response_message_field = $('#payer-get-address-response');
+
+            response_message_field.remove();
+            // Add spinner
+            button.prop('disabled', true)
+            button.addClass('payer_spinner');
+            $.ajax({
+                type: 'POST',
+                url: payer_checkout_params.get_address,
+                data: {
+                    'action': 'get_address',
+                    'personal_number': personal_number,
+                    'zip_code' : zip_code,
+                },
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    var address_data = data.data.address_information,
+                        message = data.data.message;
+                    if( data.success === false ) { 
+                        button.after('<div id="payer-get-address-response" class="woocommerce-error">' + message + '</div>');
+                    } else {
+                        button.after('<div id="payer-get-address-response" class="woocommerce-message">' + message + '</div>');
+                        wc_payer_checkout.populateAddressFields( address_data );
+                    }
+                },
+                error: function(data) {
+                },
+                complete: function(data) {
+                    button.prop('disabled', false)
+                    // Remove spinner
+                    button.removeClass('payer_spinner');
+                    $('body').trigger('update_checkout');
                 }
-            });
+            });    
         },
         populateAddressFields: function( address_data ) {
             // Set fields
@@ -114,36 +137,17 @@ jQuery( function( $ ) {
             $('body').removeClass('payer-active');
         }
     }
-    $(document).on('ready', function() {
-        wc_payer_checkout.addGetAddressButton();
-    });
 
     $('body').on('click', '#payer_get_address', function() {
             wc_payer_checkout.getAddress();
     });
-
-    $(document).on('updated_checkout', function () {        
-        if ( payer_checkout_params.locale === 'SE' ) {
-            var selected_gateway = $("input[name='payment_method']:checked").val();
-            if ( selected_gateway.indexOf("payer_") >= 0 ) {
-                if( false === $('body').hasClass('payer-active') ) {
-                    wc_payer_checkout.moveInputFields();  
-                    wc_payer_checkout.showPNOfield();
-                    wc_payer_checkout.showAddressButton();
-                    wc_payer_checkout.addBodyClass();
-                }
-            } else {
-                wc_payer_checkout.hidePNOfield();
-                wc_payer_checkout.hideAddressButton();
-                wc_payer_checkout.resetPostCodeField();          
-                wc_payer_checkout.removeBodyClass();                              
-            }
-        }
-    });
-    var selected_gateway = $('form[name="checkout"] input[name="payment_method"]:checked').val();
-    $(document).on("change", "input[name='payment_method']", function (event) {
-        if (selected_gateway !== $('form[name="checkout"] input[name="payment_method"]:checked').val()) {
-            jQuery(document.body).trigger("update_checkout");
+    $( document ).ready(function() {        
+        if ( payer_checkout_params.locale === 'SE' && payer_checkout_params.enable_get_address === 'yes' ) {
+            wc_payer_checkout.addGetAddressButton();
+            wc_payer_checkout.moveInputFields();  
+            wc_payer_checkout.showPNOfield();
+            wc_payer_checkout.showAddressButton();
+            wc_payer_checkout.addBodyClass();
         }
     });
 });

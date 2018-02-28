@@ -37,6 +37,12 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2018.02.28  	- version 0.1.1 =
+* Fix - Fixed Installment to only show if enabled.
+* Fix - Fixed so masking is removed on order completion without payer being the gateway.
+* Enhancement - Showing messages on get address success or failure.
+* Enhancement - Fixed some translations.
+* Enhancement - Added setting for enabling order management and get address function.
 
 = 2018.02.16  	- version 0.1.0 =
 * First release on wordpress.org.

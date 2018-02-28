@@ -25,19 +25,39 @@ class Payer_Ajax extends WC_AJAX {
     }
     
     public static function get_address() {
-		$personal_number = $_POST['personal_number'];
-		if( '' !== $_POST['zip_code'] ) {
-			$zip_code = $_POST['zip_code'];
-		} else {
-			$zip_code = 12345;
-		}
+			$personal_number = $_POST['personal_number'];
+			if( $personal_number !== '' ) {
+			if( '' !== $_POST['zip_code'] ) {
+				$zip_code = $_POST['zip_code'];
+			} else {
+				$zip_code = 12345;
+			}
 
-		$payer_address_information = Payer_Get_Address::get_address( $personal_number, $zip_code );
-			self::set_address( $payer_address_information );
-			krokedil_log_events( null, 'Payer Get Address Response', $payer_address_information );
-			wp_send_json_success( $payer_address_information );
+			$payer_address_information = Payer_Get_Address::get_address( $personal_number, $zip_code );
+			if( 'invalid request' === $payer_address_information['status'] ) {
+				$return = array(
+					'message' => __( 'Invalid request, please check the information or fill in the address manually.', 'payer-for-woocommerce' )
+				);
+				wp_send_json_error( $return );
+				wp_die();
+			} else {
+				self::set_address( $payer_address_information );
+				krokedil_log_events( null, 'Payer Get Address Response', $payer_address_information );
+				$return = array(
+					'address_information' => $payer_address_information,
+					'message'			  => __( 'Address found and added to the checkout form', 'payer-for-woocommerce' )
+				);
+				wp_send_json_success( $return );
+				wp_die();
+			}
+		} else {
+			$return = array(
+				'message' => __( 'Please fill in the personal number field', 'payer-for-woocommerce' )
+			);
+			wp_send_json_error( $return );
 			wp_die();
 		}
+	}
 		
 		private static function set_address( $payer_address_information ) {
 			$payer_customer_details = array(

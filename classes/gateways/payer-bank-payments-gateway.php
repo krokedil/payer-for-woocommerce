@@ -22,11 +22,16 @@ class Payer_Bank_Payments_Gateway extends Payer_Factory_Gateway {
 		$this->init_form_fields();
 		// Load the settings.
 		$this->init_settings();
-
-		$this->supports = array(
-			'products',
-			'refunds',
+		
+		$support_array = array(
+			'products'
 		);
+        $payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );
+        $order_management = $payer_settings['order_management'];
+        if( 'yes' === $order_management ) {
+			array_push( $support_array, 'refunds' );
+		}
+		$this->supports = $support_array;
 
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 
