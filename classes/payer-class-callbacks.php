@@ -123,7 +123,6 @@ class Payer_Callbacks {
     private function populate_customer_data( $order_id, $address ) {
         $address = base64_decode( $address );
         $address = json_decode( utf8_decode( $address ) );
-        error_log( var_export( $address, true ) );
         $order = wc_get_order( $order_id );
 
         $order->set_billing_first_name( sanitize_text_field( $address->firstName ) );
@@ -131,7 +130,7 @@ class Payer_Callbacks {
 		$order->set_billing_country( sanitize_text_field( $address->countryId ) );
 		$order->set_billing_address_1( sanitize_text_field( $address->address1 ) );
 		$order->set_billing_address_2( sanitize_text_field( $address->address2 ) );
-		//$order->set_billing_city( sanitize_text_field( $address->city ) );
+		$order->set_billing_city( sanitize_text_field( $address->city ) );
 		$order->set_billing_postcode( sanitize_text_field( $address->postalCode  ) );
 		$order->set_billing_phone( sanitize_text_field( $address->phone ) );
         $order->set_billing_email( sanitize_text_field( $address->email ) );
