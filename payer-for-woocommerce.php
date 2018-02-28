@@ -6,16 +6,16 @@
  *
  * @wordpress-plugin
  * Plugin Name:     Payer for WooCommerce
- * Plugin URI:      https://krokedil.se/produkt/payer/
+ * Plugin URI:      https://krokedil.se/payer/
  * Description:     Extends WooCommerce. Provides a <a href="https://https://www.payer.se/" target="_blank">Payer</a> checkout for WooCommerce.
- * Version:         0.0.1
+ * Version:         0.1.0
  * Author:          Krokedil
  * Author URI:      https://krokedil.se/
  * Developer:       Krokedil
  * Developer URI:   https://krokedil.se/
  * Text Domain:     payer-for-woocommerce	
  * Domain Path:     /languages
- * Copyright:       © Krokedil AB.
+ * Copyright:       © Krokedil Produktionsbyrå AB.
  * License:         GNU General Public License v3.0
  * License URI:     http://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			// Set URL
 			define( 'PAYER_PLUGIN_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 			// Set version number
-			define( 'PAYER_VERSION_NUMBER', '0.0.1' );
+			define( 'PAYER_VERSION_NUMBER', '0.1.0' );
 			// Set path to SDK
 			define( 'PAYER_SDK_DIR', '/vendor/' );
 			// Set Krokedil Logger Defines
