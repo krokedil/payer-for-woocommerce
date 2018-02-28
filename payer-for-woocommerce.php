@@ -135,7 +135,10 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 			wp_localize_script( 'payer_checkout', 'payer_checkout_params', $checkout_localize_params );
 
-			wp_enqueue_script( 'payer_checkout' );
+			$payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );
+			if($payer_settings['address_lookup'] === 'yes') {
+				wp_enqueue_script( 'payer_checkout' );
+			}
 
 			$payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' );
 			if ( 'yes' === $payer_masterpass_settings['instant_masterpass_checkout'] && ( is_product() || is_cart() || is_shop() || is_product_category() ) ) {
