@@ -176,6 +176,13 @@ if ( $this->id === 'payer_card_payment' ) {
 		'desc_tip'      => true,
 	);
 
+	$settings['order_management'] = array(
+		'title'         => __( 'Enable order management', 'payer-for-woocommerce' ),
+		'type'          => 'checkbox',
+		'label'         => __( 'Enable order management for Payer.', 'payer-for-woocommerce' ),
+		'default'       => 'no',
+	);
+
 	$settings['test_mode_settings_title'] = array(
 		'title' => __( 'Test Mode Settings', 'payer-for-woocommerce' ),
 		'type'  => 'title',
@@ -185,7 +192,7 @@ if ( $this->id === 'payer_card_payment' ) {
 		'title'         => __( 'Test mode', 'payer-for-woocommerce' ),
 		'type'          => 'checkbox',
 		'label'         => __( 'Enable Test mode for Payer.', 'payer-for-woocommerce' ),
-		'default'       => 'no',
+		'default'       => 'yes',
 	);
 
 	$settings['debug_mode'] = array(
