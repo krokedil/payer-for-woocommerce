@@ -57,7 +57,7 @@ class Payer_Installment_Payments_Gateway extends Payer_Factory_Gateway {
 		}
 
 		if ( $amount_limit < $this->get_order_total() ) {
-			return true;
+			return parent::is_available();
 		}
 
 		return false;
