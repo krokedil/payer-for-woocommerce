@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Swedish\n"
-"Last-Translator: Krokedil Produktionsbyrå <info@krokedil.se>\n"
+"Last-Translator: admin <michael@krokedil.se>\n"
 "Report-Msgid-Bugs-To: http://krokedil.se\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "POT-Creation-Date: 2018-02-16 08:39+0000\n"
-"PO-Revision-Date: 2018-02-16 08:50+0000\n"
+"PO-Revision-Date: 2018-02-28 08:25+0000\n"
 "Language: sv_SE\n"
 "X-Generator: Loco https://localise.biz/"
 
@@ -29,7 +29,7 @@ msgstr "Payer tilläggs avgifter."
 #: classes/payer-class-masterpass-functions.php:17,
 #: classes/payer-class-masterpass-functions.php:30
 msgid "Read more..."
-msgstr "Läst mer..."
+msgstr "Läs mer..."
 
 #: classes/payer-class-post-checkout.php:18
 msgid "The order has been completed with Payer"
@@ -232,7 +232,7 @@ msgstr "Logga Payer händelser i %s"
 
 #: includes/payer-factory-settings.php:200
 msgid "Put credentials in the Payer Card Payments settings."
-msgstr "Lägg till credentials i Payer kort inställningar."
+msgstr "Lägg till credentials i inställningar för Payer kortbetalning."
 
 #: classes/gateways/payer-bank-payments-gateway.php:11
 msgid "Payer Bank"
@@ -244,7 +244,7 @@ msgstr "Payer Kortbetalning"
 
 #: classes/gateways/payer-direct-invoice-gateway.php:11
 msgid "Payer Direct Invoice"
-msgstr "Payer direkt faktura"
+msgstr "Payer Direkt Faktura"
 
 #: classes/gateways/payer-einvoice-payments-gateway.php:11
 msgid "Payer EInvoice"
@@ -273,11 +273,11 @@ msgstr "xxxxxx-xxxx"
 
 #: classes/gateways/payer-installment-payments-gateway.php:11
 msgid "Payer Installment"
-msgstr "Payer delbetalning"
+msgstr "Payer Delbetalning"
 
 #: classes/gateways/payer-invoice-payments-gateway.php:11
 msgid "Payer Invoice"
-msgstr "Payer faktura"
+msgstr "Payer Faktura"
 
 #: classes/gateways/payer-masterpass-gateway.php:11
 msgid "Payer Masterpass"
