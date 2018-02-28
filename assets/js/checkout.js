@@ -114,36 +114,17 @@ jQuery( function( $ ) {
             $('body').removeClass('payer-active');
         }
     }
-    $(document).on('ready', function() {
-        wc_payer_checkout.addGetAddressButton();
-    });
-
+    
     $('body').on('click', '#payer_get_address', function() {
             wc_payer_checkout.getAddress();
     });
-
-    $(document).on('updated_checkout', function () {        
-        if ( payer_checkout_params.locale === 'SE' ) {
-            var selected_gateway = $("input[name='payment_method']:checked").val();
-            if ( selected_gateway.indexOf("payer_") >= 0 ) {
-                if( false === $('body').hasClass('payer-active') ) {
-                    wc_payer_checkout.moveInputFields();  
-                    wc_payer_checkout.showPNOfield();
-                    wc_payer_checkout.showAddressButton();
-                    wc_payer_checkout.addBodyClass();
-                }
-            } else {
-                wc_payer_checkout.hidePNOfield();
-                wc_payer_checkout.hideAddressButton();
-                wc_payer_checkout.resetPostCodeField();          
-                wc_payer_checkout.removeBodyClass();                              
-            }
-        }
-    });
-    var selected_gateway = $('form[name="checkout"] input[name="payment_method"]:checked').val();
-    $(document).on("change", "input[name='payment_method']", function (event) {
-        if (selected_gateway !== $('form[name="checkout"] input[name="payment_method"]:checked').val()) {
-            jQuery(document.body).trigger("update_checkout");
+    $( document ).ready(function() {        
+        if ( payer_checkout_params.locale === 'SE' && payer_checkout_params.enable_get_address === 'yes' ) {
+            wc_payer_checkout.addGetAddressButton();
+            wc_payer_checkout.moveInputFields();  
+            wc_payer_checkout.showPNOfield();
+            wc_payer_checkout.showAddressButton();
+            wc_payer_checkout.addBodyClass();
         }
     });
 });

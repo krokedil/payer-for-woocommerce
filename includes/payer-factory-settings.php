@@ -183,6 +183,13 @@ if ( $this->id === 'payer_card_payment' ) {
 		'default'       => 'no',
 	);
 
+	$settings['get_address'] = array(
+		'title'         => __( 'Enable get address', 'payer-for-woocommerce' ),
+		'type'          => 'checkbox',
+		'label'         => __( 'Enable get address for Payer (SE only).', 'payer-for-woocommerce' ),
+		'default'       => 'yes',
+	);
+
 	$settings['test_mode_settings_title'] = array(
 		'title' => __( 'Test Mode Settings', 'payer-for-woocommerce' ),
 		'type'  => 'title',

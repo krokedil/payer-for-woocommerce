@@ -126,11 +126,13 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 				array( 'jquery', 'wc-cart' ),
 				PAYER_VERSION_NUMBER
 			);
-
+			$payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );
+        	$get_address = $payer_settings['get_address'];
 			$checkout_localize_params = array(
-				'ajaxurl'			=>	admin_url( 'admin-ajax.php' ),
-				'locale'			=>	WC()->customer->get_billing_country(),
-				'get_address'		=>	WC_AJAX::get_endpoint( 'get_address' ),
+				'ajaxurl'			 =>	admin_url( 'admin-ajax.php' ),
+				'locale'			 =>	WC()->customer->get_billing_country(),
+				'enable_get_address' => $get_address,
+				'get_address'		 =>	WC_AJAX::get_endpoint( 'get_address' ),
 			);
 
 			wp_localize_script( 'payer_checkout', 'payer_checkout_params', $checkout_localize_params );
@@ -189,7 +191,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 		public function filter_pre_checked_value( $value ) {
 			// Only do this for Payer methods
 			$chosen_payment_method = WC()->session->get( 'chosen_payment_method' );
-			if ( strpos( $chosen_payment_method, 'payer' ) !== false ) {
+			//if ( strpos( $chosen_payment_method, 'payer' ) !== false ) {
 				$current_filter = current_filter();
 				$current_field  = str_replace( array( 'woocommerce_process_checkout_field_billing_', ), '', $current_filter );
 				if ( strpos( $value, '**' ) !== false ) {
@@ -202,7 +204,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 				} else {
 					return $value;
 				}
-			}
+			//}
 			return $value;
 		}
 
