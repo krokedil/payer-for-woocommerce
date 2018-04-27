@@ -46,13 +46,18 @@ class Payer_Get_Items {
     }
 
     private static function get_shipping( $shipping_method, $line_number ) {
+        $free_shipping = false;
+        if( 0 === intval( $shipping_method->get_total() ) ) {
+            $free_shipping = true;
+        }
+
         return array(
             'type'                  =>  'Freeform',
             'article_number'        =>  'Shipping',
             'line_number'           =>  $line_number,
             'description'           =>  $shipping_method->get_method_title(),
-            'unit_price'            =>  $shipping_method->get_total() +  $shipping_method->get_total_tax(),
-            'unit_vat_percentage'    =>  ( $shipping_method->get_total_tax() / $shipping_method->get_total() ) * 100,
+            'unit_price'            =>  ( $free_shipping ) ? 0 : $shipping_method->get_total() + $shipping_method->get_total_tax(),
+            'unit_vat_percentage'   =>  ( $free_shipping ) ? 0 : ( $shipping_method->get_total_tax() / $shipping_method->get_total() ) * 100,
             'quantity'              =>  '1',
         );
     }

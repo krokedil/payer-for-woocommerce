@@ -52,14 +52,14 @@ class Payer_Callbacks {
     }
 
     private function authorize_reply( $order_id ) {
-        $this->set_gateway();        
+        $this->set_gateway();
         $data = array(
             'payment'   =>  Payer_Get_Payment::get_payment( $order_id ),
             'purchase'  =>  Payer_Get_Purchase::get_purchase( $order_id ),
         );
         $purchase = new Payer\Sdk\Resource\Purchase( $this->gateway );
         $response = $purchase->createAuthorizeResource( $data );
-        krokedil_log_response( $order_id, $response );       
+        krokedil_log_response( $order_id, $response );
     }
 
     private function maybe_add_fee( $payer_added_fee, $order_id ) {
