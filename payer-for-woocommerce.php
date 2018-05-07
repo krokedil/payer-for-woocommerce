@@ -13,7 +13,7 @@
  * Author URI:      https://krokedil.se/
  * Developer:       Krokedil
  * Developer URI:   https://krokedil.se/
- * Text Domain:     payer-for-woocommerce	
+ * Text Domain:     payer-for-woocommerce
  * Domain Path:     /languages
  * Copyright:       © Krokedil Produktionsbyrå AB.
  * License:         GNU General Public License v3.0
@@ -21,20 +21,31 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
 if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
+	/**
+	 * Payer for WooCommerce.
+	 */
 	class Payer_For_Woocommerce {
 
+		/**
+		 * Log message.
+		 *
+		 * @var string Log message.
+		 */
 		public static $log = '';
 
+		/**
+		 * Class Constructor.
+		 */
 		public function __construct() {
 			add_action( 'init', array( $this, 'payer_make_purchase' ) );			
-			// Initiate the gateway
+			// Initiate the gateway.
 			add_action( 'plugins_loaded', array( $this, 'init' ) );
-			// Load scripts
+			// Load scripts.
 			add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
 
 			add_filter( 'woocommerce_process_checkout_field_billing_first_name', array( $this, 'filter_pre_checked_value' ) );
@@ -46,72 +57,81 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			add_filter( 'woocommerce_process_checkout_field_billing_company', array( $this, 'filter_pre_checked_value' ) );
 			add_filter( 'woocommerce_default_address_fields', array( $this, 'override_checkout_check' ) );
 
-			// Translations
+			// Translations.
 			load_plugin_textdomain( 'payer-for-woocommerce', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 		}
 
+		/**
+		 * Trigger Payer purchase.
+		 */
 		public function payer_make_purchase() {
-			if( isset( $_GET['payer-redirect'] ) && '1' === $_GET['payer-redirect'] ) {
-				$order_id = $_GET['order_id']; 
+			if ( isset( $_GET['payer-redirect'] ) && '1' === $_GET['payer-redirect'] ) {
+				$order_id = $_GET['order_id'];
 				Payer_Create_Purchase::create_purchase( $order_id );
 				die();
 			}
 		}
 
+		/**
+		 * Initiate the class.
+		 */
 		public function init() {
-			// Set definitions
+			// Set definitions.
 			$this->define();
 
-			// Include the SDK
-			require_once( 'vendor/autoload.php' );
-			// Include the gateway classes
-			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-factory-gateway.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-card-payments-gateway.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-bank-payments-gateway.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-invoice-payments-gateway.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-installment-payments-gateway.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-swish-payments-gateway.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-einvoice-payments-gateway.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-direct-invoice-gateway.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/gateways/payer-masterpass-gateway.php' );
+			// Include the SDK.
+			require_once 'vendor/autoload.php';
+			// Include the gateway classes.
+			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-factory-gateway.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-card-payments-gateway.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-bank-payments-gateway.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-invoice-payments-gateway.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-installment-payments-gateway.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-swish-payments-gateway.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-einvoice-payments-gateway.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-direct-invoice-gateway.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-masterpass-gateway.php';
 
-			// Include request classes
-			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-create-purchase.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-get-address.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-create-order.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-commit-order.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/requests/payer-refund-order.php' );
-			
-			// Include request helper classes
-			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-payment.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-purchase.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-items.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-customer.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-challenge.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-client.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-refund-data.php' );			
-			
-			// Include classes
-			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-callbacks.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-ajax.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-masterpass-populate-order.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-masterpass-functions.php' );
-			include_once( PAYER_PLUGIN_DIR . '/classes/payer-class-post-checkout.php' );
+			// Include request classes.
+			include_once PAYER_PLUGIN_DIR . '/classes/requests/payer-create-purchase.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/requests/payer-get-address.php'; 
+			include_once PAYER_PLUGIN_DIR . '/classes/requests/payer-create-order.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/requests/payer-commit-order.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/requests/payer-refund-order.php';
 
-			// Include function files
-			include_once( PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php' );	
+			// Include request helper classes.
+			include_once PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-payment.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-purchase.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-items.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-get-customer.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-challenge.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-client.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/requests/helpers/payer-create-refund-data.php';
+
+			// Include classes.
+			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-callbacks.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-ajax.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-masterpass-populate-order.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-masterpass-functions.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-post-checkout.php';
+
+			// Include function files.
+			include_once PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php';	
 		}
-		
+
+		/**
+		 * Sets definitions.
+		 */
 		public function define() {
-			// Set plugin directory
-			define( 'PAYER_PLUGIN_DIR' , untrailingslashit( plugin_dir_path( __FILE__ ) ) );
-			// Set URL
+			// Set plugin directory.
+			define( 'PAYER_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+			// Set URL.
 			define( 'PAYER_PLUGIN_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
-			// Set version number
+			// Set version number.
 			define( 'PAYER_VERSION_NUMBER', '0.1.1' );
-			// Set path to SDK
+			// Set path to SDK.
 			define( 'PAYER_SDK_DIR', '/vendor/' );
-			// Set Krokedil Logger Defines
+			// Set Krokedil Logger Defines.
 			define( 'KROKEDIL_LOGGER_GATEWAY', 'payer_' );
 			$payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );        
 			if ( 'yes' === $payer_settings['debug_mode'] ) {
@@ -119,6 +139,9 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			}
 		}
 
+		/**
+		 * Loads scripts.
+		 */
 		public function load_scripts() {
 			wp_register_script(
 				'payer_checkout',
@@ -127,12 +150,13 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 				PAYER_VERSION_NUMBER
 			);
 			$payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );
-        	$get_address = $payer_settings['get_address'];
+			$get_address = $payer_settings['get_address'];
 			$checkout_localize_params = array(
-				'ajaxurl'			 =>	admin_url( 'admin-ajax.php' ),
-				'locale'			 =>	WC()->customer->get_billing_country(),
+				'ajaxurl'            => admin_url( 'admin-ajax.php' ),
+				'locale'             => WC()->customer->get_billing_country(),
 				'enable_get_address' => $get_address,
-				'get_address'		 =>	WC_AJAX::get_endpoint( 'get_address' ),
+				'get_address_text'        => __( 'Get Address', 'payer-for-woocommerce' ),
+				'get_address'        => WC_AJAX::get_endpoint( 'get_address' ),
 			);
 
 			wp_localize_script( 'payer_checkout', 'payer_checkout_params', $checkout_localize_params );
@@ -145,7 +169,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 					'payer_instant_checkout',
 					plugins_url( 'assets/js/instant-checkout.js', __FILE__ ),
 					array( 'jquery', 'wc-cart' ),
-					PAYER_VERSION_NUMBER 
+					PAYER_VERSION_NUMBER
 				);
 
 				if ( is_product() ) {
@@ -157,27 +181,32 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 				}
 
 				$instant_checkout_params = array(
-					'ajaxurl'					=>	admin_url( 'admin-ajax.php' ),
-					'locale'					=>	WC()->customer->get_billing_country(),
-					'instant_product_purchase'	=>	WC_AJAX::get_endpoint( 'instant_product_purchase' ),
-					'instant_cart_purchase'		=>	WC_AJAX::get_endpoint( 'instant_cart_purchase' ),
-					'page_type'					=>	$page_type,
+					'ajaxurl'                  => admin_url( 'admin-ajax.php' ),
+					'locale'                   => WC()->customer->get_billing_country(),
+					'instant_product_purchase' => WC_AJAX::get_endpoint( 'instant_product_purchase' ),
+					'instant_cart_purchase'    => WC_AJAX::get_endpoint( 'instant_cart_purchase' ),
+					'page_type'                => $page_type,
 				);
 
 				wp_localize_script( 'payer_instant_checkout', 'payer_instant_checkout_params', $instant_checkout_params );
 
 				wp_enqueue_script( 'payer_instant_checkout' );
 			}
-			
+
 			wp_register_style(
 				'payer_style',
 				plugin_dir_url( __FILE__ ) . 'assets/css/checkout.css',
-				array(), 
+				array(),
 				PAYER_VERSION_NUMBER
 			);
 			wp_enqueue_style( 'payer_style' );
 		}
 
+		/**
+		 * Logs messages.
+		 *
+		 * @param string $message Log message.
+		 */
 		public static function log( $message ) {
 			$payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );
 			if ( 'yes' === $payer_settings['debug_mode'] ) {
@@ -188,32 +217,43 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			}
 		}
 
+		/**
+		 * Filters pre checked values
+		 *
+		 * @param mixed $value The requested value.
+		 *
+		 * @return mixed Filtered value.
+		 */
 		public function filter_pre_checked_value( $value ) {
-			// Only do this for Payer methods
 			$chosen_payment_method = WC()->session->get( 'chosen_payment_method' );
-			//if ( strpos( $chosen_payment_method, 'payer' ) !== false ) {
-				$current_filter = current_filter();
-				$current_field  = str_replace( array( 'woocommerce_process_checkout_field_billing_', ), '', $current_filter );
-				if ( strpos( $value, '**' ) !== false ) {
-					$customer_details = WC()->session->get( 'payer_customer_details' );
-					if ( isset( $customer_details[ $current_field ] ) && '' != $customer_details[ $current_field ] ) {
-						return $customer_details[ $current_field ];
-					} else {
-						return $value;
-					}
+			$current_filter        = current_filter();
+			$current_field         = str_replace( array( 'woocommerce_process_checkout_field_billing_' ), '', $current_filter );
+			if ( strpos( $value, '**' ) !== false ) {
+				$customer_details = WC()->session->get( 'payer_customer_details' );
+				if ( isset( $customer_details[ $current_field ] ) && '' !== $customer_details[ $current_field ] ) {
+					return $customer_details[ $current_field ];
 				} else {
 					return $value;
 				}
-			//}
+			} else {
+				return $value;
+			}
 			return $value;
 		}
 
+		/**
+		 * Overrides the checkout validation on PostCode.
+		 *
+		 * @param array $address_fields_array The array with the WooCommerce address fields.
+		 *
+		 * @return array The edited array with the WooCommerce address fields.
+		 */
 		public function override_checkout_check( $address_fields_array ) {
 			$chosen_payment_method = WC()->session->chosen_payment_method;
 			if ( strpos( $chosen_payment_method, 'payer' ) !== false ) {
 				unset( $address_fields_array['postcode']['validate'] );
 			}
-			return $address_fields_array;			
+			return $address_fields_array;
 		}
 	}
 	new Payer_For_Woocommerce();

@@ -1,13 +1,14 @@
 # Copyright (C) 2018 payer-for-woocommerce
 # This file is distributed under the same license as the payer-for-woocommerce package.
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: payer-for-woocommerce\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language-Team: Swedish\n"
-"Last-Translator: admin <michael@krokedil.se>\n"
+"Language-Team: Krokedil <info@krokedil.se>\n"
+"Last-Translator: Michael Bengtsson <michael@krokedil.se>\n"
 "Report-Msgid-Bugs-To: http://krokedil.se\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:"
@@ -16,24 +17,38 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"POT-Creation-Date: 2018-02-16 08:39+0000\n"
-"PO-Revision-Date: 2018-02-28 08:25+0000\n"
-"Language: sv_SE\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"POT-Creation-Date: 2018-02-28 10:46+0000\n"
+"Language: \n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: Loco https://localise.biz/"
+
+#: classes/payer-class-ajax.php:39
+msgid ""
+"Invalid request, please check the information or fill in the address "
+"manually."
+msgstr ""
+
+#: classes/payer-class-ajax.php:48
+msgid "Address found and added to the checkout form"
+msgstr ""
+
+#: classes/payer-class-ajax.php:55
+msgid "Please fill in the personal number field"
+msgstr ""
 
 #: classes/payer-class-callbacks.php:70
 msgid "Payer Added Fees"
-msgstr "Payer tilläggs avgifter."
+msgstr ""
 
-#: classes/payer-class-masterpass-functions.php:17,
+#: classes/payer-class-masterpass-functions.php:17
 #: classes/payer-class-masterpass-functions.php:30
 msgid "Read more..."
-msgstr "Läs mer..."
+msgstr ""
 
-#: classes/payer-class-post-checkout.php:18
+#: classes/payer-class-post-checkout.php:21
 msgid "The order has been completed with Payer"
-msgstr "Ordern har blivit aktiverad med Payer"
+msgstr ""
 
 #: includes/payer-credentials-form-field.php:15
 msgid "Payer credentials:"
@@ -43,105 +58,77 @@ msgstr ""
 msgid "Agent ID: "
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:23
-msgid "$agent_id"
-msgstr ""
-
 #: includes/payer-credentials-form-field.php:28
 msgid "Soap ID: "
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:31
-msgid "$soap_id"
-msgstr ""
-
 #: includes/payer-credentials-form-field.php:36
 msgid "Soap Password: "
-msgstr "Soap lösenord:"
-
-#: includes/payer-credentials-form-field.php:39
-msgid "$soap_password"
 msgstr ""
 
 #: includes/payer-credentials-form-field.php:44
 msgid "Post key 1: "
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:47
-msgid "$post_key_1"
-msgstr ""
-
 #: includes/payer-credentials-form-field.php:52
 msgid "Post key 2: "
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:55
-msgid "$post_key_2"
-msgstr ""
-
 #: includes/payer-credentials-form-field.php:60
 msgid "Rest key: "
-msgstr "Rest nyckel:"
-
-#: includes/payer-credentials-form-field.php:63
-msgid "$rest_key"
 msgstr ""
 
 #: includes/payer-factory-settings.php:8
 msgid "Enable/Disable"
-msgstr "Aktivera/Avaktivera"
+msgstr ""
 
 #: includes/payer-factory-settings.php:14
 msgid "Title"
-msgstr "Titel"
+msgstr ""
 
 #: includes/payer-factory-settings.php:16
 msgid "This controls the title which the user sees during checkout."
-msgstr "Här bestämmer du titeln som kunden ser i kassan."
-
-#: includes/payer-factory-settings.php:17
-msgid "$this->method_title"
 msgstr ""
 
 #: includes/payer-factory-settings.php:21
 msgid "Description"
-msgstr "Beskrivning"
+msgstr ""
 
 #: includes/payer-factory-settings.php:24
 msgid "This controls the description which the user sees during checkout."
-msgstr "Här bestämmer du vilken beskrivning kunden ser i kassan."
+msgstr ""
 
 #: includes/payer-factory-settings.php:30
 msgid "Instant MasterPass checkout"
-msgstr "Direkt MasterPass kassa"
+msgstr ""
 
 #: includes/payer-factory-settings.php:32
 msgid "Enable instant MasterPass checkout for products and cart page."
-msgstr "Aktivera MasterPass direkt kassa för produkter och varukorgs sida."
+msgstr ""
 
-#: includes/payer-factory-settings.php:39,
-#: includes/payer-factory-settings.php:49,
-#: includes/payer-factory-settings.php:59,
-#: includes/payer-factory-settings.php:69,
-#: includes/payer-factory-settings.php:78,
-#: includes/payer-factory-settings.php:88,
-#: includes/payer-factory-settings.php:98,
-#: includes/payer-factory-settings.php:108,
+#: includes/payer-factory-settings.php:39
+#: includes/payer-factory-settings.php:49
+#: includes/payer-factory-settings.php:59
+#: includes/payer-factory-settings.php:69
+#: includes/payer-factory-settings.php:78
+#: includes/payer-factory-settings.php:88
+#: includes/payer-factory-settings.php:98
+#: includes/payer-factory-settings.php:108
 #: includes/payer-factory-settings.php:118
 msgid "Icon URL"
-msgstr "Ikon URL"
+msgstr ""
 
-#: includes/payer-factory-settings.php:41,
-#: includes/payer-factory-settings.php:51,
-#: includes/payer-factory-settings.php:61,
-#: includes/payer-factory-settings.php:71,
-#: includes/payer-factory-settings.php:80,
-#: includes/payer-factory-settings.php:90,
-#: includes/payer-factory-settings.php:100,
-#: includes/payer-factory-settings.php:110,
+#: includes/payer-factory-settings.php:41
+#: includes/payer-factory-settings.php:51
+#: includes/payer-factory-settings.php:61
+#: includes/payer-factory-settings.php:71
+#: includes/payer-factory-settings.php:80
+#: includes/payer-factory-settings.php:90
+#: includes/payer-factory-settings.php:100
+#: includes/payer-factory-settings.php:110
 #: includes/payer-factory-settings.php:120
 msgid "Put the URL to a new icon image here"
-msgstr "Lägg till URLen till en ny ikon bild här"
+msgstr ""
 
 #: includes/payer-factory-settings.php:126
 msgid "Payer credentials"
@@ -154,9 +141,6 @@ msgid ""
 "Administration</a>. Contact Payer if you haven't got access to your login "
 "credentials"
 msgstr ""
-"Nycklar kan hittas under Settings/Account delen hos <a href=\"https://secure."
-"payer.se/adminweb/inloggning/inloggning.php\"> Payer Administration</a>. "
-"Kontakta Payer om du inte har tillgång till dina login uppgifter,"
 
 #: includes/payer-factory-settings.php:132
 msgid "Agent ID"
@@ -164,7 +148,7 @@ msgstr ""
 
 #: includes/payer-factory-settings.php:134
 msgid "Enter your Payer Agent ID"
-msgstr "Skriv ditt Payer Agent ID här"
+msgstr ""
 
 #: includes/payer-factory-settings.php:140
 msgid "Soap ID"
@@ -172,15 +156,15 @@ msgstr ""
 
 #: includes/payer-factory-settings.php:142
 msgid "Enter your Payer SOAP ID"
-msgstr "Skriv ditt Payer SOAP ID här"
+msgstr ""
 
 #: includes/payer-factory-settings.php:148
 msgid "Soap Password"
-msgstr "Soap lösenord"
+msgstr ""
 
 #: includes/payer-factory-settings.php:150
 msgid "Enter your Payer Password"
-msgstr "Skriv ditt Payer Agent lösenord här"
+msgstr ""
 
 #: includes/payer-factory-settings.php:156
 msgid "Post key 1"
@@ -188,7 +172,7 @@ msgstr ""
 
 #: includes/payer-factory-settings.php:158
 msgid "Enter your Payer Post key 1"
-msgstr "Skriv din Payer Post nyckel 1 här"
+msgstr ""
 
 #: includes/payer-factory-settings.php:164
 msgid "Post key 2"
@@ -196,55 +180,83 @@ msgstr ""
 
 #: includes/payer-factory-settings.php:166
 msgid "Enter your Payer Post key 2"
-msgstr "Skriv din Payer Post nyckel 2 här"
+msgstr ""
 
 #: includes/payer-factory-settings.php:172
 msgid "Rest key"
-msgstr "Rest nyckel"
+msgstr ""
 
 #: includes/payer-factory-settings.php:174
 msgid "Enter your Payer Rest key"
-msgstr "Skriv din Payer Rest nyckel här"
+msgstr ""
 
 #: includes/payer-factory-settings.php:180
-msgid "Test Mode Settings"
-msgstr "Testläges inställningar"
+msgid "Enable order management"
+msgstr ""
 
-#: includes/payer-factory-settings.php:185
-msgid "Test mode"
-msgstr "Testläge"
+#: includes/payer-factory-settings.php:182
+msgid "Enable order management for Payer."
+msgstr ""
 
 #: includes/payer-factory-settings.php:187
-msgid "Enable Test mode for Payer."
-msgstr "Aktivera testläge för Payer"
+msgid "Enable get address"
+msgstr ""
 
-#: includes/payer-factory-settings.php:192
-msgid "Debug"
+#: includes/payer-factory-settings.php:189
+msgid "Enable get address for Payer (SE only)."
 msgstr ""
 
 #: includes/payer-factory-settings.php:194
+msgid "Test Mode Settings"
+msgstr ""
+
+#: includes/payer-factory-settings.php:199
+msgid "Test mode"
+msgstr ""
+
+#: includes/payer-factory-settings.php:201
+msgid "Enable Test mode for Payer."
+msgstr ""
+
+#: includes/payer-factory-settings.php:206
+msgid "Debug"
+msgstr ""
+
+#: includes/payer-factory-settings.php:208
 msgid "Enable logging."
-msgstr "Aktivera loggning."
+msgstr ""
 
-#: includes/payer-factory-settings.php:195
+#: includes/payer-factory-settings.php:209
+#, php-format
 msgid "Log Payer events, in <code>%s</code>"
-msgstr "Logga Payer händelser i %s"
+msgstr ""
 
-#: includes/payer-factory-settings.php:200
+#: includes/payer-factory-settings.php:214
 msgid "Put credentials in the Payer Card Payments settings."
-msgstr "Lägg till credentials i inställningar för Payer kortbetalning."
+msgstr ""
 
 #: classes/gateways/payer-bank-payments-gateway.php:11
 msgid "Payer Bank"
 msgstr ""
 
+#: classes/gateways/payer-bank-payments-gateway.php:12
+#: classes/gateways/payer-card-payments-gateway.php:12
+#: classes/gateways/payer-direct-invoice-gateway.php:12
+#: classes/gateways/payer-einvoice-payments-gateway.php:12
+#: classes/gateways/payer-installment-payments-gateway.php:12
+#: classes/gateways/payer-invoice-payments-gateway.php:12
+#: classes/gateways/payer-masterpass-gateway.php:12
+#: classes/gateways/payer-swish-payments-gateway.php:12
+msgid "."
+msgstr ""
+
 #: classes/gateways/payer-card-payments-gateway.php:11
 msgid "Payer Card"
-msgstr "Payer Kortbetalning"
+msgstr ""
 
 #: classes/gateways/payer-direct-invoice-gateway.php:11
 msgid "Payer Direct Invoice"
-msgstr "Payer Direkt Faktura"
+msgstr ""
 
 #: classes/gateways/payer-einvoice-payments-gateway.php:11
 msgid "Payer EInvoice"
@@ -252,32 +264,32 @@ msgstr ""
 
 #: classes/gateways/payer-factory-gateway.php:47
 msgid "The order has been refunded with Payer"
-msgstr "Order har blivit krediterad med Payer"
+msgstr ""
 
 #: classes/gateways/payer-factory-gateway.php:50
 msgid "The order has already been refunded with Payer"
-msgstr "Ordern har redan blivit krediterad med Payer"
+msgstr ""
 
 #: classes/gateways/payer-factory-gateway.php:54
 msgid "Unknown error. The order has not been refunded with Payer."
-msgstr "Okänt fel. Ordern har inte blivit krediterad med Payer"
+msgstr ""
 
 #: classes/gateways/payer-factory-gateway.php:60
 msgid "Personal number"
-msgstr "Personnummer"
+msgstr ""
 
 #: classes/gateways/payer-factory-gateway.php:61
 msgctxt "placeholder"
 msgid "xxxxxx-xxxx"
-msgstr "xxxxxx-xxxx"
+msgstr ""
 
 #: classes/gateways/payer-installment-payments-gateway.php:11
 msgid "Payer Installment"
-msgstr "Payer Delbetalning"
+msgstr ""
 
 #: classes/gateways/payer-invoice-payments-gateway.php:11
 msgid "Payer Invoice"
-msgstr "Payer Faktura"
+msgstr ""
 
 #: classes/gateways/payer-masterpass-gateway.php:11
 msgid "Payer Masterpass"
@@ -285,4 +297,26 @@ msgstr ""
 
 #: classes/gateways/payer-swish-payments-gateway.php:11
 msgid "Payer Swish"
+msgstr ""
+
+#. Name of the plugin
+msgid "Payer for WooCommerce"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Extends WooCommerce. Provides a <a href=\"https://https://www.payer.se/\" "
+"target=\"_blank\">Payer</a> checkout for WooCommerce."
+msgstr ""
+
+#. URI of the plugin
+msgid "https://krokedil.se/payer/"
+msgstr ""
+
+#. Author of the plugin
+msgid "Krokedil"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://krokedil.se/"
 msgstr ""
