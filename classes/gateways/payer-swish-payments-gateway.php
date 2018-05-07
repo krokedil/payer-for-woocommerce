@@ -48,9 +48,9 @@ class Payer_Swish_Payments_Gateway extends Payer_Factory_Gateway {
 	}
 }
 
-add_filter( 'woocommerce_payment_gateways', 'add_payer_swish_gateway' );
+add_filter( 'woocommerce_payment_gateways', 'add_krokedil_payer_swish_gateway' );
 
-function add_payer_swish_gateway( $methods ) {
+function add_krokedil_payer_swish_gateway( $methods ) {
 	if ( ! defined( 'UNSET_PAYER_SWISH_PAYMENTS' ) ) {
 		$methods[] = 'Payer_Swish_Payments_Gateway';
 	}

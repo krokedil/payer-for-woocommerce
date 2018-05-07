@@ -41,9 +41,9 @@ class Payer_Invoice_Payments_Gateway extends Payer_Factory_Gateway {
 	}
 }
 
-add_filter( 'woocommerce_payment_gateways', 'add_payer_invoice_gateway' );
+add_filter( 'woocommerce_payment_gateways', 'add_krokedil_payer_invoice_gateway' );
 
-function add_payer_invoice_gateway( $methods ) {
+function add_krokedil_payer_invoice_gateway( $methods ) {
 	if ( ! defined( 'UNSET_PAYER_INVOICE_PAYMENTS' ) ) {		
 		$methods[] = 'Payer_Invoice_Payments_Gateway';
 	}

@@ -65,7 +65,7 @@ class Payer_Admin_Notices {
 		$settings          = $this->settings;
 		$failed_checkes    = array();
 		foreach ( $settings as $key => $value ) {
-			if ( in_array( $key, $settings_to_check ) ) {
+			if ( in_array( $key, $settings_to_check, true ) ) {
 				if ( '' === $value ) {
 					$check = false;
 					$failed_checks[] = $key;

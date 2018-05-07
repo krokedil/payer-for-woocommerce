@@ -47,9 +47,9 @@ class Payer_Bank_Payments_Gateway extends Payer_Factory_Gateway {
 	}
 }
 
-add_filter( 'woocommerce_payment_gateways', 'add_payer_bank_gateway' );
+add_filter( 'woocommerce_payment_gateways', 'add_krokedil_payer_bank_gateway' );
 
-function add_payer_bank_gateway( $methods ) {
+function add_krokedil_payer_bank_gateway( $methods ) {
 	if ( ! defined( 'UNSET_PAYER_BANK_PAYMENTS' ) ) {
 		$methods[] = 'Payer_Bank_Payments_Gateway';
 	}

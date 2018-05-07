@@ -12,7 +12,7 @@ class Payer_Create_Purchase {
             'purchase'  =>  Payer_Get_Purchase::get_purchase( $order_id ),
         );
         $purchase = new Payer\Sdk\Resource\Purchase( $gateway );
-        krokedil_log_events( $order_id, 'Payer Create Purchase', $data );        
+        krokedil_log_events( $order_id, 'Payer Create Purchase', $data );
         Payer_For_Woocommerce::log( 'Payer Create Purchase: '. $order_id . ' $data: ' . var_export( $data, true ) );
         $response = $purchase->create( $data );
         krokedil_log_response( $order_id, $response );
