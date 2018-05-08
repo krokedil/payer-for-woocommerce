@@ -3,7 +3,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+/**
+ * Gets Order Items.
+ * 
+ * @class    Payer_Get_Items
+ * @package  Payer/Classes/Requests/Helpers
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Get_Items {
+    /**
+     * Gets items.
+     *
+     * @param int $order_id
+     * @return array
+     */
     public static function get_items( $order_id ) {
         $order = wc_get_order( $order_id );
         $line_number = 0;
@@ -26,6 +40,12 @@ class Payer_Get_Items {
         return $items;
     }
 
+    /**
+     * Gets single item.
+     *
+     * @param array $item
+     * @return array
+     */
     private static function get_item( $item ) {
         $product = $item->get_product();
 
@@ -45,6 +65,13 @@ class Payer_Get_Items {
         );
     }
 
+    /**
+     * Gets shipping
+     *
+     * @param string $shipping_method
+     * @param int $line_number
+     * @return array
+     */
     private static function get_shipping( $shipping_method, $line_number ) {
         $free_shipping = false;
         if( 0 === intval( $shipping_method->get_total() ) ) {
@@ -62,6 +89,13 @@ class Payer_Get_Items {
         );
     }
 
+    /**
+     * Gets order Fee.
+     *
+     * @param array $fee
+     * @param int $line_number
+     * @return array
+     */
     private static function get_fee( $fee, $line_number ) {
         return array(
             'type'                  =>  'Freeform',
@@ -74,6 +108,12 @@ class Payer_Get_Items {
         );
     }
 
+    /**
+     * Calculates tax
+     *
+     * @param array $product
+     * @return int
+     */
     private static function calculate_tax( $product ) {
         $price_incl_tax = wc_get_price_including_tax( $product );
         $price_excl_tax = wc_get_price_excluding_tax( $product );
@@ -83,6 +123,13 @@ class Payer_Get_Items {
         return $tax_percent;
     }
 
+    /**
+     * Gets SKU
+     *
+     * @param array $product
+     * @param int $product_id
+     * @return string
+     */
     private static function get_sku( $product, $product_id ) {
         if ( get_post_meta( $product_id, '_sku', true ) !== '' ) {
             $part_number = $product->get_sku();

@@ -2,8 +2,18 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+/**
+ * Iallment Payments Gateway.
+ * 
+ * @class    Payer_Installment_Payments_Gateway
+ * @package  Payer/Classes/Gateways
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Installment_Payments_Gateway extends Payer_Factory_Gateway {
+	/**
+	 * Class constructor.
+	 */
 	public function __construct() {
 		parent::__construct();
 
@@ -32,6 +42,11 @@ class Payer_Installment_Payments_Gateway extends Payer_Factory_Gateway {
 		add_filter( 'woocommerce_page_wc-settings', array( $this, 'show_keys_in_settings' ) );				
 	}
 
+	/**
+	 * Shows keys from settings on settings page.
+	 *
+	 * @return void
+	 */
 	public function show_keys_in_settings() {
 		if ( isset( $_GET['section'] ) ) {
 			if ( $this->id === $_GET['section'] ) {
@@ -40,6 +55,11 @@ class Payer_Installment_Payments_Gateway extends Payer_Factory_Gateway {
 		}
 	}
 
+	/**
+	 * Checks if gateway should be available.
+	 *
+	 * @return boolean
+	 */
 	public function is_available() {
 		$order_management = $payer_settings['order_management'];
 		$payer_settings = get_option( 'woocommerce_payer_installment_payment_settings' );
@@ -72,7 +92,12 @@ class Payer_Installment_Payments_Gateway extends Payer_Factory_Gateway {
 }
 
 add_filter( 'woocommerce_payment_gateways', 'add_krokedil_payer_installment_gateway' );
-
+/**
+ * Registers the gateway.
+ *
+ * @param array $methods
+ * @return array
+ */
 function add_krokedil_payer_installment_gateway( $methods ) {
 	if ( ! defined( 'UNSET_PAYER_INSTALLMENT_PAYMENTS' ) ) {		
 		$methods[] = 'Payer_Installment_Payments_Gateway';

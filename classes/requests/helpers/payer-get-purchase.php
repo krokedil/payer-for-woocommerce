@@ -2,8 +2,21 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+/**
+ * Gets Purchase object.
+ * 
+ * @class    Payer_Get_Purchase
+ * @package  Payer/Classes/Requests/Helpers
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Get_Purchase {
+    /**
+     * Gets purchase object.
+     *
+     * @param int $order_id
+     * @return array
+     */
     public static function get_purchase( $order_id ) {
         $payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );        
         if ( 'yes' === $payer_settings['test_mode'] ) {

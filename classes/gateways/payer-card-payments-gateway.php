@@ -3,7 +3,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+/**
+ * Card Payments Gateway.
+ * 
+ * @class    Payer_Card_Payments_Gateway
+ * @package  Payer/Classes/Gateways
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Card_Payments_Gateway extends Payer_Factory_Gateway {
+	/**
+	 * Class constructor.
+	 */
 	public function __construct() {
 		parent::__construct();
 
@@ -40,7 +51,12 @@ class Payer_Card_Payments_Gateway extends Payer_Factory_Gateway {
 }
 
 add_filter( 'woocommerce_payment_gateways', 'add_krokedil_payer_card_gateway' );
-
+/**
+ * Registers the gateway.
+ *
+ * @param array $methods
+ * @return array $methods
+ */
 function add_payer_krokedil_card_gateway( $methods ) {
 	$methods[] = 'Payer_Card_Payments_Gateway';
 

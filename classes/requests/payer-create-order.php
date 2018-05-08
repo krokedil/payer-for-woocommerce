@@ -2,9 +2,22 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+/**
+ * Creates a Payer order.
+ * 
+ * @class    Payer_Create_Order
+ * @package  Payer/Classes/Requests
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Create_Order {
 
+    /**
+     * Creates the order with Payer.
+     *
+     * @param int $order_id
+     * @return void
+     */
     public static function create_order( $order_id ) {
         $gateway = Payer_Create_Client::create_client();
         $data = Payer_Get_Purchase::get_purchase( $order_id );

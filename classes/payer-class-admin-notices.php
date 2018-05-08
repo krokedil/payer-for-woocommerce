@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @class    Payer_Admin_Notices
  * @package  Payer/Classes
  * @category Class
- * @author   Krokedil
+ * @author   Krokedil <info@krokedil.se>
  */
 class Payer_Admin_Notices {
 	/**

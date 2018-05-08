@@ -2,8 +2,18 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+/**
+ * Direct Invoice Payments Gateway.
+ * 
+ * @class    Payer_Direct_Invoice_Gateway
+ * @package  Payer/Classes/Gateways
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Direct_Invoice_Gateway extends Payer_Factory_Gateway {
+	/**
+	 * Class constructor.
+	 */
     public function __construct() {
 		parent::__construct();
 
@@ -32,6 +42,12 @@ class Payer_Direct_Invoice_Gateway extends Payer_Factory_Gateway {
 		add_filter( 'woocommerce_page_wc-settings', array( $this, 'show_keys_in_settings' ) );				
 	}
 
+	/**
+	 * Handles the payment.
+	 *
+	 * @param int $order_id
+	 * @return array
+	 */
 	public function process_payment( $order_id ) {
 		$order = wc_get_order( $order_id );
 
@@ -53,7 +69,12 @@ class Payer_Direct_Invoice_Gateway extends Payer_Factory_Gateway {
 }
 
 add_filter( 'woocommerce_payment_gateways', 'add_krokedil_payer_direct_invoice_gateway' );
-
+/**
+ * Registers the gateway.
+ *
+ * @param array $methods
+ * @return array $methods
+ */
 function add_krokedil_payer_direct_invoice_gateway( $methods ) {
 	if ( ! defined( 'UNSET_PAYER_DIRECT_INVOICE_PAYMENTS' ) ) {		
 		$methods[] = 'Payer_Direct_Invoice_Gateway';

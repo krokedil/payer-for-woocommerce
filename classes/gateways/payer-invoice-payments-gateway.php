@@ -2,8 +2,18 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+/**
+ * Invoice Payments Gateway.
+ * 
+ * @class    Payer_Invoice_Payments_Gateway
+ * @package  Payer/Classes/Gateways
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Invoice_Payments_Gateway extends Payer_Factory_Gateway {
+	/**
+	 * Class constructor.
+	 */
 	public function __construct() {
 		parent::__construct();
 
@@ -31,7 +41,11 @@ class Payer_Invoice_Payments_Gateway extends Payer_Factory_Gateway {
 
 		add_filter( 'woocommerce_page_wc-settings', array( $this, 'show_keys_in_settings' ) );				
 	}
-
+	/**
+	 * Shows settings keys on the settings page.
+	 *
+	 * @return void
+	 */
 	public function show_keys_in_settings() {
 		if ( isset( $_GET['section'] ) ) {
 			if ( $this->id === $_GET['section'] ) {
@@ -42,7 +56,12 @@ class Payer_Invoice_Payments_Gateway extends Payer_Factory_Gateway {
 }
 
 add_filter( 'woocommerce_payment_gateways', 'add_krokedil_payer_invoice_gateway' );
-
+/**
+ * Registers the gaeway.
+ *
+ * @param array $methods
+ * @return array
+ */
 function add_krokedil_payer_invoice_gateway( $methods ) {
 	if ( ! defined( 'UNSET_PAYER_INVOICE_PAYMENTS' ) ) {		
 		$methods[] = 'Payer_Invoice_Payments_Gateway';

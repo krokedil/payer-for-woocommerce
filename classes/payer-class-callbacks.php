@@ -3,15 +3,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+/**
+ * Handles callback from Payer
+ * 
+ * @class    Payer_Callbacks
+ * @package  Payer/Classes
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Callbacks {
 
+    /**
+     * Gateway
+     *
+     * @var string
+     */
     private $gateway;
 
+    /**
+     * Class constructor.
+     */
     public function __construct() {
         // Add action for listener.
 		add_action( 'woocommerce_api_payer_gateway', array( $this, 'payer_listener' ) );
     }
 
+    /**
+     * Callback listener.
+     *
+     * @return void
+     */
     public function payer_listener() {
         $callback_type = $_GET['payer_callback_type'];
         $order_id = $_GET['payer_merchant_reference_id'];
@@ -36,6 +57,12 @@ class Payer_Callbacks {
         }
     }
 
+    /**
+     * Creates a reply for a settlement callback.
+     *
+     * @param int $order_id
+     * @return void
+     */
     private function settlement_reply( $order_id ) {
         update_post_meta( $order_id, '_payer_payment_id', $_GET['payer_payment_id'] );        
         $this->set_gateway();
@@ -51,6 +78,12 @@ class Payer_Callbacks {
         krokedil_log_response( $order_id, $response );
     }
 
+    /**
+     * Creates a reply for a authorize callback.
+     *
+     * @param int $order_id
+     * @return void
+     */
     private function authorize_reply( $order_id ) {
         $this->set_gateway();
         $data = array(
@@ -80,6 +113,13 @@ class Payer_Callbacks {
         }
     }
 
+    /**
+     * Maybe update the gateway used for the order.
+     *
+     * @param int $order_id
+     * @param string $used_gateway
+     * @return void
+     */
     private function maybe_update_gateway( $order_id, $used_gateway ) {
         $order = wc_get_order( $order_id );
         $starting_gateway = $order->get_payment_method();
@@ -116,10 +156,22 @@ class Payer_Callbacks {
         }
     }
 
+    /**
+     * Sets the gateway for the order.
+     *
+     * @return void
+     */
     private function set_gateway() {
         $this->gateway = Payer_Create_Client::create_client();
     }
 
+    /**
+     * Populates the order with customer data from callback.
+     *
+     * @param int    $order_id
+     * @param string $address
+     * @return void
+     */
     private function populate_customer_data( $order_id, $address ) {
         $address = base64_decode( $address );
         $address = json_decode( utf8_decode( $address ) );

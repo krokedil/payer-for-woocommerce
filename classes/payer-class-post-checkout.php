@@ -2,12 +2,28 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+/**
+ * Handles order completion.
+ * 
+ * @class    Payer_Post_Checkout
+ * @package  Payer/Classes
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Post_Checkout {
+    /**
+     * Class constructor.
+     */
     public function __construct() {
         add_action( 'woocommerce_order_status_completed', array( $this, 'payer_order_completed' ) );
     }
 
+    /**
+     * Completes the order with Payer.
+     *
+     * @param int $order_id
+     * @return void
+     */
     public function payer_order_completed( $order_id ) {
         $payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );
         $order_management = $payer_settings['order_management'];

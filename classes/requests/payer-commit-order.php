@@ -2,9 +2,22 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+/**
+ * Commits a Payer order.
+ * 
+ * @class    Payer_Commit_Order
+ * @package  Payer/Classes/Requests
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Commit_Order {
 
+    /**
+     * Commits order.
+     *
+     * @param int $order_id
+     * @return bool|void
+     */
     public static function commit_order( $order_id ) {
         $gateway = Payer_Create_Client::create_client();
         $data = array(
