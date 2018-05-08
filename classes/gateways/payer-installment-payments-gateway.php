@@ -49,7 +49,7 @@ class Payer_Installment_Payments_Gateway extends Payer_Factory_Gateway {
 	 */
 	public function show_keys_in_settings() {
 		if ( isset( $_GET['section'] ) ) {
-			if ( $this->id === $_GET['section'] ) {
+			if ( $this->id === $_GET['section'] ) {		
 				payer_show_credentials_form();
 			}
 		}

@@ -66,6 +66,19 @@ class Payer_Direct_Invoice_Gateway extends Payer_Factory_Gateway {
 			'redirect' => $order->get_checkout_order_received_url(),
 		);
 	}
+
+	/**
+	 * Shows keys from settings on settings page.
+	 *
+	 * @return void
+	 */
+	public function show_keys_in_settings() {
+		if ( isset( $_GET['section'] ) ) {
+			if ( $this->id === $_GET['section'] ) {		
+				payer_show_credentials_form();
+			}
+		}
+	}
 }
 
 add_filter( 'woocommerce_payment_gateways', 'add_krokedil_payer_direct_invoice_gateway' );
