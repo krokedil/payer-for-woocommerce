@@ -57,7 +57,7 @@ add_filter( 'woocommerce_payment_gateways', 'add_krokedil_payer_card_gateway' );
  * @param array $methods
  * @return array $methods
  */
-function add_payer_krokedil_card_gateway( $methods ) {
+function add_krokedil_payer_card_gateway( $methods ) {
 	$methods[] = 'Payer_Card_Payments_Gateway';
 
 	return $methods;

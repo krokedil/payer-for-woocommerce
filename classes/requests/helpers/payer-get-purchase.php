@@ -34,6 +34,7 @@ class Payer_Get_Purchase {
             'currency'      =>  get_woocommerce_currency(),
             'test_mode'     =>  $test_mode,
             'client_ip'     =>  get_post_meta( $order_id, '_customer_ip_address', true ),
+            'charset'       => 'UTF-8',
         );
     }
 }
