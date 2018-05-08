@@ -60,7 +60,7 @@ class Payer_Get_Items {
             'article_number'        =>  self::get_sku( $product, $product_id ),
             'description'           =>  $product->get_name(),
             'unit_price'            =>  ( $item->get_total() + $item->get_total_tax() ) / $item['qty'],
-            'unit_vat_percetage'    =>  self::calculate_tax( $product ),
+            'unit_vat_percentage'   =>  self::calculate_tax( $product ),
             'quantity'              =>  $item['qty'],
         );
     }
