@@ -37,6 +37,14 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2018.05.08  	- version 0.1.2 =
+* Fix - Fixed free shipping error.
+* Fix - Added Swedish translation for Get Address.
+* Fix - Added prefixes to function that register gateways to prevent error with old plugin.
+* Fix - We now send the used charset with the order to prevent malformed order details.
+* Fix - Added function to show settings fields on direct invoice to prevent an error.
+* Fix - Fixed a spelling error on Percentage.
+
 = 2018.02.28  	- version 0.1.1 =
 * Fix - Fixed Installment to only show if enabled.
 * Fix - Fixed so masking is removed on order completion without payer being the gateway.

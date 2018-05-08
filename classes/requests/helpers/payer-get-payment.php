@@ -2,8 +2,21 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+/**
+ * Gets Payment object.
+ * 
+ * @class    Payer_Get_Payment
+ * @package  Payer/Classes/Requests/Helpers
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Get_Payment {
+    /**
+     * Gets Payment object.
+     *
+     * @param int $order_id
+     * @return array
+     */
     public static function get_payment( $order_id ) {
         $order = wc_get_order( $order_id );
         
@@ -43,6 +56,12 @@ class Payer_Get_Payment {
         );
     }
 
+    /**
+     * Gets urls
+     *
+     * @param array $order
+     * @return array
+     */
     private static function get_url( $order ) {
         return array(
             'authorize' =>  get_site_url() . '/wc-api/Payer_Gateway',

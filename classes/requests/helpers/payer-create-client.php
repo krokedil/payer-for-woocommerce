@@ -2,15 +2,52 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+/**
+ * Creates a Payer Client.
+ * 
+ * @class    Payer_Create_Client
+ * @package  Payer/Classes/Requests/Helpers
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Create_Client {
 
+	/**
+	 * Agent id
+	 *
+	 * @var int
+	 */
 	private static $agent_id;
+	/**
+	 * Soap Username
+	 *
+	 * @var string
+	 */
 	private static $soap_username;
+	/**
+	 * Soap Password
+	 *
+	 * @var string
+	 */
 	private static $soap_password;
+	/**
+	 * Post Key 1
+	 *
+	 * @var string
+	 */
 	private static $post_key1;
+	/**
+	 * Post key 2
+	 *
+	 * @var string
+	 */
 	private static $post_key2;
 
+	/**
+	 * Creates client.
+	 *
+	 * @return array
+	 */
 	public static function create_client() {
 		self::set_variables();
 		$credentials = array(
@@ -28,6 +65,11 @@ class Payer_Create_Client {
 		return Payer\Sdk\Client::create( $credentials );
 	}
 
+	/**
+	 * Sets needed variables.
+	 *
+	 * @return void
+	 */
 	private static function set_variables() {
 		$payer_settings = get_option( 'woocommerce_payer_card_payment_settings'  );
 		self::$agent_id = $payer_settings['payer_agent_id'];

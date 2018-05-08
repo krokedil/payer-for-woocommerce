@@ -3,7 +3,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+/**
+ * Creates Payer refund data.
+ * 
+ * @class    Payer_Create_Refund_Data
+ * @package  Payer/Classes/Requests/Helpers
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Create_Refund_Data {
+    /**
+     * Creates refund data
+     *
+     * @param int $order_id
+     * @param int $amount
+     * @param string $reason
+     * @param string $payment_id
+     * @return array
+     */
     public static function create_refund_data( $order_id, $amount, $reason, $payment_id ) {
 
         $refund_id = self::get_refunded_order( $order_id );
@@ -23,6 +40,12 @@ class Payer_Create_Refund_Data {
         return $data;
     }
 
+    /**
+     * Gets refunded order
+     *
+     * @param int $order_id
+     * @return string
+     */
     private static function get_refunded_order( $order_id ) {
         $query_args = array(
             'fields'         => 'id=>parent',
@@ -47,6 +70,12 @@ class Payer_Create_Refund_Data {
         return $refund_id;
     }
 
+    /**
+     * Calculates tax.
+     *
+     * @param string $refund_id
+     * @return void
+     */
     private static function calculate_tax( $refund_id ) {
         $refund_order = wc_get_order( $refund_id );
         $refund_tax_total = $refund_order->get_total_tax() * -1;

@@ -2,16 +2,37 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+/**
+ * Payer Factory Gateway.
+ * 
+ * @class    Payer_Factory_Gateway
+ * @package  Payer/Classes/Gateways
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Factory_Gateway extends WC_Payment_Gateway {
+	/**
+	 * Class constructor.
+	 */
 	public function __construct() {
 		add_filter( 'woocommerce_checkout_fields' , array( $this, 'add_pno_field' ) );
 	}
 
+	/**
+	 * Loads the settings file.
+	 *
+	 * @return void
+	 */
 	public function init_form_fields() {
 		$this->form_fields = include( PAYER_PLUGIN_DIR . '/includes/payer-factory-settings.php' );
 	}
 
+	/**
+	 * Handles payment.
+	 *
+	 * @param int $order_id
+	 * @return array
+	 */
 	public function process_payment( $order_id ) {
 		$order = wc_get_order( $order_id );
 
@@ -38,6 +59,14 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 		);
 	}
 
+	/**
+	 * Handles refunds.
+	 *
+	 * @param int $order_id
+	 * @param int $amount
+	 * @param string $reason
+	 * @return bool
+	 */
 	public function process_refund( $order_id, $amount = null, $reason = '' ) {
 		$order = wc_get_order( $order_id );
 		if( false !== strpos( $order->get_payment_method(), 'payer_' ) ) {
@@ -55,6 +84,12 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 		return false;
 	}
 
+	/**
+	 * Adds Personalnumber field to checkout.
+	 *
+	 * @param array $fields
+	 * @return array $fields
+	 */
 	public function add_pno_field( $fields ) {
 		$fields['billing']['billing_pno'] = array(
 			'label'     	=> __('Personal number', 'payer-for-woocommerce'),
@@ -62,11 +97,16 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 			'required'  	=> false,
 			'class'     	=> array('form-row-wide'),
 			'clear'     	=> true
-		 );
+		);
 	
-		 return $fields;
+		return $fields;
 	}
 
+	/**
+	 * Gets the icon for the gateways.
+	 *
+	 * @return string
+	 */
 	public function set_icon() {
 		switch ( $this->id ) {
 			case 'payer_bank_payment':
@@ -101,6 +141,12 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 		}
 	}
 
+	/**
+	 * Checks if address has been changed from what was recieved.
+	 *
+	 * @param int $order_id
+	 * @return void
+	 */
 	public function check_posted_data( $order_id ) {
 		if( WC()->session->get( 'payer_customer_details' ) ) {
 			$get_address_data = WC()->session->get( 'payer_customer_details' );
@@ -121,6 +167,11 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 
 	}
 
+	/**
+	 * Clears sessions.
+	 *
+	 * @return void
+	 */
 	private function clear_sessions() {
 		WC()->session->__unset( 'payer_customer_details' );
 	}

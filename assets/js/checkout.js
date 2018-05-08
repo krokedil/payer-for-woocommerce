@@ -48,7 +48,7 @@ jQuery( function( $ ) {
 
         addGetAddressButton: function() {
             var post_code   = $('#billing_postcode_field'),
-                button      = '<button type="button" class="payer_get_address_button button" id="payer_get_address">Get Address</button>';
+                button      = '<button type="button" class="payer_get_address_button button" id="payer_get_address">' + payer_checkout_params.get_address_text + '</button>';
 
             post_code.after(button);
         },

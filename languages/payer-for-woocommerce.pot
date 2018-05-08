@@ -18,10 +18,19 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"POT-Creation-Date: 2018-02-28 10:46+0000\n"
+"POT-Creation-Date: 2018-05-07 08:54+0000\n"
 "Language: \n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: Loco https://localise.biz/"
+
+#: payer-for-woocommerce.php:159
+msgid "Get Address"
+msgstr ""
+
+#: classes/payer-class-admin-notices.php:83
+#, php-format
+msgid "Not all credentials are filled in. Missed credentials: %s"
+msgstr ""
 
 #: classes/payer-class-ajax.php:39
 msgid ""
@@ -50,31 +59,31 @@ msgstr ""
 msgid "The order has been completed with Payer"
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:15
+#: includes/payer-credentials-form-field.php:18
 msgid "Payer credentials:"
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:20
+#: includes/payer-credentials-form-field.php:23
 msgid "Agent ID: "
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:28
+#: includes/payer-credentials-form-field.php:31
 msgid "Soap ID: "
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:36
+#: includes/payer-credentials-form-field.php:39
 msgid "Soap Password: "
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:44
+#: includes/payer-credentials-form-field.php:47
 msgid "Post key 1: "
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:52
+#: includes/payer-credentials-form-field.php:55
 msgid "Post key 2: "
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:60
+#: includes/payer-credentials-form-field.php:63
 msgid "Rest key: "
 msgstr ""
 

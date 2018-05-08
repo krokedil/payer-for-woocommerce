@@ -2,14 +2,29 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+/**
+ * Contains MasterPass functionality.
+ * 
+ * @class    Payer_Masterpass_Functions
+ * @package  Payer/Classes
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Masterpass_Functions {
+    /**
+     * Class constructor.
+     */
     public function __construct() {
         add_action( 'woocommerce_after_cart_totals', array( $this, 'add_button' ) );
         add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'add_button' ) );
         add_action( 'woocommerce_after_mini_cart', array( $this, 'add_button' ) );      
     }
 
+    /**
+     * Adds the "Pay with MasterPass" button.
+     *
+     * @return void
+     */
     public function add_button() {
         $payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' ); 
         if ( 'yes' === $payer_masterpass_settings['instant_masterpass_checkout'] ) {
@@ -18,6 +33,11 @@ class Payer_Masterpass_Functions {
         }
     }
 
+    /**
+     * Adds the pay with MasterPass button to the shop. Not used.
+     *
+     * @return void
+     */
     public function add_button_shop() {
         global $product;
         $id = $product->get_id();

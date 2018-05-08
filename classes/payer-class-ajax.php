@@ -3,11 +3,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class Payer_Ajax extends WC_AJAX { 
-    public static function init() {
+/**
+ * Payer Ajax class.
+ * 
+ * @class    Payer_Ajax
+ * @package  Payer/Classes
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
+class Payer_Ajax extends WC_AJAX {
+	/**
+	 * Initiatie the class.
+	 *
+	 * @return void
+	 */
+	public static function init() {
 		self::add_ajax_events();
     }
-    
+
+	/**
+	 * Adds ajax events.
+	 *
+	 * @return void
+	 */
     public static function add_ajax_events() {
 			$ajax_events = array(
 				'get_address' 				=> true,
@@ -23,7 +41,12 @@ class Payer_Ajax extends WC_AJAX {
 				}
 			}
     }
-    
+	
+	/**
+	 * Get Address Ajax event.
+	 *
+	 * @return void
+	 */
     public static function get_address() {
 			$personal_number = $_POST['personal_number'];
 			if( $personal_number !== '' ) {
@@ -58,34 +81,73 @@ class Payer_Ajax extends WC_AJAX {
 			wp_die();
 		}
 	}
+	
+	/**
+	 * Sets address as session.
+	 *
+	 * @param array $payer_address_information
+	 * 
+	 * @return void
+	 */
+	private static function set_address( $payer_address_information ) {
+		$payer_customer_details = array(
+				'first_name'	=>	$payer_address_information['first_name'],
+				'last_name'		=>	$payer_address_information['last_name'],
+				'address_1'		=>	$payer_address_information['address_1'],
+				'address_2'		=> 	$payer_address_information['address_2'],
+				'company'		=>	$payer_address_information['company'],
+				'city'			=>	$payer_address_information['city'],
+		);
+
+		WC()->session->set( 'payer_customer_details', $payer_customer_details );
+	}
+
+	/**
+	 * Starts a instant purchase with MasterPass from the product page.
+	 *
+	 * @return void
+	 */
+	public static function instant_product_purchase() {
+		$product_id 	= $_POST['product_id'];
+		$variation_id 	= $_POST['variation_id'];
+		$quantity 		= $_POST['quantity'];
+		// Empty the current cart to prevent incorrect orders.
+		WC()->cart->empty_cart();
+
+		Payer_Masterpass_Populate_Order::add_item_to_cart( $product_id, $quantity, $variation_id );
+
+		$order 	= wc_create_order();
+		$order_id = $order->get_id();
+
+		Payer_Masterpass_Populate_Order::add_order_details( $order );
+
+		Payer_Masterpass_Populate_Order::set_gateway( $order );
+
+		$redirect_url = WC()->cart->get_checkout_url();
 		
-		private static function set_address( $payer_address_information ) {
-			$payer_customer_details = array(
-					'first_name'	=>	$payer_address_information['first_name'],
-					'last_name'		=>	$payer_address_information['last_name'],
-					'address_1'		=>	$payer_address_information['address_1'],
-					'address_2'		=> 	$payer_address_information['address_2'],
-					'company'		=>	$payer_address_information['company'],
-					'city'			=>	$payer_address_information['city'],
-			);
+		$redirect_url = add_query_arg(
+			array(
+				'payer-redirect'	=>	'1',
+				'order_id'			=>	$order_id,
+			),
+			$redirect_url
+		);
+		wp_send_json_success( $redirect_url );
+		wp_die();
+	}
 
-			WC()->session->set( 'payer_customer_details', $payer_customer_details );
-		}
-
-		public static function instant_product_purchase() {
-			$product_id 	= $_POST['product_id'];
-			$variation_id 	= $_POST['variation_id'];
-			$quantity 		= $_POST['quantity'];
-			// Empty the current cart to prevent incorrect orders.
-			WC()->cart->empty_cart();
-
-			Payer_Masterpass_Populate_Order::add_item_to_cart( $product_id, $quantity, $variation_id );
-
+	/**
+	 * Starts a instant purchase with MasterPass from the cart page.
+	 *
+	 * @return void
+	 */
+	public static function instant_cart_purchase() {
+		if ( WC()->cart->get_cart_contents_count() > 0 ) {
 			$order 	= wc_create_order();
 			$order_id = $order->get_id();
 
 			Payer_Masterpass_Populate_Order::add_order_details( $order );
-
+			
 			Payer_Masterpass_Populate_Order::set_gateway( $order );
 
 			$redirect_url = WC()->cart->get_checkout_url();
@@ -99,30 +161,9 @@ class Payer_Ajax extends WC_AJAX {
 			);
 			wp_send_json_success( $redirect_url );
 			wp_die();
-		}		
-		public static function instant_cart_purchase() {
-			if ( WC()->cart->get_cart_contents_count() > 0 ) {
-				$order 	= wc_create_order();
-				$order_id = $order->get_id();
-
-				Payer_Masterpass_Populate_Order::add_order_details( $order );
-				
-				Payer_Masterpass_Populate_Order::set_gateway( $order );
-
-				$redirect_url = WC()->cart->get_checkout_url();
-				
-				$redirect_url = add_query_arg(
-					array(
-						'payer-redirect'	=>	'1',
-						'order_id'			=>	$order_id,
-					),
-					$redirect_url
-				);
-				wp_send_json_success( $redirect_url );
-				wp_die();
-			}
-			wp_send_json_error();
-			wp_die();
 		}
+		wp_send_json_error();
+		wp_die();
+	}
 }
 Payer_Ajax::init();

@@ -2,9 +2,12 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+/**
+ * Shows credential form on settings page.
+ */
 function payer_show_credentials_form() {
     $payer_card_settings = get_option( 'woocommerce_payer_card_payment_settings' );
-    // Setting values
+    // Setting values.
     $agent_id = $payer_card_settings['payer_agent_id'];
     $soap_id = $payer_card_settings['payer_soap_id'];
     $soap_password = $payer_card_settings['payer_password'];

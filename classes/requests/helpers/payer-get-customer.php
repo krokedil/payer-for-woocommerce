@@ -2,8 +2,21 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
+/**
+ * Gets a Payer Customer.
+ * 
+ * @class    Payer_Get_Customer
+ * @package  Payer/Classes/Requests/Helpers
+ * @category Class
+ * @author   Krokedil <info@krokedil.se>
+ */
 class Payer_Get_Customer {
+    /**
+     * Gets customer
+     *
+     * @param int $order_id
+     * @return array
+     */
     public static function get_customer( $order_id ) {
         $order = wc_get_order( $order_id );
        return array(
@@ -22,6 +35,12 @@ class Payer_Get_Customer {
         );
     }
 
+    /**
+     * Gets address
+     *
+     * @param array $order
+     * @return array
+     */
     private static function get_address( $order ) {
         return array(
             'address_1'         =>  ( false == $order->get_billing_address_1() ) ? '' : $order->get_billing_address_1(),
@@ -30,6 +49,12 @@ class Payer_Get_Customer {
         );
     }
 
+    /**
+     * Gets phone
+     *
+     * @param array $order
+     * @return array
+     */
     private static function get_phone( $order ) {
         return array(
             'home'              =>  '',
