@@ -113,8 +113,9 @@ class Payer_Ajax extends WC_AJAX {
 		$quantity 		= $_POST['quantity'];
 		// Empty the current cart to prevent incorrect orders.
 		WC()->cart->empty_cart();
-
+		WC()->session->set( 'chosen_payment_method', 'payer_masterpass' );	
 		Payer_Masterpass_Populate_Order::add_item_to_cart( $product_id, $quantity, $variation_id );
+		Payer_Masterpass_Functions::maybe_add_campaign_fee();
 
 		$order 	= wc_create_order();
 		$order_id = $order->get_id();
@@ -142,7 +143,9 @@ class Payer_Ajax extends WC_AJAX {
 	 * @return void
 	 */
 	public static function instant_cart_purchase() {
-		if ( WC()->cart->get_cart_contents_count() > 0 ) {
+		if ( WC()->cart->get_cart_contents_count() > 0 ) {	
+			WC()->session->set( 'chosen_payment_method', 'payer_masterpass' );	
+			Payer_Masterpass_Functions::maybe_add_campaign_fee();
 			$order 	= wc_create_order();
 			$order_id = $order->get_id();
 
