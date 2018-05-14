@@ -150,21 +150,26 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 				array( 'jquery', 'wc-cart' ),
 				PAYER_VERSION_NUMBER
 			);
-			$payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );
-			$get_address = $payer_settings['get_address'];
-			$checkout_localize_params = array(
-				'ajaxurl'            => admin_url( 'admin-ajax.php' ),
-				'locale'             => WC()->customer->get_billing_country(),
-				'enable_get_address' => $get_address,
-				'get_address_text'        => __( 'Get Address', 'payer-for-woocommerce' ),
-				'get_address'        => WC_AJAX::get_endpoint( 'get_address' ),
+			$payer_settings            = get_option( 'woocommerce_payer_card_payment_settings' );
+			$get_address               = $payer_settings['get_address'];
+			$payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' );
+			$masterpass_campaign       = false;
+			if ( 'yes' === $payer_masterpass_settings['masterpass_campaign'] ) {
+				$masterpass_campaign = true;
+			}
+			$checkout_localize_params  = array(
+				'ajaxurl'             => admin_url( 'admin-ajax.php' ),
+				'locale'              => WC()->customer->get_billing_country(),
+				'enable_get_address'  => $get_address,
+				'get_address_text'    => __( 'Get Address', 'payer-for-woocommerce' ),
+				'get_address'         => WC_AJAX::get_endpoint( 'get_address' ),
+				'masterpass_campaign' => $masterpass_campaign,
 			);
 
 			wp_localize_script( 'payer_checkout', 'payer_checkout_params', $checkout_localize_params );
 
 			wp_enqueue_script( 'payer_checkout' );
 
-			$payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' );
 			if ( 'yes' === $payer_masterpass_settings['instant_masterpass_checkout'] && ( is_product() || is_cart() || is_shop() || is_product_category() ) ) {
 				wp_register_script(
 					'payer_instant_checkout',

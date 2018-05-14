@@ -32,6 +32,18 @@ if ( $this->id === 'payer_masterpass' ) {
 		'label'         => __( 'Enable instant MasterPass checkout for products and cart page.', 'payer-for-woocommerce' ),
 		'default'       => 'no',
 	);
+	$settings['masterpass_campaign']         = array(
+		'title'         => __( 'MasterPass Campaign', 'payer-for-woocommerce' ),
+		'type'          => 'checkbox',
+		'label'         => __( 'Enable this setting to partake in a MasterPass campaign that is ongoing.', 'payer-for-woocommerce' ),
+		'default'       => 'no',
+	);
+	$settings['masterpass_campaign_amount']  = array(
+		'title'         => __( 'Discount amount for campaign', 'payer-for-woocommerce' ),
+		'type'          => 'number',
+		'label'         => __( 'Enter the amount to be discounted for the current campaign.', 'payer-for-woocommerce' ),
+		'default'       => '0',
+	);
 }
 
 if ( $this->id === 'payer_bank_payment' ) {
