@@ -66,7 +66,7 @@ class Payer_Masterpass_Functions {
 			if ( 'yes' === $campaign ) {
                 $amount   = isset( $masterpass_settings['masterpass_campaign_amount'] ) ? floatval( $masterpass_settings['masterpass_campaign_amount'] ) : 0;
                 $discount = ( $amount * -1 );
-                WC()->cart->add_fee( __( 'MasterPass campaign discount', 'payer-for-woocommerce' ), $discount, false );
+                WC()->cart->add_fee( __( 'MasterPass campaign discount', 'payer-for-woocommerce' ), $discount, true );
 			}
 		}
 	}
