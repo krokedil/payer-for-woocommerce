@@ -18,13 +18,18 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"POT-Creation-Date: 2018-05-07 08:22+0000\n"
+"POT-Creation-Date: 2018-05-07 08:54+0000\n"
 "Language: \n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: payer-for-woocommerce.php:158
+#: payer-for-woocommerce.php:159
 msgid "Get Address"
+msgstr ""
+
+#: classes/payer-class-admin-notices.php:83
+#, php-format
+msgid "Not all credentials are filled in. Missed credentials: %s"
 msgstr ""
 
 #: classes/payer-class-ajax.php:39

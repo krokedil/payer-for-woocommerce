@@ -115,6 +115,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-masterpass-functions.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-post-checkout.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-admin-notices.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-gdpr.php';
 
 			// Include function files.
 			include_once PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php';	

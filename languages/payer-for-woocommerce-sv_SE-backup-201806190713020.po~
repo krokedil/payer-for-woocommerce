@@ -17,14 +17,19 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"POT-Creation-Date: 2018-05-07 08:22+0000\n"
-"PO-Revision-Date: 2018-05-07 08:23+0000\n"
+"POT-Creation-Date: 2018-05-07 08:54+0000\n"
+"PO-Revision-Date: 2018-05-07 08:55+0000\n"
 "Language: sv_SE\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: payer-for-woocommerce.php:158
+#: payer-for-woocommerce.php:159
 msgid "Get Address"
 msgstr "Hämta Adress"
+
+#: classes/payer-class-admin-notices.php:83
+#, php-format
+msgid "Not all credentials are filled in. Missed credentials: %s"
+msgstr "Alla uppgifter är inte ifyllda. Saknade uppgifter: %s"
 
 #: classes/payer-class-ajax.php:39
 msgid ""

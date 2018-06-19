@@ -32,6 +32,13 @@ if ( $this->id === 'payer_masterpass' ) {
 		'label'         => __( 'Enable instant MasterPass checkout for products and cart page.', 'payer-for-woocommerce' ),
 		'default'       => 'no',
 	);
+	$settings['masterpass_instant_purchase_text'] = array(
+		'title'       => __( 'Instant purchase text', 'payer-for-woocommerce' ),
+		'type'        => 'textarea',
+		'desc_tip'    => true,
+		'description' => __( 'Add an optional text after the Instant purchase button.', 'payer-for-woocommerce' ),
+		'default'     => '',
+	);
 	$settings['masterpass_campaign']         = array(
 		'title'         => __( 'MasterPass Campaign', 'payer-for-woocommerce' ),
 		'type'          => 'checkbox',
