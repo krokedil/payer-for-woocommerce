@@ -37,6 +37,10 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2018.06.21  	- version 0.1.3 =
+* Enhancement - Added setting to be able to partake in MasterPass campaigns.
+* Enhancement - Added setting to add text to the instant purchase buttons.
+
 = 2018.05.08  	- version 0.1.2 =
 * Fix - Fixed free shipping error.
 * Fix - Added Swedish translation for Get Address.
