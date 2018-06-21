@@ -23,7 +23,7 @@ class Payer_Admin_Notices {
 	 *
 	 * @var $settings
 	 */
-	protected static $settings;
+	protected $settings;
 	/**
 	 * Checks if Payer gateway is enabled.
 	 *

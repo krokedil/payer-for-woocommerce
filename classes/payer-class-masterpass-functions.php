@@ -17,7 +17,8 @@ class Payer_Masterpass_Functions {
     public function __construct() {
         add_action( 'woocommerce_after_cart_totals', array( $this, 'add_button' ) );
         add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'add_button' ) );
-        add_action( 'woocommerce_after_mini_cart', array( $this, 'add_button' ) );      
+        add_action( 'woocommerce_after_mini_cart', array( $this, 'add_button' ) );
+        add_action( 'woocommerce_cart_calculate_fees',  array( $this, 'maybe_add_campaign_fee' ) );
     }
 
     /**
@@ -29,6 +30,16 @@ class Payer_Masterpass_Functions {
         $payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' ); 
         if ( 'yes' === $payer_masterpass_settings['instant_masterpass_checkout'] ) {
             echo '<object type="image/svg" class="payer_instant_checkout"><img id="payer_instant_checkout" class="payer_instant_checkout" src="https://static.masterpass.com/dyn/img/btn/global/mp_chk_btn_147x034px.svg" alt="MasterPass"/></object>';
+            if ( 'yes' === $payer_masterpass_settings['masterpass_campaign'] && is_product() ){
+                global $product;
+                $price            = floatval( $product->get_price() );
+                $discount         = $payer_masterpass_settings['masterpass_campaign_amount'];
+                $discounted_price = ( ( $price - $discount ) < 0 ) ? 0 : ( $price - $discount ) ;
+                echo '<p class="price" style="margin: 0">' . __( 'Campaign ', 'payer-for-woocommerce' ) . wc_price( $discounted_price ) . '</p>';
+            }
+            if ( '' !== $payer_masterpass_settings['masterpass_instant_purchase_text'] && isset( $payer_masterpass_settings['masterpass_instant_purchase_text'] ) ) {
+                echo '<p>' . $payer_masterpass_settings['masterpass_instant_purchase_text'] . '</p>';
+            }
             echo '<a href="#" rel="external" onclick="window.open(\'http://www.mastercard.com/mc_us/wallet/learnmore/se\', \'_blank\', \'width=650,height=750,scrollbars=yes\'); return false;"><small>'. __( 'Read more...', 'payer-for-woocommerce' ) .'</small></a>';
         }
     }
@@ -50,5 +61,24 @@ class Payer_Masterpass_Functions {
             echo '<a href="#" rel="external" onclick="window.open(\'http://www.mastercard.com/mc_us/wallet/learnmore/se\', \'_blank\', \'width=650,height=750,scrollbars=yes\'); return false;"><small>'. __( 'Read more...', 'payer-for-woocommerce' ) .'</small></a>';            
         }
     }
+
+	/**
+	 * Maybe adds campaign fee to order.
+	 *
+	 * @return void
+	 */
+	public function maybe_add_campaign_fee() {
+        // Check if masterpass is the chosen gateway.
+		if ( 'payer_masterpass' === WC()->session->get( 'chosen_payment_method' ) ) {
+			$masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' );
+			$campaign            = isset( $masterpass_settings['masterpass_campaign'] ) ? $masterpass_settings['masterpass_campaign'] : 'no';
+			// Check if there is a campaign active.
+			if ( 'yes' === $campaign ) {
+                $amount   = isset( $masterpass_settings['masterpass_campaign_amount'] ) ? floatval( $masterpass_settings['masterpass_campaign_amount'] ) : 0;
+                $discount = ( $amount * -1 );
+                WC()->cart->add_fee( __( 'MasterPass campaign discount', 'payer-for-woocommerce' ), $discount, true );
+			}
+		}
+	}
 }
 new Payer_Masterpass_Functions;

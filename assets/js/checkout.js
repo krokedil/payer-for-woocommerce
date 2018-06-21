@@ -150,4 +150,9 @@ jQuery( function( $ ) {
             wc_payer_checkout.addBodyClass();
         }
     });
+    $(document.body).on("change", "input[name='payment_method']", function (event) {
+        if( payer_checkout_params.masterpass_campaign === '1' ) {
+            $('body').trigger('update_checkout');
+        }
+    });
 });
