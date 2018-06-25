@@ -2,11 +2,11 @@
 Contributors: payertech, krokedil, NiklasHogefjord
 Tags: ecommerce, e-commerce, woocommerce, payer, checkout
 Requires at least: 4.7
-Tested up to: 4.9.4
+Tested up to: 4.9.6
 Requires PHP: 5.6
 Stable tag: trunk
 WC requires at least: 3.0.0
-WC tested up to: 3.3.1
+WC tested up to: 3.4.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,7 +37,7 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
-= 2018.06.21  	- version 0.1.3 =
+= 2018.06.25  	- version 0.2.0 =
 * Enhancement - Added setting to be able to partake in MasterPass campaigns.
 * Enhancement - Added setting to add text to the instant purchase buttons.
 
