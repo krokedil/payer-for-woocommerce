@@ -28,9 +28,9 @@ class Payer_GDPR {
 			$content =
 				__(
 					'When you place an order in the webstore with Payer as the choosen payment method, ' .
-					'information about the products in the order (namne, price, quantity, SKU) is sent to Payer. ' .
-					'When the purchase is finalized Payer sends your billing and shipping address back to the webstore. ' .
-					'This data plus an unique identifier for the purchase is then stored as billing and shipping data in the order in WooCommerce.',
+					'information about the products in the order (namne, price, quantity, SKU) is sent to Payer ' .
+					'together with your billing and shipping address. Payer then responds with a unique transaction ID. ' .
+					'This ID is stored in the order in WooCommerce for future reference.',
 					'payer-for-woocommerce'
 				);
 			wp_add_privacy_policy_content(
