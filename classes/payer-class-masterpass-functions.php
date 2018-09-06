@@ -27,10 +27,10 @@ class Payer_Masterpass_Functions {
      * @return void
      */
     public function add_button() {
-        $payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' ); 
+        $payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' );
         if ( 'yes' === $payer_masterpass_settings['instant_masterpass_checkout'] ) {
             echo '<object type="image/svg" class="payer_instant_checkout"><img id="payer_instant_checkout" class="payer_instant_checkout" src="https://static.masterpass.com/dyn/img/btn/global/mp_chk_btn_147x034px.svg" alt="MasterPass"/></object>';
-            if ( 'yes' === $payer_masterpass_settings['masterpass_campaign'] && is_product() ){
+            if ( 'yes' === $payer_masterpass_settings['masterpass_campaign'] && is_product() && 'yes' === $payer_masterpass_settings['masterpass_campaign_text'] ){
                 global $product;
                 $price            = floatval( $product->get_price() );
                 $discount         = $payer_masterpass_settings['masterpass_campaign_amount'];
