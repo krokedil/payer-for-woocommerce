@@ -9,50 +9,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Payer_Subscription {
 	public function __construct() {
 		add_filter( 'payer_create_purchase_data', array( $this, 'maybe_handle_subscription' ) );
+		add_filter( 'payer_create_purchase_data', array( $this, 'maybe_handle_card_free_trial' ) );
 		add_action( 'woocommerce_scheduled_subscription_payment_payer_direct_invoice_gateway', array( $this, 'handle_direct_invoice_recurring' ), 10, 2 );
 		add_action( 'woocommerce_scheduled_subscription_payment_payer_card_payment', array( $this, 'handle_card_recurring' ), 10, 2 );
 	}
 
 	public function maybe_handle_subscription( $data ) {
-		if ( class_exists( 'WC_Subscriptions_Product' ) ) {
-			$subscription = false;
-			if ( isset( $data['purchase'] ) ) {
-				$purchase = $data['purchase'];
-			} else {
-				$purchase = $data;
-			}
-			foreach ( $purchase['items'] as $line_item ) {
-				if ( $this->get_product_from_sku( $line_item['article_number'] ) ) {
-					$product = $this->get_product_from_sku( $line_item['article_number'] );
-				} else {
-					$product = $this->get_product_from_id( $line_item['article_number'] );
-				}
-				if ( $this->check_if_product_is_subscription( $product ) ) {
-					$subscription = true;
-					break;
-				}
-			}
+		if ( class_exists( 'WC_Subscriptions_Order' ) ) {
+			$order_id     = $data['purchase']['reference_id'];
+			$order        = wc_get_order( $order_id );
+			$subscription = wcs_order_contains_subscription( $order );
 
 			if ( true === $subscription ) {
 				$data['payment']['options']['store'] = true;
 			}
 		}
 		return $data;
-	}
-
-	private function get_product_from_sku( $sku ) {
-		$product_id = wc_get_product_id_by_sku( $sku );
-
-		return wc_get_product( $product_id );
-	}
-
-	private function get_product_from_id( $id ) {
-		return wc_get_product( $id );
-
-	}
-
-	private function check_if_product_is_subscription( $product ) {
-		return WC_Subscriptions_Product::is_subscription( $product );
 	}
 
 	public function handle_direct_invoice_recurring( $renewal_total, $renewal_order ) {
@@ -109,5 +81,21 @@ class Payer_Subscription {
 			$renewal_order->add_order_note( __( 'Subscription payment failed to create with Payer', 'payer-for-woocommerce' ) );
 		}
 	}
-}
-new Payer_Subscription();
+
+	public function maybe_handle_card_free_trial( $data ) {
+		if ( class_exists( 'WC_Subscriptions_Order' ) ) {
+			$order_id = $data['purchase']['reference_id'];
+			$order    = wc_get_order( $order_id );
+			if ( empty( floatval( $order->get_total() ) ) ) {
+				foreach ( $data['purchase']['items'] as $item ) {
+					$x = 0;
+					if ( 0 === $item['unit_price'] ) {
+						$data['purchase']['items'][ $x ]['unit_price'] = 1;
+					}
+					$x++;
+				}
+			}
+			return $data;
+		}
+	}
+} new Payer_Subscription();

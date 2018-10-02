@@ -46,6 +46,9 @@ class Payer_Callbacks {
 			update_post_meta( $order_id, 'payer_recurring_token', $recurring_token );
 		}
 		Payer_For_Woocommerce::log( 'Payer Callback: ' . $order_id . ' $_GET: ' . var_export( $_GET, true ) );
+		/**
+		 * Add comment.
+		 */
 		switch ( $callback_type ) {
 			case 'auth':
 				krokedil_log_events( $order_id, 'Payer Auth Callback', $_GET );
@@ -201,26 +204,26 @@ class Payer_Callbacks {
 	}
 
 	private function make_debit( $order_id ) {
-		$this->set_gateway();
 		$order = wc_get_order( $order_id );
+		if ( ! empty( floatval( $order->get_total() ) ) ) {
+			$this->set_gateway();
+			$price_incl_tax   = $order->get_total();
+			$price_excl_tax   = $order->get_total() - $order->get_total_tax();
+			$price_difference = $price_incl_tax - $price_excl_tax;
 
-		$price_incl_tax   = $order->get_total();
-		$price_excl_tax   = $order->get_total() - $order->get_total_tax();
-		$price_difference = $price_incl_tax - $price_excl_tax;
+			$data     = array(
+				'recurring_token' => get_post_meta( $order_id, 'payer_recurring_token' ),
+				'description'     => 'Subscription',
+				'amount'          => $order->get_total(),
+				'vat_percentage'  => intval( ( $price_difference / $price_excl_tax ) * 100 ),
+				'currency'        => $order->get_currency(),
+				'reference_id'    => $order_id,
+			);
+			$purchase = new Payer\Sdk\Resource\Purchase( $this->gateway );
+			$response = $purchase->debit( $data );
 
-		$data = array(
-			'recurring_token' => get_post_meta( $order_id, 'payer_recurring_token' ),
-			'description'     => 'Subscription',
-			'amount'          => $order->get_total(),
-			'vat_percentage'  => intval( ( $price_difference / $price_excl_tax ) * 100 ),
-			'currency'        => $order->get_currency(),
-			'reference_id'    => $order_id,
-		);
-
-		$purchase = new Payer\Sdk\Resource\Purchase( $this->gateway );
-		$response = $purchase->debit( $data );
-
-		krokedil_log_response( $order_id, $response );
+			krokedil_log_response( $order_id, $response );
+		}
 	}
 }
 new Payer_Callbacks();
