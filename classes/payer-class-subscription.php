@@ -75,7 +75,7 @@ class Payer_Subscription {
 		if ( isset( $response['transaction_id'] ) && is_int( $response['transaction_id'] ) ) {
 			WC_Subscriptions_Manager::process_subscription_payments_on_order( $renewal_order );
 			$renewal_order->add_order_note( __( 'Subscription payment made with Payer', 'payer-for-woocommerce' ) );
-			$renewal_order->payment_complete();
+			$renewal_order->payment_complete( $response['transaction_id'] );
 		} else {
 			WC_Subscriptions_Manager::process_subscription_payment_failure_on_order( $renewal_order );
 			$renewal_order->add_order_note( __( 'Subscription payment failed to create with Payer', 'payer-for-woocommerce' ) );
