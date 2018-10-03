@@ -1,23 +1,23 @@
 [
     {
         "name": "krokedil/krokedil-logger",
-        "version": "1.0.4",
-        "version_normalized": "1.0.4.0",
+        "version": "1.0.6",
+        "version_normalized": "1.0.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/krokedil/krokedil-logger.git",
-            "reference": "72c3710d542450d24fde732fa961810777dc8632"
+            "reference": "68fca237f3d53720d223373827531488d5ef7b21"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/krokedil/krokedil-logger/zipball/72c3710d542450d24fde732fa961810777dc8632",
-            "reference": "72c3710d542450d24fde732fa961810777dc8632",
+            "url": "https://api.github.com/repos/krokedil/krokedil-logger/zipball/68fca237f3d53720d223373827531488d5ef7b21",
+            "reference": "68fca237f3d53720d223373827531488d5ef7b21",
             "shasum": ""
         },
         "require": {
             "php": ">=5.6.0"
         },
-        "time": "2018-01-30T08:14:34+00:00",
+        "time": "2018-03-29T13:59:58+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -47,17 +47,17 @@
     },
     {
         "name": "payer/sdk",
-        "version": "1.1.11",
-        "version_normalized": "1.1.11.0",
+        "version": "1.1.12",
+        "version_normalized": "1.1.12.0",
         "source": {
             "type": "git",
             "url": "https://github.com/PayerPayment/Payer-PhpSdk.git",
-            "reference": "de0388ded310a8ba48e0e682be327cc45ac07893"
+            "reference": "b07f3cfa3178c5bfc7cb5c6c79988592dbbd3418"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PayerPayment/Payer-PhpSdk/zipball/de0388ded310a8ba48e0e682be327cc45ac07893",
-            "reference": "de0388ded310a8ba48e0e682be327cc45ac07893",
+            "url": "https://api.github.com/repos/PayerPayment/Payer-PhpSdk/zipball/b07f3cfa3178c5bfc7cb5c6c79988592dbbd3418",
+            "reference": "b07f3cfa3178c5bfc7cb5c6c79988592dbbd3418",
             "shasum": ""
         },
         "require": {
@@ -66,11 +66,11 @@
         },
         "require-dev": {
             "phpmd/phpmd": "~2.2",
-            "phpunit/phpunit": "4.0.*",
+            "phpunit/phpunit": "5.0.*",
             "satooshi/php-coveralls": "~0.6",
             "squizlabs/php_codesniffer": "~2.3"
         },
-        "time": "2018-01-19T15:05:24+00:00",
+        "time": "2018-05-07T13:50:38+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
