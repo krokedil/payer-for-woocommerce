@@ -54,6 +54,24 @@ class Payer_Card_Payments_Gateway extends Payer_Factory_Gateway {
 		$this->supports = $support_array;
 
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
+		// add_action( 'woocommerce_review_order_after_cart_contents', array( $this, 'add_free_trial_text_to_description' ) );
+		$this->add_free_trial_text_to_description();
+	}
+
+	public function add_free_trial_text_to_description() {
+		if ( class_exists( 'WC_Subscriptions_Cart' ) && empty( floatval( WC()->cart->get_total( 'payer' ) ) ) && WC_Subscriptions_Cart::cart_contains_subscription() ) {
+			$description = $this->description;
+
+			$free_trial_message = wc_price( 1 ) . __( ' will be reserved on your card.', 'payer-for-woocommerce' );
+
+			if ( '' !== $description ) {
+				$description = $description . '<br>' . $free_trial_message;
+			} else {
+				$description = $free_trial_message;
+			}
+
+			$this->description = $description;
+		}
 	}
 }
 
