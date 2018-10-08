@@ -59,7 +59,7 @@ class Payer_Card_Payments_Gateway extends Payer_Factory_Gateway {
 	}
 
 	public function add_free_trial_text_to_description() {
-		if ( class_exists( 'WC_Subscriptions_Cart' ) && empty( floatval( WC()->cart->get_total( 'payer' ) ) ) && WC_Subscriptions_Cart::cart_contains_subscription() ) {
+		if ( is_checkout() && class_exists( 'WC_Subscriptions_Cart' ) && empty( floatval( WC()->cart->get_total( 'payer' ) ) ) && WC_Subscriptions_Cart::cart_contains_subscription() ) {
 			$description = $this->description;
 
 			$free_trial_message = wc_price( 1 ) . __( ' will be reserved on your card.', 'payer-for-woocommerce' );
