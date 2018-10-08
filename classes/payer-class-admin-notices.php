@@ -67,7 +67,7 @@ class Payer_Admin_Notices {
 		foreach ( $settings as $key => $value ) {
 			if ( in_array( $key, $settings_to_check, true ) ) {
 				if ( '' === $value ) {
-					$check = false;
+					$check           = false;
 					$failed_checks[] = $key;
 				}
 			}
@@ -80,6 +80,7 @@ class Payer_Admin_Notices {
 			}
 			$failed_checks_string = substr_replace( $failed_checks_string, '', -2 );
 			echo '<div class="notice notice-error">';
+			// translators: Used to show the missing credentials for the Payer API.
 			echo '<p>' . esc_html( sprintf( __( 'Not all credentials are filled in. Missed credentials: %s', 'payer-for-woocommerce' ), $failed_checks_string ) ) . '</p>';
 			echo '</div>';
 		}

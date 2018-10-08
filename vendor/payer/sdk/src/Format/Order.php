@@ -202,7 +202,7 @@ class Order extends DataFormatter
     }
 
     /**
-     * Handles the default 'Order Details' object format
+     * Handles the default 'ORder Details' object format
      *
      * @param array $order The order details request object to be filtered
      * @return array The filtered get status object
