@@ -37,6 +37,10 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2018.10.08  	- version 1.0.0 =
+* Enhancement 	- Added support for WooCommerce subscriptions for Direct invoice and Card payments.
+* Enhancement   - Updated the Payer SDK.
+
 = 2018.06.25  	- version 0.2.0 =
 * Enhancement 	- Added setting to be able to partake in MasterPass campaigns.
 * Enhancement 	- Added setting to add text to the instant purchase buttons.

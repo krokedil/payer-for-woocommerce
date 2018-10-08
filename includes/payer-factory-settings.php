@@ -45,6 +45,12 @@ if ( $this->id === 'payer_masterpass' ) {
 		'label'         => __( 'Enable this setting to partake in a MasterPass campaign that is ongoing.', 'payer-for-woocommerce' ),
 		'default'       => 'no',
 	);
+	$settings['masterpass_campaign_text']     = array(
+		'title'         => __( 'MasterPass Campaign text', 'payer-for-woocommerce' ),
+		'type'          => 'checkbox',
+		'label'         => __( 'Enable this setting to show campaign information text to customer.', 'payer-for-woocommerce' ),
+		'default'       => 'no',
+	);
 	$settings['masterpass_campaign_amount']  = array(
 		'title'         => __( 'Discount amount for campaign', 'payer-for-woocommerce' ),
 		'type'          => 'number',

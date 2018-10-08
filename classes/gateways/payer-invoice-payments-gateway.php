@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 /**
  * Invoice Payments Gateway.
- * 
+ *
  * @class    Payer_Invoice_Payments_Gateway
  * @package  Payer/Classes/Gateways
  * @category Class
@@ -17,16 +17,16 @@ class Payer_Invoice_Payments_Gateway extends Payer_Factory_Gateway {
 	public function __construct() {
 		parent::__construct();
 
-		$this->id                   = 'payer_invoice_payment';
-		$this->method_title         = __( 'Payer Invoice', 'payer-for-woocommerce' );
-		$this->method_description   = __( 'Allows payments through ' . $this->method_title . '.', 'payer-for-woocommerce' );
+		$this->id                 = 'payer_invoice_payment';
+		$this->method_title       = __( 'Payer Invoice', 'payer-for-woocommerce' );
+		$this->method_description = __( 'Allows payments through ' . $this->method_title . '.', 'payer-for-woocommerce' );
 
-		$this->title       		    = $this->get_option( 'title' );
-		$this->description 		    = $this->get_option( 'description' );
-		$this->test_mode            = $this->get_option( 'test_mode' );
-		$this->debug_mode           = $this->get_option( 'debug_mode' );
-		$this->icon_url				= $this->get_option( 'payer_invoice_payment_icon' );		
-		$this->icon					= $this->set_icon();
+		$this->title       = $this->get_option( 'title' );
+		$this->description = $this->get_option( 'description' );
+		$this->test_mode   = $this->get_option( 'test_mode' );
+		$this->debug_mode  = $this->get_option( 'debug_mode' );
+		$this->icon_url    = $this->get_option( 'payer_invoice_payment_icon' );
+		$this->icon        = $this->set_icon();
 
 		// Load the form fields.
 		$this->init_form_fields();
@@ -39,7 +39,7 @@ class Payer_Invoice_Payments_Gateway extends Payer_Factory_Gateway {
 
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 
-		add_filter( 'woocommerce_page_wc-settings', array( $this, 'show_keys_in_settings' ) );				
+		add_filter( 'woocommerce_page_wc-settings', array( $this, 'show_keys_in_settings' ) );
 	}
 	/**
 	 * Shows settings keys on the settings page.
@@ -63,7 +63,7 @@ add_filter( 'woocommerce_payment_gateways', 'add_krokedil_payer_invoice_gateway'
  * @return array
  */
 function add_krokedil_payer_invoice_gateway( $methods ) {
-	if ( ! defined( 'UNSET_PAYER_INVOICE_PAYMENTS' ) ) {		
+	if ( ! defined( 'UNSET_PAYER_INVOICE_PAYMENTS' ) ) {
 		$methods[] = 'Payer_Invoice_Payments_Gateway';
 	}
 	return $methods;
