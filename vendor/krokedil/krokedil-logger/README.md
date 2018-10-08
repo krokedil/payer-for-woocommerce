@@ -1,6 +1,15 @@
 # krokedil-logger
 ## Installation
-Add this plugin as a submodule in your main plugin folder. And include the file **krokedil-order-event-log.php**.
+Install with [Composer](getcomposer.org).
+
+Add these lines to your composer.json:
+```
+{
+    "require": {
+        "krokedil/krokedil-logger": "^1.0"
+    }
+}
+```
 
 ## Usage
 ### Log event

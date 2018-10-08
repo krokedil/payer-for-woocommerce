@@ -15,10 +15,10 @@
  * Developer URI:   https://krokedil.se/
  * Text Domain:     payer-for-woocommerce
  * Domain Path:     /languages
- * 
+ *
  * WC requires at least: 3.0.0
  * WC tested up to: 3.4.3
- * 
+ *
  * Copyright:       © Krokedil Produktionsbyrå AB.
  * License:         GNU General Public License v3.0
  * License URI:     http://www.gnu.org/licenses/gpl-3.0.html
@@ -46,7 +46,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 		 * Class Constructor.
 		 */
 		public function __construct() {
-			add_action( 'init', array( $this, 'payer_make_purchase' ) );			
+			add_action( 'init', array( $this, 'payer_make_purchase' ) );
 			// Initiate the gateway.
 			add_action( 'plugins_loaded', array( $this, 'init' ) );
 			// Load scripts.
@@ -98,7 +98,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 			// Include request classes.
 			include_once PAYER_PLUGIN_DIR . '/classes/requests/payer-create-purchase.php';
-			include_once PAYER_PLUGIN_DIR . '/classes/requests/payer-get-address.php'; 
+			include_once PAYER_PLUGIN_DIR . '/classes/requests/payer-get-address.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/requests/payer-create-order.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/requests/payer-commit-order.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/requests/payer-refund-order.php';
@@ -120,9 +120,10 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-post-checkout.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-admin-notices.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-gdpr.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-subscription.php';
 
 			// Include function files.
-			include_once PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php';	
+			include_once PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php';
 		}
 
 		/**
@@ -139,7 +140,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			define( 'PAYER_SDK_DIR', '/vendor/' );
 			// Set Krokedil Logger Defines.
 			define( 'KROKEDIL_LOGGER_GATEWAY', 'payer_' );
-			$payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );        
+			$payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );
 			if ( 'yes' === $payer_settings['debug_mode'] ) {
 				define( 'KROKEDIL_LOGGER_ON', true );
 			}
@@ -162,7 +163,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			if ( 'yes' === $payer_masterpass_settings['masterpass_campaign'] ) {
 				$masterpass_campaign = true;
 			}
-			$checkout_localize_params  = array(
+			$checkout_localize_params = array(
 				'ajaxurl'             => admin_url( 'admin-ajax.php' ),
 				'locale'              => WC()->customer->get_billing_country(),
 				'enable_get_address'  => $get_address,
@@ -185,7 +186,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 				if ( is_product() ) {
 					$page_type = 'product';
-				} else if ( is_cart() ) {
+				} elseif ( is_cart() ) {
 					$page_type = 'cart';
 				} else {
 					$page_type = '';
