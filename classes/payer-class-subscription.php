@@ -95,7 +95,7 @@ class Payer_Subscription {
 					$x++;
 				}
 			}
-			return $data;
 		}
+		return $data;
 	}
 } new Payer_Subscription();
