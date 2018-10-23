@@ -37,6 +37,9 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2018.10.23  	- version 1.0.1 =
+* Fix           - Fixed a 500 error caused when lacking WooCommerce Subscription.
+
 = 2018.10.08  	- version 1.0.0 =
 * Enhancement 	- Added support for WooCommerce subscriptions for Direct invoice and Card payments.
 * Enhancement   - Updated the Payer SDK.
