@@ -73,7 +73,6 @@ jQuery( function( $ ) {
                 },
                 dataType: 'json',
                 success: function(data) {
-                    console.log(data);
                     var address_data = data.data.address_information,
                         message = data.data.message;
                     if( data.success === false ) { 
@@ -102,15 +101,14 @@ jQuery( function( $ ) {
                 post_code       = $('#billing_postcode'),
                 address_1       = $('#billing_address_1'),
                 address_2       = $('#billing_address_2');
-
             // Populate fields
-            first_name.val( wc_payer_checkout.maskFormField( address_data.first_name ) );
-            last_name.val( wc_payer_checkout.maskFormField( address_data.last_name ) );
-            organisation.val( wc_payer_checkout.maskFormField( address_data.organisation ) );
-            city.val( wc_payer_checkout.maskFormField( address_data.city ) );
+            first_name.val( ( '' === address_data.organisation ? wc_payer_checkout.maskFormField( address_data.first_name ) : address_data.first_name ) );
+            last_name.val( ( '' === address_data.organisation ? wc_payer_checkout.maskFormField( address_data.last_name ) : address_data.last_name ) );
+            organisation.val( ( '' === address_data.organisation ? wc_payer_checkout.maskFormField( address_data.organisation ) : address_data.organisation ) );
+            city.val( ( '' === address_data.organisation ? wc_payer_checkout.maskFormField( address_data.city ) : address_data.city ) );
             post_code.val( address_data.zip_code );
-            address_1.val( wc_payer_checkout.maskFormField( address_data.address_1 ) );
-            address_2.val( wc_payer_checkout.maskFormField( address_data.address_2 ) );
+            address_1.val( ( '' === address_data.organisation ? wc_payer_checkout.maskFormField( address_data.address_1 ) : address_data.address_1 ) );
+            address_2.val( ( '' === address_data.organisation ? wc_payer_checkout.maskFormField( address_data.address_2 ) : address_data.address_2 ) );
         },
         maskFormField: function( field ) {
             if ( field !== '' ) {
