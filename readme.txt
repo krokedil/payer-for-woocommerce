@@ -37,6 +37,11 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2018.11.19  	- version 1.0.2 =
+* Fix           - Fixed is_available for Direct Invoice. Should not longer show if you dont have it enabled.
+* Enhancement   - Removed masking of address data on organizations.
+* Enhancement   - Added filter to Personalnummber label.
+
 = 2018.10.23  	- version 1.0.1 =
 * Fix           - Fixed a 500 error caused when lacking WooCommerce Subscription.
 

@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 /**
  * Payer Factory Gateway.
- * 
+ *
  * @class    Payer_Factory_Gateway
  * @package  Payer/Classes/Gateways
  * @category Class
@@ -15,7 +15,7 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		add_filter( 'woocommerce_checkout_fields' , array( $this, 'add_pno_field' ) );
+		add_filter( 'woocommerce_checkout_fields', array( $this, 'add_pno_field' ) );
 	}
 
 	/**
@@ -24,7 +24,7 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	 * @return void
 	 */
 	public function init_form_fields() {
-		$this->form_fields = include( PAYER_PLUGIN_DIR . '/includes/payer-factory-settings.php' );
+		$this->form_fields = include PAYER_PLUGIN_DIR . '/includes/payer-factory-settings.php';
 	}
 
 	/**
@@ -45,8 +45,8 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 
 		$redirect_url = add_query_arg(
 			array(
-				'payer-redirect'	=>	'1',
-				'order_id'			=>	$order_id,
+				'payer-redirect' => '1',
+				'order_id'       => $order_id,
 			),
 			$checkout_url
 		);
@@ -62,15 +62,15 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	/**
 	 * Handles refunds.
 	 *
-	 * @param int $order_id
-	 * @param int $amount
+	 * @param int    $order_id
+	 * @param int    $amount
 	 * @param string $reason
 	 * @return bool
 	 */
 	public function process_refund( $order_id, $amount = null, $reason = '' ) {
 		$order = wc_get_order( $order_id );
-		if( false !== strpos( $order->get_payment_method(), 'payer_' ) ) {
-			if( ! get_post_meta( $order_id, '_payer_order_refunded' ) ) {
+		if ( false !== strpos( $order->get_payment_method(), 'payer_' ) ) {
+			if ( ! get_post_meta( $order_id, '_payer_order_refunded' ) ) {
 				Payer_Refund_Order::refund_order( $order_id, $amount, $reason );
 				update_post_meta( $order_id, '_payer_order_refunded', 'true' );
 				$order->add_order_note( __( 'The order has been refunded with Payer', 'payer-for-woocommerce' ) );
@@ -92,13 +92,13 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	 */
 	public function add_pno_field( $fields ) {
 		$fields['billing']['billing_pno'] = array(
-			'label'     	=> __('Personal number', 'payer-for-woocommerce'),
-			'placeholder'   => _x('xxxxxx-xxxx', 'placeholder', 'payer-for-woocommerce'),
-			'required'  	=> false,
-			'class'     	=> array('form-row-wide'),
-			'clear'     	=> true
+			'label'       => apply_filters( 'payer_pno_label', __( 'Personal number', 'payer-for-woocommerce' ) ),
+			'placeholder' => _x( 'xxxxxx-xxxx', 'placeholder', 'payer-for-woocommerce' ),
+			'required'    => false,
+			'class'       => array( 'form-row-wide' ),
+			'clear'       => true,
 		);
-	
+
 		return $fields;
 	}
 
@@ -134,10 +134,10 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 				$default_img = 'payer-icon-payment_method-swish.png';
 				break;
 		}
-		if( '' !== $this->icon_url ) {
+		if ( '' !== $this->icon_url ) {
 			return $this->icon_url;
 		} else {
-			return PAYER_PLUGIN_URL . '/assets/img/' . $default_img;		
+			return PAYER_PLUGIN_URL . '/assets/img/' . $default_img;
 		}
 	}
 
@@ -148,21 +148,20 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	 * @return void
 	 */
 	public function check_posted_data( $order_id ) {
-		if( WC()->session->get( 'payer_customer_details' ) ) {
+		if ( WC()->session->get( 'payer_customer_details' ) ) {
 			$get_address_data = WC()->session->get( 'payer_customer_details' );
-			$order = wc_get_order( $order_id );
-			$order_data = array(
-				'first_name'	=>	$order->get_billing_first_name(),
-				'last_name'		=>	$order->get_billing_last_name(),
-				'address_1'		=>  $order->get_billing_address_1(),
-				'address_2'		=> 	$order->get_billing_address_2(),
-				'company'		=>	$order->get_billing_company(),
-				'city'			=>	$order->get_billing_city(),
-			);		
-			if( $get_address_data != $order_data ) {
+			$order            = wc_get_order( $order_id );
+			$order_data       = array(
+				'first_name' => $order->get_billing_first_name(),
+				'last_name'  => $order->get_billing_last_name(),
+				'address_1'  => $order->get_billing_address_1(),
+				'address_2'  => $order->get_billing_address_2(),
+				'company'    => $order->get_billing_company(),
+				'city'       => $order->get_billing_city(),
+			);
+			if ( $get_address_data != $order_data ) {
 				$order->add_order_note( 'The address information was changed by the customer from the get address information.', 'payer-for-woocommerce' );
 			}
-
 		}
 
 	}

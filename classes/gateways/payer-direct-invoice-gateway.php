@@ -89,6 +89,10 @@ class Payer_Direct_Invoice_Gateway extends Payer_Factory_Gateway {
 	}
 
 	public function is_available() {
+		if ( 'yes' !== $this->get_option( 'enabled' ) ) {
+			return false;
+		}
+
 		if ( $this->get_order_total() < 1 ) {
 			return false;
 		}
