@@ -133,6 +133,20 @@ jQuery( function( $ ) {
 
         removeBodyClass: function() {
             $('body').removeClass('payer-active');
+        },
+
+        checkIfPnoIsFilled: function() {
+            var payment_method = $('input[name="payment_method"]:checked').val();
+
+            if( 'payer_direct_invoice_gateway' === payment_method ) {
+                if( $('#billing_pno').val() === '' ) {
+                    $('#place_order').prop('disabled', true);
+                } else {
+                    $('#place_order').prop('disabled', false);
+                }
+            } else {
+                $('#place_order').prop('disabled', false);
+            }
         }
     }
 
@@ -146,11 +160,19 @@ jQuery( function( $ ) {
             wc_payer_checkout.showPNOfield();
             wc_payer_checkout.showAddressButton();
             wc_payer_checkout.addBodyClass();
+            wc_payer_checkout.checkIfPnoIsFilled();
         }
     });
     $(document.body).on("change", "input[name='payment_method']", function (event) {
         if( payer_checkout_params.masterpass_campaign === '1' ) {
             $('body').trigger('update_checkout');
         }
+        wc_payer_checkout.checkIfPnoIsFilled();
+    });
+    $('form.checkout').on('keyup', '#billing_pno', function() {
+        wc_payer_checkout.checkIfPnoIsFilled();
+    });
+    $('body').on('updated_checkout', function() { 
+        wc_payer_checkout.checkIfPnoIsFilled();
     });
 });
