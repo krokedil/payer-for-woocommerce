@@ -91,14 +91,16 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	 * @return array $fields
 	 */
 	public function add_pno_field( $fields ) {
-		$fields['billing']['billing_pno'] = array(
-			'label'       => apply_filters( 'payer_pno_label', __( 'Personal number', 'payer-for-woocommerce' ) ),
-			'placeholder' => _x( 'xxxxxx-xxxx', 'placeholder', 'payer-for-woocommerce' ),
-			'required'    => false,
-			'class'       => array( 'form-row-wide' ),
-			'clear'       => true,
-		);
-
+		$settings = get_option( 'woocommerce_payer_card_payment_settings' );
+		if ( 'yes' === $settings['get_address'] ) {
+			$fields['billing']['billing_pno'] = array(
+				'label'       => apply_filters( 'payer_pno_label', __( 'Personal number', 'payer-for-woocommerce' ) ),
+				'placeholder' => _x( 'xxxxxx-xxxx', 'placeholder', 'payer-for-woocommerce' ),
+				'required'    => false,
+				'class'       => array( 'form-row-wide' ),
+				'clear'       => true,
+			);
+		}
 		return $fields;
 	}
 

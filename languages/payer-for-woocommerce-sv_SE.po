@@ -56,7 +56,7 @@ msgstr "Okänt fel. Ordern har inte blivit krediterad med Payer"
 
 #: classes/gateways/payer-factory-gateway.php:95
 msgid "Personal number"
-msgstr "Personnummer"
+msgstr "Personnummer/Org nummer"
 
 #: classes/gateways/payer-factory-gateway.php:96
 msgctxt "placeholder"
