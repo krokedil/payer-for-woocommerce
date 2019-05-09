@@ -29,7 +29,7 @@ class Payer_Subscription {
 
 	public function handle_direct_invoice_recurring( $renewal_total, $renewal_order ) {
 		$order_id    = $renewal_order->get_id();
-		$billing_pno = get_post_meta( WC_Subscriptions_Renewal_Order::get_parent_order_id( $order_id ), '_billing_pno', true );
+		$billing_pno = get_post_meta( WC_Subscriptions_Renewal_Order::get_parent_order_id( $order_id ), apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), true );
 
 		$payer_order_id = Payer_Create_Order::create_order( $order_id, $billing_pno );
 		if ( isset( $payer_order_id['order_id'] ) && is_int( $payer_order_id['order_id'] ) ) {

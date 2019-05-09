@@ -21,7 +21,7 @@ class Payer_Get_Customer {
 		$order = wc_get_order( $order_id );
 
 		if ( null === $pno ) {
-			$pno = ( null === get_post_meta( $order_id, '_billing_pno', true ) ) ? '' : get_post_meta( $order_id, '_billing_pno', true );
+			$pno = ( null === get_post_meta( $order_id, apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), true ) ) ? '' : get_post_meta( $order_id, apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), true );
 		}
 
 		return array(
