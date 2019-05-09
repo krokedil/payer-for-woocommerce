@@ -993,10 +993,23 @@ class PostService extends WebserviceInterface implements PayerPostInterface
 	 * @return bool true/false
 	 *
 	 */
-	public function is_valid_ip()
+	public function is_valid_ip($is_proxy = false)
 	{
-		$ip = $_SERVER ["REMOTE_ADDR"];
-		return in_array ( $ip, $this->myFirewall );
+		if ( $is_proxy ) {
+			if ( strpos( $_SERVER['HTTP_X_FORWARDED_FOR'], ',' ) !== false ) {
+				$iplist = explode( ',', $_SERVER['HTTP_X_FORWARDED_FOR'] );
+				foreach ( $iplist as $ip ) {
+					if ( in_array ( $ip, $this->myFirewall ) ) {
+						return true;
+					}
+				}
+				return false;
+			} else {
+				return in_array ( $_SERVER ["HTTP_X_FORWARDED_FOR"], $this->myFirewall );
+			}
+		}
+		
+		return in_array ( $_SERVER ["REMOTE_ADDR"], $this->myFirewall );
 	}
 
 	/**
@@ -1022,7 +1035,7 @@ class PostService extends WebserviceInterface implements PayerPostInterface
 	 * @return bool returns true or false indicating a legal(true) callback checksum
 	 *
 	 */
-	public function is_valid_callback()
+	public function is_valid_callback($proxy = false)
 	{
 		return $this->validate_callback_url ( $this->get_request_url () );
 	}

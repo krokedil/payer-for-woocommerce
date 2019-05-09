@@ -82,9 +82,23 @@ class Payer_Callbacks {
 		if ( isset( $_GET['address'] ) ) {
 			$this->populate_customer_data( $order_id, $_GET['address'] );
 		}
-		$data     = array(
-			'payment'  => Payer_Get_Payment::get_payment( $order_id ),
-			'purchase' => Payer_Get_Purchase::get_purchase( $order_id ),
+		$settings           = get_option( 'woocommerce_payer_card_payment_settings' );
+		$is_proxy           = false;
+		$skip_ip_validation = false;
+		if ( isset( $settings['is_proxy'] ) && 'yes' === $settings['is_proxy'] ) {
+			$is_proxy = true;
+		}
+		if ( isset( $settings['skip_ip_validation'] ) && 'yes' === $settings['skip_ip_validation'] ) {
+			$skip_ip_validation = true;
+		}
+
+		$data     = apply_filters(
+			'payer_callback_data', array(
+				'payment'            => Payer_Get_Payment::get_payment( $order_id ),
+				'purchase'           => Payer_Get_Purchase::get_purchase( $order_id ),
+				'is_proxy'           => $is_proxy,
+				'skip_ip_validation' => $skip_ip_validation,
+			)
 		);
 		$purchase = new Payer\Sdk\Resource\Purchase( $this->gateway );
 		$response = $purchase->createSettlementResource( $data );
@@ -99,9 +113,23 @@ class Payer_Callbacks {
 	 */
 	private function authorize_reply( $order_id ) {
 		$this->set_gateway();
-		$data     = array(
-			'payment'  => Payer_Get_Payment::get_payment( $order_id ),
-			'purchase' => Payer_Get_Purchase::get_purchase( $order_id ),
+		$settings           = get_option( 'woocommerce_payer_card_payment_settings' );
+		$is_proxy           = false;
+		$skip_ip_validation = false;
+		if ( isset( $settings['is_proxy'] ) && 'yes' === $settings['is_proxy'] ) {
+			$is_proxy = true;
+		}
+		if ( isset( $settings['skip_ip_validation'] ) && 'yes' === $settings['skip_ip_validation'] ) {
+			$skip_ip_validation = true;
+		}
+
+		$data     = apply_filters(
+			'payer_callback_data', array(
+				'payment'            => Payer_Get_Payment::get_payment( $order_id ),
+				'purchase'           => Payer_Get_Purchase::get_purchase( $order_id ),
+				'is_proxy'           => $is_proxy,
+				'skip_ip_validation' => $skip_ip_validation,
+			)
 		);
 		$purchase = new Payer\Sdk\Resource\Purchase( $this->gateway );
 		$response = $purchase->createAuthorizeResource( $data );
