@@ -95,6 +95,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-einvoice-payments-gateway.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-direct-invoice-gateway.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-masterpass-gateway.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-rent-payments-gateway.php';
 
 			// Include request classes.
 			include_once PAYER_PLUGIN_DIR . '/classes/requests/payer-create-purchase.php';
@@ -121,6 +122,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-admin-notices.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-gdpr.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-subscription.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-rent-mail.php';
 
 			// Include function files.
 			include_once PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php';

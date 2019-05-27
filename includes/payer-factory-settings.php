@@ -25,6 +25,16 @@ $settings = array(
 	),
 );
 
+if ( $this->id === 'payer_rent_payment' ) {
+	$settings['payer_rent_payment_icon'] = array(
+		'title'       => __( 'Icon URL', 'payer-for-woocommerce' ),
+		'type'        => 'text',
+		'description' => __( 'Put the URL to a new icon image here', 'payer-for-woocommerce' ),
+		'default'     => '',
+		'desc_tip'    => true,
+	);
+}
+
 if ( $this->id === 'payer_masterpass' ) {
 	$settings['instant_masterpass_checkout']      = array(
 		'title'   => __( 'Instant MasterPass checkout', 'payer-for-woocommerce' ),

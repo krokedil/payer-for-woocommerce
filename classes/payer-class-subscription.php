@@ -12,6 +12,8 @@ class Payer_Subscription {
 		add_filter( 'payer_create_purchase_data', array( $this, 'maybe_handle_card_free_trial' ) );
 		add_action( 'woocommerce_scheduled_subscription_payment_payer_direct_invoice_gateway', array( $this, 'handle_direct_invoice_recurring' ), 10, 2 );
 		add_action( 'woocommerce_scheduled_subscription_payment_payer_card_payment', array( $this, 'handle_card_recurring' ), 10, 2 );
+		add_action( 'woocommerce_scheduled_subscription_payment_payer_rent_payment', array( $this, 'handle_rent_recurring' ), 10, 2 );
+
 	}
 
 	public function maybe_handle_subscription( $data ) {
@@ -80,6 +82,28 @@ class Payer_Subscription {
 			WC_Subscriptions_Manager::process_subscription_payment_failure_on_order( $renewal_order );
 			$renewal_order->add_order_note( __( 'Subscription payment failed to create with Payer', 'payer-for-woocommerce' ) );
 		}
+	}
+
+	/**
+	 * Handles the recurring payment for the rent orders
+	 *
+	 * @param float    $renewal_total Total of the order
+	 * @param WC_Order $renewal_order WooCommerce order object
+	 * @return void
+	 */
+	public function handle_rent_recurring( $renewal_total, $renewal_order ) {
+		$order_id = $renewal_order->get_id();
+
+		$pno = get_post_meta( $order_id, apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), true );
+
+		if ( empty( $pno ) ) {
+			$pno = get_post_meta( WC_Subscriptions_Renewal_Order::get_parent_order_id( $order_id ), apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), true );
+			update_post_meta( $order_id, apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), $pno );
+		}
+
+		do_action( 'payer_send_rent_mail', $order_id );
+		WC_Subscriptions_Manager::process_subscription_payments_on_order( $renewal_order );
+		$renewal_order->payment_complete();
 	}
 
 	public function maybe_handle_card_free_trial( $data ) {

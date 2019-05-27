@@ -139,7 +139,7 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 		if ( '' !== $this->icon_url ) {
 			return $this->icon_url;
 		} else {
-			return PAYER_PLUGIN_URL . '/assets/img/' . $default_img;
+			return PAYER_PLUGIN_URL . '/assets/img/' . $this->id;
 		}
 	}
 
