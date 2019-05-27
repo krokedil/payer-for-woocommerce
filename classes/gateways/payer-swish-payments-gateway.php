@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 /**
  * Swish Payments Gateway.
- * 
+ *
  * @class    Payer_Swish_Payments_Gateway
  * @package  Payer/Classes/Gateways
  * @category Class
@@ -17,36 +17,35 @@ class Payer_Swish_Payments_Gateway extends Payer_Factory_Gateway {
 	public function __construct() {
 		parent::__construct();
 
-		$this->id                   = 'payer_swish_payment';
-		$this->method_title         = __( 'Payer Swish', 'payer-for-woocommerce' );
-		$this->method_description   = __( 'Allows payments through ' . $this->method_title . '.', 'payer-for-woocommerce' );
+		$this->id                 = 'payer_swish_payment';
+		$this->method_title       = __( 'Payer Swish', 'payer-for-woocommerce' );
+		$this->method_description = __( 'Allows payments through ' . $this->method_title . '.', 'payer-for-woocommerce' );
 
-		$this->title       		    = $this->get_option( 'title' );
-		$this->description 		    = $this->get_option( 'description' );
-		$this->test_mode            = $this->get_option( 'test_mode' );
-		$this->debug_mode           = $this->get_option( 'debug_mode' );
-		$this->icon_url				= $this->get_option( 'payer_swish_payment_icon' );
-		$this->icon					= $this->set_icon();
+		$this->title       = $this->get_option( 'title' );
+		$this->description = $this->get_option( 'description' );
+		$this->test_mode   = $this->get_option( 'test_mode' );
+		$this->debug_mode  = $this->get_option( 'debug_mode' );
+		$this->icon_url    = $this->get_option( 'payer_swish_payment_icon' );
+		$this->icon        = $this->set_icon();
 
 		// Load the form fields.
 		$this->init_form_fields();
 		// Load the settings.
 		$this->init_settings();
 
-		$support_array = array(
-			'products'
+		$support_array    = array(
+			'products',
 		);
-        $payer_settings = get_option( 'woocommerce_payer_card_payment_settings' );
-        $order_management = $payer_settings['order_management'];
-        if( 'yes' === $order_management ) {
+		$payer_settings   = get_option( 'woocommerce_payer_card_payment_settings' );
+		$order_management = $payer_settings['order_management'];
+		if ( 'yes' === $order_management ) {
 			array_push( $support_array, 'refunds' );
 		}
 		$this->supports = $support_array;
 
-
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 
-		add_filter( 'woocommerce_page_wc-settings', array( $this, 'show_keys_in_settings' ) );	
+		add_filter( 'woocommerce_page_wc-settings', array( $this, 'show_keys_in_settings' ) );
 	}
 
 	/**
@@ -60,6 +59,17 @@ class Payer_Swish_Payments_Gateway extends Payer_Factory_Gateway {
 				payer_show_credentials_form();
 			}
 		}
+	}
+
+	public function is_available() {
+		$payer_settings = get_option( 'woocommerce_' . $this->id . '_settings' );
+		$enabled        = $payer_settings['enabled'];
+
+		if ( 'no' === $enabled ) {
+			return false;
+		}
+
+		return true;
 	}
 }
 
