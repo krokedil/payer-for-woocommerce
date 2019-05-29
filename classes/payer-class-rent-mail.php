@@ -21,8 +21,9 @@ class WC_New_Rent_Order {
 		$to      = 'b2b-leasing@payer.se';
 		$subject = '[' . get_home_url() . '] New rent order ' . $order_id;
 		$content = $this->get_content( $order_id );
+		$headers = array( 'Content-Type: text/html; charset=UTF-8' );
 		if ( false !== $content ) {
-			wp_mail( $to, $subject, $content );
+			wp_mail( $to, $subject, $content, $headers );
 		}
 	}
 
