@@ -49,7 +49,9 @@ use Payer\Sdk\Resource\Purchase;
 $data = array(
     'proxy' => array(
         '::1'   // For debugging purposes: Add the requestors ip to pass the firewall validation
-    )
+    ),
+      // 'is_proxy' => false,
+      // 'skip_ip_validation' => false
 );
 
 try {
@@ -57,7 +59,7 @@ try {
     $gateway = Client::create($credentials);
 
     $purchase = new Purchase($gateway);
-    $purchase->createAuthorizeResource();
+    $purchase->createAuthorizeResource($data);
 
 } catch (PayerException $e) {
     var_dump($e);

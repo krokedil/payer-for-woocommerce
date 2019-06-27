@@ -61,9 +61,8 @@ class Payer_Installment_Payments_Gateway extends Payer_Factory_Gateway {
 	 * @return boolean
 	 */
 	public function is_available() {
-		$payer_settings   = get_option( 'woocommerce_payer_installment_payment_settings' );
-		$order_management = $payer_settings['order_management'];
-		$enabled          = $payer_settings['enabled'];
+		$payer_settings = get_option( 'woocommerce_payer_installment_payment_settings' );
+		$enabled        = $payer_settings['enabled'];
 
 		if ( 'no' === $enabled ) {
 			return false;

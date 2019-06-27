@@ -39,7 +39,7 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 		// Check if customer changed any of the data from get_address
 		$this->check_posted_data( $order_id );
 
-		update_post_meta( $order_id, '_billing_pno', $_POST['billing_pno'] );
+		update_post_meta( $order_id, apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), apply_filters( 'payer_pno_field_data', $_POST['billing_pno'] ) );
 
 		$checkout_url = WC()->cart->get_checkout_url();
 
@@ -91,14 +91,16 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	 * @return array $fields
 	 */
 	public function add_pno_field( $fields ) {
-		$fields['billing']['billing_pno'] = array(
-			'label'       => apply_filters( 'payer_pno_label', __( 'Personal number', 'payer-for-woocommerce' ) ),
-			'placeholder' => _x( 'xxxxxx-xxxx', 'placeholder', 'payer-for-woocommerce' ),
-			'required'    => false,
-			'class'       => array( 'form-row-wide' ),
-			'clear'       => true,
-		);
-
+		$settings = get_option( 'woocommerce_payer_card_payment_settings' );
+		if ( 'yes' === $settings['get_address'] ) {
+			$fields['billing']['billing_pno'] = array(
+				'label'       => apply_filters( 'payer_pno_label', __( 'Personal number', 'payer-for-woocommerce' ) ),
+				'placeholder' => _x( 'xxxxxx-xxxx', 'placeholder', 'payer-for-woocommerce' ),
+				'required'    => false,
+				'class'       => array( 'form-row-wide' ),
+				'clear'       => true,
+			);
+		}
 		return $fields;
 	}
 
@@ -137,7 +139,7 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 		if ( '' !== $this->icon_url ) {
 			return $this->icon_url;
 		} else {
-			return PAYER_PLUGIN_URL . '/assets/img/' . $default_img;
+			return PAYER_PLUGIN_URL . '/assets/img/' . $this->id;
 		}
 	}
 
