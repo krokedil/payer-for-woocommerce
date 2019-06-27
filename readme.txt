@@ -37,6 +37,14 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2019.06.27  	- version 1.1.0 =
+* Feature		- Added rental payments as an option for those that have this allowed by Payer.
+* Enhancement   - Changed how to get the tax rate.
+* Enhancement   - Added filters for PNO fields to change the field used and how it is saved to the order.
+* Enhancement   - All gateways now have proper checks to see if they are enabled or not.
+* Enhancement   - Updated SDK and added functionality for IP validation skipping and support for Proxys.
+* Enhancement   - Direct invoice now supports free trial subscriptions.
+
 = 2018.11.19  	- version 1.0.2 =
 * Fix           - Fixed is_available for Direct Invoice. Should not longer show if you dont have it enabled.
 * Enhancement   - Removed masking of address data on organizations.
