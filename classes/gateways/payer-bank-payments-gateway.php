@@ -80,7 +80,7 @@ add_filter( 'woocommerce_payment_gateways', 'add_krokedil_payer_bank_gateway' );
  * @param array $methods
  * @return array $methods
  */
-function add_krokedil_payer_rent_gateway( $methods ) {
+function add_krokedil_payer_bank_gateway( $methods ) {
 	if ( ! defined( 'UNSET_PAYER_BANK_PAYMENTS' ) ) {
 		$methods[] = 'Payer_Bank_Payments_Gateway';
 	}

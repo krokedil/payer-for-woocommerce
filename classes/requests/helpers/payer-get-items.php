@@ -24,7 +24,7 @@ class Payer_Get_Items {
 		$items       = array();
 		foreach ( $order->get_items() as $item ) {
 			$line_number   = $line_number + 1;
-			$formated_item = self::get_item( $item, $line_number );
+			$formated_item = self::get_item( $item, $line_number, $order );
 			array_push( $items, $formated_item );
 		}
 		foreach ( $order->get_shipping_methods() as $shipping_method ) {
@@ -46,7 +46,7 @@ class Payer_Get_Items {
 	 * @param array $item
 	 * @return array
 	 */
-	private static function get_item( $item, $line_number ) {
+	private static function get_item( $item, $line_number, $order ) {
 		$product = $item->get_product();
 
 		if ( $item['variation_id'] ) {
@@ -60,7 +60,7 @@ class Payer_Get_Items {
 			'article_number'      => self::get_sku( $product, $product_id ),
 			'description'         => $product->get_name(),
 			'unit_price'          => ( $item->get_total() + $item->get_total_tax() ) / $item['qty'],
-			'unit_vat_percentage' => self::calculate_tax( $product ),
+			'unit_vat_percentage' => self::calculate_tax( $order ),
 			'quantity'            => $item['qty'],
 		);
 	}
@@ -114,13 +114,14 @@ class Payer_Get_Items {
 	 * @param array $product
 	 * @return int
 	 */
-	private static function calculate_tax( $product ) {
-		$price_incl_tax   = wc_get_price_including_tax( $product );
-		$price_excl_tax   = wc_get_price_excluding_tax( $product );
-		$price_difference = $price_incl_tax - $price_excl_tax;
-		$tax_percent      = intval( ( $price_difference / $price_excl_tax ) * 100 );
-
-		return $tax_percent;
+	private static function calculate_tax( $order ) {
+		$tax_items = $order->get_items( 'tax' );
+		$tax_rate  = 0;
+		foreach ( $tax_items as $tax_item ) {
+			$rate_id  = $tax_item->get_rate_id();
+			$tax_rate = intval( round( WC_Tax::_get_tax_rate( $rate_id )['tax_rate'] ) );
+		}
+		return ( null !== $tax_rate && ! empty( $tax_rate ) ) ? $tax_rate : 0;
 	}
 
 	/**

@@ -57,6 +57,7 @@ class Payer_Rent_Payments_Gateway extends Payer_Factory_Gateway {
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
 
 		add_filter( 'woocommerce_page_wc-settings', array( $this, 'show_keys_in_settings' ) );
+
 	}
 
 	/**
@@ -68,12 +69,27 @@ class Payer_Rent_Payments_Gateway extends Payer_Factory_Gateway {
 	public function process_payment( $order_id ) {
 		$order = wc_get_order( $order_id );
 		update_post_meta( $order_id, apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), apply_filters( 'payer_pno_field_data', $_POST['billing_pno'] ) );
-		$order->payment_complete();
+		$order->update_status( 'on-hold' );
 		do_action( 'payer_send_rent_mail', $order_id );
 		return array(
 			'result'   => 'success',
 			'redirect' => $order->get_checkout_order_received_url(),
 		);
+	}
+
+	public function is_available() {
+		if ( $this->get_option( 'enabled' ) !== 'yes' ) {
+			return false;
+		}
+		if ( class_exists( 'WC_Subscriptions_Cart' ) ) {
+			if ( ! WC_Subscriptions_Cart::cart_contains_subscription() ) {
+				return false;
+			}
+		} else {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -90,14 +106,13 @@ class Payer_Rent_Payments_Gateway extends Payer_Factory_Gateway {
 	}
 }
 
-add_filter( 'woocommerce_payment_gateways', 'add_krokedil_payer_bank_gateway' );
 /**
  * Registers the gateway.
  *
  * @param array $methods
  * @return array $methods
  */
-function add_krokedil_payer_bank_gateway( $methods ) {
+function add_krokedil_payer_rent_gateway( $methods ) {
 	if ( ! defined( 'UNSET_PAYER_RENT_PAYMENTS' ) ) {
 		$methods[] = 'Payer_Rent_Payments_Gateway';
 	}

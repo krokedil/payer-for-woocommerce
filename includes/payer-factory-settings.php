@@ -33,6 +33,11 @@ if ( $this->id === 'payer_rent_payment' ) {
 		'default'     => '',
 		'desc_tip'    => true,
 	);
+
+	$settings['payer_rent_notice'] = array(
+		'title' => __( 'To use this payment method you need to contact Payer first. If you do not contact payer before hand and get approval, your payments will not go through.', 'payer-for-woocommerce' ),
+		'type'  => 'title',
+	);
 }
 
 if ( $this->id === 'payer_masterpass' ) {
