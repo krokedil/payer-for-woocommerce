@@ -8,7 +8,7 @@
  * Plugin Name:     Payer for WooCommerce
  * Plugin URI:      https://krokedil.se/payer/
  * Description:     Extends WooCommerce. Provides a <a href="https://https://www.payer.se/" target="_blank">Payer</a> checkout for WooCommerce.
- * Version:         1.0.2
+ * Version:         1.1.0
  * Author:          Krokedil
  * Author URI:      https://krokedil.se/
  * Developer:       Krokedil
@@ -17,7 +17,7 @@
  * Domain Path:     /languages
  *
  * WC requires at least: 3.0.0
- * WC tested up to: 3.4.5
+ * WC tested up to: 3.6.4
  *
  * Copyright:       © Krokedil Produktionsbyrå AB.
  * License:         GNU General Public License v3.0
@@ -95,6 +95,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-einvoice-payments-gateway.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-direct-invoice-gateway.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-masterpass-gateway.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-rent-payments-gateway.php';
 
 			// Include request classes.
 			include_once PAYER_PLUGIN_DIR . '/classes/requests/payer-create-purchase.php';
@@ -121,6 +122,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-admin-notices.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-gdpr.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-subscription.php';
+			include_once PAYER_PLUGIN_DIR . '/classes/payer-class-rent-mail.php';
 
 			// Include function files.
 			include_once PAYER_PLUGIN_DIR . '/includes/payer-credentials-form-field.php';
@@ -135,7 +137,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			// Set URL.
 			define( 'PAYER_PLUGIN_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 			// Set version number.
-			define( 'PAYER_VERSION_NUMBER', '1.0.2' );
+			define( 'PAYER_VERSION_NUMBER', '1.1.0' );
 			// Set path to SDK.
 			define( 'PAYER_SDK_DIR', '/vendor/' );
 			// Set Krokedil Logger Defines.
