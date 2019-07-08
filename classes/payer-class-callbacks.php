@@ -56,7 +56,6 @@ class Payer_Callbacks {
 				break;
 			case 'store':
 				krokedil_log_events( $order_id, 'Payer Store Callback', $_GET );
-				$this->make_debit( $order_id );
 				$order->payment_complete( $order_id, $used_gateway );
 				$this->authorize_reply( $order_id );
 				break;
@@ -229,29 +228,6 @@ class Payer_Callbacks {
 		$order->set_billing_email( sanitize_text_field( $address->email ) );
 
 		$order->save();
-	}
-
-	private function make_debit( $order_id ) {
-		$order = wc_get_order( $order_id );
-		if ( ! empty( floatval( $order->get_total() ) ) ) {
-			$this->set_gateway();
-			$price_incl_tax   = $order->get_total();
-			$price_excl_tax   = $order->get_total() - $order->get_total_tax();
-			$price_difference = $price_incl_tax - $price_excl_tax;
-
-			$data     = array(
-				'recurring_token' => get_post_meta( $order_id, 'payer_recurring_token' ),
-				'description'     => 'Subscription',
-				'amount'          => $order->get_total(),
-				'vat_percentage'  => intval( ( $price_difference / $price_excl_tax ) * 100 ),
-				'currency'        => $order->get_currency(),
-				'reference_id'    => $order_id,
-			);
-			$purchase = new Payer\Sdk\Resource\Purchase( $this->gateway );
-			$response = $purchase->debit( $data );
-
-			krokedil_log_response( $order_id, $response );
-		}
 	}
 }
 new Payer_Callbacks();
