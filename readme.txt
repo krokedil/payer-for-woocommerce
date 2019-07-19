@@ -37,6 +37,9 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2019.07.08  	- version 1.1.2 =
+* Fix			- Fixed gateway icons to be loaded from the correct path.
+
 = 2019.07.08  	- version 1.1.1 =
 * Fix			- Changed subscription card payments to be charged on completion of order in WooCommerce. Prevents issue due to making the debit call to fast.
 
