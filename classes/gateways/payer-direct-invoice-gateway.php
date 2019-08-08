@@ -64,24 +64,13 @@ class Payer_Direct_Invoice_Gateway extends Payer_Factory_Gateway {
 		// Check if customer changed any of the data from get_address
 		$this->check_posted_data( $order_id );
 		// Check if order is not subscription and order total is zero.
-		if ( class_exists( 'WC_Subscriptions_Order' ) && wcs_order_contains_subscription( $order ) && 0 === intval( $order->get_total() ) ) {
-			// Complete order without creating a payer order.
-			$order->payment_complete();
-			krokedil_set_order_gateway_version( $order_id, PAYER_VERSION_NUMBER );
-			return array(
-				'result'   => 'success',
-				'redirect' => $order->get_checkout_order_received_url(),
-			);
-		} else {
-			// Create an order
-			Payer_Create_Order::create_order( $order_id );
-			$order->payment_complete();
-			krokedil_set_order_gateway_version( $order_id, PAYER_VERSION_NUMBER );
-			return array(
-				'result'   => 'success',
-				'redirect' => $order->get_checkout_order_received_url(),
-			);
-		}
+		$order->payment_complete();
+		krokedil_set_order_gateway_version( $order_id, PAYER_VERSION_NUMBER );
+
+		return array(
+			'result'   => 'success',
+			'redirect' => $order->get_checkout_order_received_url(),
+		);
 	}
 
 	/**
