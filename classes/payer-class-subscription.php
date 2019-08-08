@@ -30,18 +30,12 @@ class Payer_Subscription {
 	}
 
 	public function handle_direct_invoice_recurring( $renewal_total, $renewal_order ) {
+
 		$order_id    = $renewal_order->get_id();
 		$billing_pno = get_post_meta( WC_Subscriptions_Renewal_Order::get_parent_order_id( $order_id ), apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), true );
+		update_post_meta( apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), $billing_pno );
 
-		$payer_order_id = Payer_Create_Order::create_order( $order_id, $billing_pno );
-		if ( isset( $payer_order_id['order_id'] ) && is_int( $payer_order_id['order_id'] ) ) {
-			WC_Subscriptions_Manager::process_subscription_payments_on_order( $renewal_order );
-			$renewal_order->add_order_note( __( 'Subscription payment made with Payer', 'payer-for-woocommerce' ) );
-			$renewal_order->payment_complete( $order_id );
-		} else {
-			WC_Subscriptions_Manager::process_subscription_payment_failure_on_order( $renewal_order );
-			$renewal_order->add_order_note( __( 'Subscription payment failed to create with Payer', 'payer-for-woocommerce' ) );
-		}
+		WC_Subscriptions_Manager::process_subscription_payments_on_order( $renewal_order );
 	}
 
 	public function handle_card_recurring( $renewal_total, $renewal_order ) {
