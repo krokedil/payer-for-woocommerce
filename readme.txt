@@ -37,6 +37,9 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2019.07.08  	- version 1.1.3 =
+* Enhancement	- Changed when invoices get sent to Payer for direct invoices.
+
 = 2019.07.08  	- version 1.1.2 =
 * Fix			- Fixed gateway icons to be loaded from the correct path.
 
