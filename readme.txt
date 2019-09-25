@@ -37,6 +37,9 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2019.09.25  	- version 1.1.4 =
+* Fix	        - Only add order note for order completed with Payer if that is the case.
+
 = 2019.07.08  	- version 1.1.3 =
 * Enhancement	- Changed when invoices get sent to Payer for direct invoices.
 

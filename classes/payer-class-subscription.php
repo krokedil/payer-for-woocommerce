@@ -33,7 +33,7 @@ class Payer_Subscription {
 
 		$order_id    = $renewal_order->get_id();
 		$billing_pno = get_post_meta( WC_Subscriptions_Renewal_Order::get_parent_order_id( $order_id ), apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), true );
-		update_post_meta( apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), $billing_pno );
+		update_post_meta( $order_id, apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), $billing_pno );
 
 		WC_Subscriptions_Manager::process_subscription_payments_on_order( $renewal_order );
 	}

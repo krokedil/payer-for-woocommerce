@@ -32,11 +32,17 @@ class Payer_Post_Checkout {
 			if ( ! get_post_meta( $order_id, '_payer_order_completed' ) ) {
 				if ( in_array( $order->get_payment_method(), array( 'payer_invoice_payment', 'payer_installment_payment' ) ) ) {
 					Payer_Commit_Order::commit_order( $order_id );
+
+					update_post_meta( $order_id, '_payer_order_completed', 'true' );
+					$order->add_order_note( __( 'The order has been completed with Payer', 'payer-for-woocommerce' ) );
 				}
 
 				// Card payment subscription parent order.
 				if ( $order->get_payment_method() === 'payer_card_payment' && wcs_order_contains_subscription( $order, 'parent' ) ) {
 					$this->make_debit( $order_id );
+
+					update_post_meta( $order_id, '_payer_order_completed', 'true' );
+					$order->add_order_note( __( 'The order has been completed with Payer', 'payer-for-woocommerce' ) );
 				}
 
 				if ( $order->get_payment_method() === 'payer_direct_invoice_gateway' ) {
@@ -44,10 +50,10 @@ class Payer_Post_Checkout {
 					$order->set_transaction_id( Payer_Create_Order::create_order( $order_id, get_post_meta( $order_id, apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), true ) ) );
 
 					Payer_Commit_Order::commit_order( $order_id );
-				}
 
-				update_post_meta( $order_id, '_payer_order_completed', 'true' );
-				$order->add_order_note( __( 'The order has been completed with Payer', 'payer-for-woocommerce' ) );
+					update_post_meta( $order_id, '_payer_order_completed', 'true' );
+					$order->add_order_note( __( 'The order has been completed with Payer', 'payer-for-woocommerce' ) );
+				}
 			}
 		}
 	}
