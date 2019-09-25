@@ -32,6 +32,9 @@ class Payer_Post_Checkout {
 			if ( ! get_post_meta( $order_id, '_payer_order_completed' ) ) {
 				if ( in_array( $order->get_payment_method(), array( 'payer_invoice_payment', 'payer_installment_payment' ) ) ) {
 					Payer_Commit_Order::commit_order( $order_id );
+
+					update_post_meta( $order_id, '_payer_order_completed', 'true' );
+					$order->add_order_note( __( 'The order has been completed with Payer', 'payer-for-woocommerce' ) );
 				}
 
 				// Card payment subscription parent order.
