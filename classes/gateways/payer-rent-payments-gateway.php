@@ -78,7 +78,7 @@ class Payer_Rent_Payments_Gateway extends Payer_Factory_Gateway {
 	}
 
 	public function is_available() {
-		if ( $this->get_option( 'enabled' ) !== 'yes' ) {
+		if ( 'yes' !== $this->enabled ) {
 			return false;
 		}
 		if ( class_exists( 'WC_Subscriptions_Cart' ) ) {

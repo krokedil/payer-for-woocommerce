@@ -55,10 +55,7 @@ class Payer_Invoice_Payments_Gateway extends Payer_Factory_Gateway {
 	}
 
 	public function is_available() {
-		$payer_settings = get_option( 'woocommerce_' . $this->id . '_settings' );
-		$enabled        = $payer_settings['enabled'];
-
-		if ( 'no' === $enabled ) {
+		if ( 'yes' !== $this->enabled ) {
 			return false;
 		}
 
