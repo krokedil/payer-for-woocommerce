@@ -87,7 +87,7 @@ class Payer_Direct_Invoice_Gateway extends Payer_Factory_Gateway {
 	}
 
 	public function is_available() {
-		if ( 'yes' !== $this->get_option( 'enabled' ) ) {
+		if ( 'yes' !== $this->enabled ) {
 			return false;
 		}
 		if ( class_exists( 'WC_Subscriptions_Cart' ) && WC_Subscriptions_Cart::cart_contains_subscription() && $this->get_order_total() < 1 ) {
