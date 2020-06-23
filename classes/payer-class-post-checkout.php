@@ -38,11 +38,13 @@ class Payer_Post_Checkout {
 				}
 
 				// Card payment subscription parent order.
-				if ( $order->get_payment_method() === 'payer_card_payment' && wcs_order_contains_subscription( $order, 'parent' ) ) {
-					$this->make_debit( $order_id );
+				if ( function_exists( 'wcs_order_contains_subscription' ) && function_exists( 'wcs_is_subscription' ) ) {
+					if ( $order->get_payment_method() === 'payer_card_payment' && wcs_order_contains_subscription( $order, 'parent' ) ) {
+						$this->make_debit( $order_id );
 
-					update_post_meta( $order_id, '_payer_order_completed', 'true' );
-					$order->add_order_note( __( 'The order has been completed with Payer', 'payer-for-woocommerce' ) );
+						update_post_meta( $order_id, '_payer_order_completed', 'true' );
+						$order->add_order_note( __( 'The order has been completed with Payer', 'payer-for-woocommerce' ) );
+					}
 				}
 
 				if ( $order->get_payment_method() === 'payer_direct_invoice_gateway' ) {
