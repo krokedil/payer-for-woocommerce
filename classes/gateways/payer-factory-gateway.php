@@ -41,7 +41,7 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 
 		update_post_meta( $order_id, apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), apply_filters( 'payer_pno_field_data', $_POST['billing_pno'] ) );
 
-		$checkout_url = WC()->cart->get_checkout_url();
+		$checkout_url = wc_get_checkout_url();
 
 		$redirect_url = add_query_arg(
 			array(

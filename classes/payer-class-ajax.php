@@ -153,7 +153,7 @@ class Payer_Ajax extends WC_AJAX {
 
 			Payer_Masterpass_Populate_Order::set_gateway( $order );
 
-			$redirect_url = WC()->cart->get_checkout_url();
+			$redirect_url = wc_get_checkout_url();
 
 			$redirect_url = add_query_arg(
 				array(
