@@ -60,7 +60,7 @@ class Payer_Get_Items {
 			'article_number'      => self::get_sku( $product, $product_id ),
 			'description'         => $product->get_name(),
 			'unit_price'          => ( $item->get_total() + $item->get_total_tax() ) / $item['qty'],
-			'unit_vat_percentage' => self::calculate_tax( $order ),
+			'unit_vat_percentage' => self::calculate_tax( $order, $item ),
 			'quantity'            => $item['qty'],
 		);
 	}
@@ -114,14 +114,20 @@ class Payer_Get_Items {
 	 * @param array $product
 	 * @return int
 	 */
-	private static function calculate_tax( $order ) {
+	private static function calculate_tax( $order, $order_item ) {
 		$tax_items = $order->get_items( 'tax' );
-		$tax_rate  = 0;
 		foreach ( $tax_items as $tax_item ) {
-			$rate_id  = $tax_item->get_rate_id();
-			$tax_rate = intval( round( WC_Tax::_get_tax_rate( $rate_id )['tax_rate'] ) );
+			$rate_id = $tax_item->get_rate_id();
+			foreach ( $order_item->get_taxes()['total'] as $key => $value ) {
+				if ( '' !== $value ) {
+					if ( $rate_id === $key ) {
+						return round( WC_Tax::_get_tax_rate( $rate_id )['tax_rate'] );
+					}
+				}
+			}
 		}
-		return ( null !== $tax_rate && ! empty( $tax_rate ) ) ? $tax_rate : 0;
+		// If we get here, there is no tax set for the order item. Return zero.
+		return 0;
 	}
 
 	/**
