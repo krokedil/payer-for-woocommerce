@@ -2,11 +2,11 @@
 Contributors: payertech, krokedil, NiklasHogefjord
 Tags: ecommerce, e-commerce, woocommerce, payer, checkout
 Requires at least: 4.7
-Tested up to: 5.4.2
+Tested up to: 5.5.3
 Requires PHP: 5.6
 Stable tag: trunk
 WC requires at least: 3.0.0
-WC tested up to: 4.2.1
+WC tested up to: 4.7.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,6 +37,9 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2020.12.07  	- version 1.1.7 =
+* Fix           - Fixed incorrect tax rate being sent in some cases.
+
 = 2020.06.23  	- version 1.1.6 =
 * Fix	        - Avoid fatal error - check if wcs_order_contains_subscription exist in payer_order_completed function.
 * Fix           - Use wc_get_checkout_url() instead of WC()->cart->get_checkout_url() to avoid deprecated notice.
