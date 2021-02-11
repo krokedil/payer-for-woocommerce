@@ -2,11 +2,11 @@
 Contributors: payertech, krokedil, NiklasHogefjord
 Tags: ecommerce, e-commerce, woocommerce, payer, checkout
 Requires at least: 4.7
-Tested up to: 5.5.3
+Tested up to: 5.6.1
 Requires PHP: 5.6
 Stable tag: trunk
 WC requires at least: 3.0.0
-WC tested up to: 4.7.1
+WC tested up to: 5.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,6 +37,9 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2021.02.11  	- version 1.1.8 =
+* Enhancement   - Changed logic in the Payer Rent gateway to allow the payment method to be selected by an admin on the edit subscription page.
+
 = 2020.12.07  	- version 1.1.7 =
 * Fix           - Fixed incorrect tax rate being sent in some cases.
 
