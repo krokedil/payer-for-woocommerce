@@ -50,7 +50,8 @@ class Payer_Rent_Payments_Gateway extends Payer_Factory_Gateway {
 			'subscription_reactivation',
 			'subscription_amount_changes',
 			'subscription_date_changes',
-			'subscription_payment_method_change',
+			'subscription_payment_method_change_customer',
+			'subscription_payment_method_change_admin',
 			'multiple_subscriptions',
 		);
 
@@ -78,18 +79,21 @@ class Payer_Rent_Payments_Gateway extends Payer_Factory_Gateway {
 	}
 
 	public function is_available() {
+		$order_id = filter_input( INPUT_GET, 'post', FILTER_SANITIZE_STRING );
+		$order    = wc_get_order( $order_id );
 		if ( 'yes' !== $this->enabled ) {
 			return false;
 		}
-		if ( class_exists( 'WC_Subscriptions_Cart' ) ) {
-			if ( ! WC_Subscriptions_Cart::cart_contains_subscription() ) {
-				return false;
-			}
-		} else {
-			return false;
+
+		if ( class_exists( 'WC_Subscriptions_Cart' ) && WC_Subscriptions_Cart::cart_contains_subscription() ) {
+			return true;
 		}
 
-		return true;
+		if ( $order && class_exists( 'WC_Subscription' ) && wcs_is_subscription( $order ) ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
