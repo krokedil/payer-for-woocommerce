@@ -37,6 +37,9 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2021.02.19  	- version 1.1.9 =
+* Fix           - Fixed a issue with Payer Rents availability in some cases.
+
 = 2021.02.11  	- version 1.1.8 =
 * Enhancement   - Changed logic in the Payer Rent gateway to allow the payment method to be selected by an admin on the edit subscription page.
 
