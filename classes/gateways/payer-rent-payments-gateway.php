@@ -80,7 +80,10 @@ class Payer_Rent_Payments_Gateway extends Payer_Factory_Gateway {
 
 	public function is_available() {
 		$order_id = filter_input( INPUT_GET, 'post', FILTER_SANITIZE_STRING );
-		$order    = wc_get_order( $order_id );
+		if ( empty( $order_id ) ) {
+			$order_id = filter_input( INPUT_POST, 'post_ID', FILTER_SANITIZE_STRING );
+		}
+		$order = wc_get_order( $order_id );
 		if ( 'yes' !== $this->enabled ) {
 			return false;
 		}
