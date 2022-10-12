@@ -80,6 +80,9 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 		 * Initiate the class.
 		 */
 		public function init() {
+			if ( ! class_exists( 'WC_Payment_Gateway' ) ) {
+				return;
+			}
 			// Set definitions.
 			$this->define();
 
