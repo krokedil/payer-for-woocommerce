@@ -48,30 +48,34 @@
                 "logging",
                 "woocommerce"
             ],
+            "support": {
+                "issues": "https://github.com/krokedil/krokedil-logger/issues",
+                "source": "https://github.com/krokedil/krokedil-logger/tree/1.0.6"
+            },
             "time": "2018-03-29T13:59:58+00:00"
         },
         {
             "name": "payer/sdk",
-            "version": "1.1.13",
+            "version": "1.1.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PayerPayment/Payer-PhpSdk.git",
-                "reference": "52c1b8c358558b84b5ee783bb25ef1ffce63932c"
+                "reference": "2fc798f94e8d5168ca4ee5212877ae39ee3cbed7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PayerPayment/Payer-PhpSdk/zipball/52c1b8c358558b84b5ee783bb25ef1ffce63932c",
-                "reference": "52c1b8c358558b84b5ee783bb25ef1ffce63932c",
+                "url": "https://api.github.com/repos/PayerPayment/Payer-PhpSdk/zipball/2fc798f94e8d5168ca4ee5212877ae39ee3cbed7",
+                "reference": "2fc798f94e8d5168ca4ee5212877ae39ee3cbed7",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": ">=5.3.0"
+                "php": ">=7.1"
             },
             "require-dev": {
+                "php-coveralls/php-coveralls": "^2",
                 "phpmd/phpmd": "~2.2",
-                "phpunit/phpunit": "5.0.*",
-                "satooshi/php-coveralls": "~0.6",
+                "phpunit/phpunit": "^8.5",
                 "squizlabs/php_codesniffer": "~2.3"
             },
             "type": "library",
@@ -87,11 +91,11 @@
             ],
             "authors": [
                 {
-                    "name": "Mathias Åkerberg",
-                    "email": "maker@payer.se"
+                    "name": "Björn Ihlar",
+                    "email": "bihla@payer.se"
                 }
             ],
-            "description": "The all-in-one Payer API for PHP Developers. This is the only package you need to get started with Payers payment services.",
+            "description": "The all-in-one Payer API for PHP Developers. Tested up to PHP 8.1 This is the only package you need to get started with Payers payment services.",
             "homepage": "https://github.com/PayerPayment/Payer-PhpSdk",
             "keywords": [
                 "ecommerce",
@@ -100,7 +104,11 @@
                 "payment",
                 "sdk"
             ],
-            "time": "2019-04-16T19:40:45+00:00"
+            "support": {
+                "issues": "https://github.com/PayerPayment/Payer-PhpSdk/issues",
+                "source": "https://github.com/PayerPayment/Payer-PhpSdk/tree/1.1.22"
+            },
+            "time": "2022-11-02T11:11:04+00:00"
         }
     ],
     "packages-dev": [],
@@ -110,5 +118,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
