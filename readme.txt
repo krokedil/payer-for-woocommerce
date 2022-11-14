@@ -2,11 +2,11 @@
 Contributors: payertech, krokedil, NiklasHogefjord
 Tags: ecommerce, e-commerce, woocommerce, payer, checkout
 Requires at least: 4.7
-Tested up to: 5.6.1
-Requires PHP: 5.6
+Tested up to: 6.1.0
+Requires PHP: 7.1
 Stable tag: trunk
-WC requires at least: 3.0.0
-WC tested up to: 5.0.0
+WC requires at least: 4.0.0
+WC tested up to: 7.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,6 +37,10 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
+= 2022.11.14  	- version 1.1.10 =
+* Fix           - Updated the Payer SDK to version 1.1.22 to solve issues with PHP 8.0+. This bumps minimum PHP Version required to 7.1.
+* Fix           - Fix a fatal error that happens if you have Payer for WooCommerce activated without WooCommerce.
+
 = 2021.02.19  	- version 1.1.9 =
 * Fix           - Fixed a issue with Payer Rents availability in some cases.
 
