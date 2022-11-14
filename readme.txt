@@ -37,7 +37,7 @@ For help setting up and configuring Payer for WooCommerce please refer to our [d
 
 
 == CHANGELOG ==
-= 2022.11.11  	- version 1.1.10 =
+= 2022.11.14  	- version 1.1.10 =
 * Fix           - Updated the Payer SDK to version 1.22 to solve issues with PHP 8.0+. This bumps minimum PHP Version required to 7.1.
 * Fix           - Fix a fatal error that happens if you have Payer for WooCommerce activated without WooCommerce.
 
