@@ -16,7 +16,7 @@ jobs:
         php_version: 7.4
     - name: WordPress Plugin Deploy
       id: deploy
-      uses: 10up/action-wordpress-plugin-deploy@master
+      uses: 10up/action-wordpress-plugin-deploy@stable
       with:
         generate-zip: true
       env:
