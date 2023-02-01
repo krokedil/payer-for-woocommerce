@@ -21,3 +21,7 @@ phpunit-docker.xml
 phpunit.xml
 composer.lock
 composer.json
+
+DOCKER_ENV
+docker_tag
+output.log
