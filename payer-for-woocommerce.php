@@ -88,6 +88,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 			// Include the SDK.
 			require_once 'vendor/autoload.php';
+
 			// Include the gateway classes.
 			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-factory-gateway.php';
 			include_once PAYER_PLUGIN_DIR . '/classes/gateways/payer-card-payments-gateway.php';
