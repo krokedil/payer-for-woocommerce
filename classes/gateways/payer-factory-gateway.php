@@ -12,6 +12,41 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	/**
+	 * Testmode.
+	 *
+	 * @var bool
+	 */
+	public $test_mode;
+
+	/**
+	 * Debug mode.
+	 *
+	 * @var bool
+	 */
+	public $debug_mode;
+
+	/**
+	 * Payer agent id.
+	 *
+	 * @var string
+	 */
+	public $payer_agent_id;
+
+	/**
+	 * Payer password.
+	 *
+	 * @var string
+	 */
+	public $payer_password;
+
+	/**
+	 * Icon URL.
+	 *
+	 * @var string
+	 */
+	public $icon_url;
+
+	/**
 	 * Class constructor.
 	 */
 	public function __construct() {
@@ -36,7 +71,7 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 	public function process_payment( $order_id ) {
 		$order = wc_get_order( $order_id );
 
-		// Check if customer changed any of the data from get_address
+		// Check if customer changed any of the data from get_address.
 		$this->check_posted_data( $order_id );
 
 		update_post_meta( $order_id, apply_filters( 'payer_billing_pno_meta_name', '_billing_pno' ), apply_filters( 'payer_pno_field_data', $_POST['billing_pno'] ) );
@@ -165,7 +200,6 @@ class Payer_Factory_Gateway extends WC_Payment_Gateway {
 				$order->add_order_note( 'The address information was changed by the customer from the get address information.', 'payer-for-woocommerce' );
 			}
 		}
-
 	}
 
 	/**
