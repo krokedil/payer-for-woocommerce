@@ -1,6 +1,11 @@
 {
     "require": {
-        "payer/sdk": "^1.1",
+        "payer/sdk": "dev-master",
         "krokedil/krokedil-logger": "^1.0"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
     }
 }

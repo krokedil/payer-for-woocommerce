@@ -52,13 +52,10 @@ class Payer_Create_Client {
 		self::set_variables();
 		$credentials = array(
 			'agent_id' => self::$agent_id,
-			/*
-			Disable SOAP since the service is offline.
-			'soap'      =>  array(
-				'username'  =>  self::$soap_username,
-				'password'  =>  self::$soap_password,
+			'soap'     => array(
+				'username' => self::$soap_username,
+				'password' => self::$soap_password,
 			),
-			*/
 			'post'     => array(
 				'key_1' => self::$post_key1,
 				'key_2' => self::$post_key2,
