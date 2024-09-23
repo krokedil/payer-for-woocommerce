@@ -260,7 +260,7 @@ if ( $this->id === 'payer_card_payment' ) {
 		'title'       => __( 'Debug', 'payer-for-woocommerce' ),
 		'type'        => 'checkbox',
 		'label'       => __( 'Enable logging.', 'payer-for-woocommerce' ),
-		'description' => sprintf( __( 'Log Payer events, in <code>%s</code>', 'payer-for-woocommerce' ), wc_get_log_file_path( 'payer' ) ),
+		'description' => __( 'Log Payer events', 'payer-for-woocommerce' ),
 		'default'     => 'no',
 	);
 } else {

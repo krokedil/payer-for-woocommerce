@@ -8,7 +8,7 @@
  * Plugin Name:     Payer for WooCommerce
  * Plugin URI:      https://krokedil.se/payer/
  * Description:     Extends WooCommerce. Provides a <a href="https://https://www.payer.se/" target="_blank">Payer</a> checkout for WooCommerce.
- * Version:         1.2.0-Beta.2
+ * Version:         1.2.1
  * Author:          Krokedil
  * Author URI:      https://krokedil.se/
  * Developer:       Krokedil
@@ -17,7 +17,7 @@
  * Domain Path:     /languages
  *
  * WC requires at least: 4.0.0
- * WC tested up to: 7.3.0
+ * WC tested up to: 7.6.0
  *
  * Copyright:       © Krokedil Produktionsbyrå AB.
  * License:         GNU General Public License v3.0
@@ -62,7 +62,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			add_filter( 'woocommerce_default_address_fields', array( $this, 'override_checkout_check' ) );
 
 			// Translations.
-			load_plugin_textdomain( 'payer-for-woocommerce', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
+			load_plugin_textdomain( 'payer-for-woocommerce', false, plugin_basename( __DIR__ ) . '/languages' );
 		}
 
 		/**
@@ -141,7 +141,7 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			// Set URL.
 			define( 'PAYER_PLUGIN_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 			// Set version number.
-			define( 'PAYER_VERSION_NUMBER', '1.2.0-Beta.2' );
+			define( 'PAYER_VERSION_NUMBER', '1.2.1' );
 			// Set path to SDK.
 			define( 'PAYER_SDK_DIR', '/vendor/' );
 			// Set Krokedil Logger Defines.
@@ -165,10 +165,8 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 			$payer_settings            = get_option( 'woocommerce_payer_card_payment_settings' );
 			$get_address               = $payer_settings['get_address'];
 			$payer_masterpass_settings = get_option( 'woocommerce_payer_masterpass_settings' );
-			$masterpass_campaign       = false;
-			if ( 'yes' === $payer_masterpass_settings['masterpass_campaign'] ) {
-				$masterpass_campaign = true;
-			}
+			$masterpass_campaign       = wc_string_to_bool( $payer_masterpass_settings['masterpass_campaign'] ?? 'no' );
+
 			$checkout_localize_params = array(
 				'ajaxurl'             => admin_url( 'admin-ajax.php' ),
 				'locale'              => WC()->customer->get_billing_country(),
@@ -182,7 +180,8 @@ if ( ! class_exists( 'Payer_For_Woocommerce' ) ) {
 
 			wp_enqueue_script( 'payer_checkout' );
 
-			if ( 'yes' === $payer_masterpass_settings['instant_masterpass_checkout'] && ( is_product() || is_cart() || is_shop() || is_product_category() ) ) {
+			$instant_masterpass_checkout = wc_string_to_bool( $payer_masterpass_settings['instant_masterpass_checkout'] ?? 'no' );
+			if ( $instant_masterpass_checkout && ( is_product() || is_cart() || is_shop() || is_product_category() ) ) {
 				wp_register_script(
 					'payer_instant_checkout',
 					plugins_url( 'assets/js/instant-checkout.js', __FILE__ ),

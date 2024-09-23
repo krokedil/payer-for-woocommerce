@@ -1,26 +1,21 @@
-# Copyright (C) 2018 payer-for-woocommerce
-# This file is distributed under the same license as the payer-for-woocommerce package.
+# Copyright (C) 2024 
+# This file is distributed under the same license as the  package.
 msgid ""
 msgstr ""
-"Project-Id-Version: payer-for-woocommerce\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: "
+"https://wordpress.org/support/plugin/payer-for-woocommerce\n"
+"POT-Creation-Date: 2024-09-23 08:53:29+00:00\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language-Team: Krokedil <info@krokedil.se>\n"
-"Last-Translator: Michael Bengtsson <michael@krokedil.se>\n"
-"Report-Msgid-Bugs-To: http://krokedil.se\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
 
 #: classes/gateways/payer-bank-payments-gateway.php:21
 msgid "Payer Bank"
-msgstr ""
-
-#: classes/gateways/payer-bank-payments-gateway.php:22, classes/gateways/payer-card-payments-gateway.php:23, classes/gateways/payer-direct-invoice-gateway.php:22, classes/gateways/payer-einvoice-payments-gateway.php:22, classes/gateways/payer-installment-payments-gateway.php:22, classes/gateways/payer-invoice-payments-gateway.php:22, classes/gateways/payer-masterpass-gateway.php:22, classes/gateways/payer-swish-payments-gateway.php:22, classes/payer-class-gdpr.php:29, includes/payer-factory-settings.php:10
 msgstr ""
 
 #: classes/gateways/payer-card-payments-gateway.php:22
@@ -39,25 +34,20 @@ msgstr ""
 msgid "Payer EInvoice"
 msgstr ""
 
-#: classes/gateways/payer-factory-gateway.php:76
+#: classes/gateways/payer-factory-gateway.php:111
 msgid "The order has been refunded with Payer"
 msgstr ""
 
-#: classes/gateways/payer-factory-gateway.php:79
+#: classes/gateways/payer-factory-gateway.php:114
 msgid "The order has already been refunded with Payer"
 msgstr ""
 
-#: classes/gateways/payer-factory-gateway.php:83
+#: classes/gateways/payer-factory-gateway.php:118
 msgid "Unknown error. The order has not been refunded with Payer."
 msgstr ""
 
-#: classes/gateways/payer-factory-gateway.php:95
+#: classes/gateways/payer-factory-gateway.php:132
 msgid "Personal number"
-msgstr ""
-
-#: classes/gateways/payer-factory-gateway.php:96
-msgctxt "placeholder"
-msgid "xxxxxx-xxxx"
 msgstr ""
 
 #: classes/gateways/payer-installment-payments-gateway.php:21
@@ -72,17 +62,23 @@ msgstr ""
 msgid "Payer Masterpass"
 msgstr ""
 
+#: classes/gateways/payer-rent-payments-gateway.php:21
+msgid "Payer Rent"
+msgstr ""
+
 #: classes/gateways/payer-swish-payments-gateway.php:21
 msgid "Payer Swish"
 msgstr ""
 
-#. translators: Used to show the missing credentials for the Payer API.
 #: classes/payer-class-admin-notices.php:84
+#. translators: Used to show the missing credentials for the Payer API.
 msgid "Not all credentials are filled in. Missed credentials: %s"
 msgstr ""
 
 #: classes/payer-class-ajax.php:62
-msgid "Invalid request, please check the information or fill in the address manually."
+msgid ""
+"Invalid request, please check the information or fill in the address "
+"manually."
 msgstr ""
 
 #: classes/payer-class-ajax.php:71
@@ -93,31 +89,62 @@ msgstr ""
 msgid "Please fill in the personal number field"
 msgstr ""
 
-#: classes/payer-class-callbacks.php:116
+#: classes/payer-class-callbacks.php:143
 msgid "Payer Added Fees"
 msgstr ""
 
-#: classes/payer-class-masterpass-functions.php:50
+#: classes/payer-class-masterpass-functions.php:51
 msgid "Campaign "
 msgstr ""
 
-#: classes/payer-class-masterpass-functions.php:55, classes/payer-class-masterpass-functions.php:73
+#: classes/payer-class-masterpass-functions.php:56
+#: classes/payer-class-masterpass-functions.php:74
 msgid "Read more..."
 msgstr ""
 
-#: classes/payer-class-masterpass-functions.php:91
+#: classes/payer-class-masterpass-functions.php:92
 msgid "MasterPass campaign discount"
 msgstr ""
 
 #: classes/payer-class-post-checkout.php:37
+#: classes/payer-class-post-checkout.php:46
+#: classes/payer-class-post-checkout.php:57
 msgid "The order has been completed with Payer"
 msgstr ""
 
-#: classes/payer-class-subscription.php:37, classes/payer-class-subscription.php:77
+#: classes/payer-class-rent-mail.php:11
+msgid "[{site_title}]: New rent order #{order_number}"
+msgstr ""
+
+#: classes/payer-class-rent-mail.php:46
+msgid "Product"
+msgstr ""
+
+#: classes/payer-class-rent-mail.php:47
+msgid "Quantity"
+msgstr ""
+
+#: classes/payer-class-rent-mail.php:48
+msgid "Price"
+msgstr ""
+
+#: classes/payer-class-rent-mail.php:75
+msgid "Total"
+msgstr ""
+
+#: classes/payer-class-rent-mail.php:80
+msgid "Billing address"
+msgstr ""
+
+#: classes/payer-class-rent-mail.php:97
+msgid "Personal/Organisation number: "
+msgstr ""
+
+#: classes/payer-class-subscription.php:73
 msgid "Subscription payment made with Payer"
 msgstr ""
 
-#: classes/payer-class-subscription.php:41, classes/payer-class-subscription.php:81
+#: classes/payer-class-subscription.php:78
 msgid "Subscription payment failed to create with Payer"
 msgstr ""
 
@@ -129,48 +156,24 @@ msgstr ""
 msgid "Agent ID: "
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:26
-msgid "$agent_id"
-msgstr ""
-
 #: includes/payer-credentials-form-field.php:31
 msgid "Soap ID: "
-msgstr ""
-
-#: includes/payer-credentials-form-field.php:34
-msgid "$soap_id"
 msgstr ""
 
 #: includes/payer-credentials-form-field.php:39
 msgid "Soap Password: "
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:42
-msgid "$soap_password"
-msgstr ""
-
 #: includes/payer-credentials-form-field.php:47
 msgid "Post key 1: "
-msgstr ""
-
-#: includes/payer-credentials-form-field.php:50
-msgid "$post_key_1"
 msgstr ""
 
 #: includes/payer-credentials-form-field.php:55
 msgid "Post key 2: "
 msgstr ""
 
-#: includes/payer-credentials-form-field.php:58
-msgid "$post_key_2"
-msgstr ""
-
 #: includes/payer-credentials-form-field.php:63
 msgid "Rest key: "
-msgstr ""
-
-#: includes/payer-credentials-form-field.php:66
-msgid "$rest_key"
 msgstr ""
 
 #: includes/payer-factory-settings.php:8
@@ -185,10 +188,6 @@ msgstr ""
 msgid "This controls the title which the user sees during checkout."
 msgstr ""
 
-#: includes/payer-factory-settings.php:17
-msgid "$this->method_title"
-msgstr ""
-
 #: includes/payer-factory-settings.php:21
 msgid "Description"
 msgstr ""
@@ -198,153 +197,210 @@ msgid "This controls the description which the user sees during checkout."
 msgstr ""
 
 #: includes/payer-factory-settings.php:30
-msgid "Instant MasterPass checkout"
-msgstr ""
-
-#: includes/payer-factory-settings.php:32
-msgid "Enable instant MasterPass checkout for products and cart page."
-msgstr ""
-
-#: includes/payer-factory-settings.php:36
-msgid "Instant purchase text"
-msgstr ""
-
-#: includes/payer-factory-settings.php:39
-msgid "Add an optional text after the Instant purchase button."
-msgstr ""
-
-#: includes/payer-factory-settings.php:43
-msgid "MasterPass Campaign"
-msgstr ""
-
-#: includes/payer-factory-settings.php:45
-msgid "Enable this setting to partake in a MasterPass campaign that is ongoing."
-msgstr ""
-
-#: includes/payer-factory-settings.php:49
-msgid "MasterPass Campaign text"
-msgstr ""
-
-#: includes/payer-factory-settings.php:51
-msgid "Enable this setting to show campaign information text to customer."
-msgstr ""
-
-#: includes/payer-factory-settings.php:55
-msgid "Discount amount for campaign"
-msgstr ""
-
-#: includes/payer-factory-settings.php:57
-msgid "Enter the amount to be discounted for the current campaign."
-msgstr ""
-
-#: includes/payer-factory-settings.php:64, includes/payer-factory-settings.php:74, includes/payer-factory-settings.php:84, includes/payer-factory-settings.php:94, includes/payer-factory-settings.php:103, includes/payer-factory-settings.php:113, includes/payer-factory-settings.php:123, includes/payer-factory-settings.php:133, includes/payer-factory-settings.php:143
+#: includes/payer-factory-settings.php:79
+#: includes/payer-factory-settings.php:89
+#: includes/payer-factory-settings.php:99
+#: includes/payer-factory-settings.php:109
+#: includes/payer-factory-settings.php:118
+#: includes/payer-factory-settings.php:128
+#: includes/payer-factory-settings.php:138
+#: includes/payer-factory-settings.php:148
+#: includes/payer-factory-settings.php:158
 msgid "Icon URL"
 msgstr ""
 
-#: includes/payer-factory-settings.php:66, includes/payer-factory-settings.php:76, includes/payer-factory-settings.php:86, includes/payer-factory-settings.php:96, includes/payer-factory-settings.php:105, includes/payer-factory-settings.php:115, includes/payer-factory-settings.php:125, includes/payer-factory-settings.php:135, includes/payer-factory-settings.php:145
+#: includes/payer-factory-settings.php:32
+#: includes/payer-factory-settings.php:81
+#: includes/payer-factory-settings.php:91
+#: includes/payer-factory-settings.php:101
+#: includes/payer-factory-settings.php:111
+#: includes/payer-factory-settings.php:120
+#: includes/payer-factory-settings.php:130
+#: includes/payer-factory-settings.php:140
+#: includes/payer-factory-settings.php:150
+#: includes/payer-factory-settings.php:160
 msgid "Put the URL to a new icon image here"
 msgstr ""
 
-#: includes/payer-factory-settings.php:151
+#: includes/payer-factory-settings.php:38
+msgid ""
+"To use this payment method you need to contact Payer first. If you do not "
+"contact payer before hand and get approval, your payments will not go "
+"through."
+msgstr ""
+
+#: includes/payer-factory-settings.php:45
+msgid "Instant MasterPass checkout"
+msgstr ""
+
+#: includes/payer-factory-settings.php:47
+msgid "Enable instant MasterPass checkout for products and cart page."
+msgstr ""
+
+#: includes/payer-factory-settings.php:51
+msgid "Instant purchase text"
+msgstr ""
+
+#: includes/payer-factory-settings.php:54
+msgid "Add an optional text after the Instant purchase button."
+msgstr ""
+
+#: includes/payer-factory-settings.php:58
+msgid "MasterPass Campaign"
+msgstr ""
+
+#: includes/payer-factory-settings.php:60
+msgid "Enable this setting to partake in a MasterPass campaign that is ongoing."
+msgstr ""
+
+#: includes/payer-factory-settings.php:64
+msgid "MasterPass Campaign text"
+msgstr ""
+
+#: includes/payer-factory-settings.php:66
+msgid "Enable this setting to show campaign information text to customer."
+msgstr ""
+
+#: includes/payer-factory-settings.php:70
+msgid "Discount amount for campaign"
+msgstr ""
+
+#: includes/payer-factory-settings.php:72
+msgid "Enter the amount to be discounted for the current campaign."
+msgstr ""
+
+#: includes/payer-factory-settings.php:166
 msgid "Payer credentials"
 msgstr ""
 
-#: includes/payer-factory-settings.php:153
-msgid "The key values can be found under the Settings/Account section in <a href=\"https://secure.payer.se/adminweb/inloggning/inloggning.php\"> Payer Administration</a>. Contact Payer if you haven't got access to your login credentials"
+#: includes/payer-factory-settings.php:168
+msgid ""
+"The key values can be found under the Settings/Account section in <a "
+"href=\"https://secure.payer.se/adminweb/inloggning/inloggning.php\"> Payer "
+"Administration</a>. Contact Payer if you haven't got access to your login "
+"credentials"
 msgstr ""
 
-#: includes/payer-factory-settings.php:157
+#: includes/payer-factory-settings.php:172
 msgid "Agent ID"
 msgstr ""
 
-#: includes/payer-factory-settings.php:159
+#: includes/payer-factory-settings.php:174
 msgid "Enter your Payer Agent ID"
 msgstr ""
 
-#: includes/payer-factory-settings.php:165
+#: includes/payer-factory-settings.php:180
 msgid "Soap ID"
 msgstr ""
 
-#: includes/payer-factory-settings.php:167
+#: includes/payer-factory-settings.php:182
 msgid "Enter your Payer SOAP ID"
 msgstr ""
 
-#: includes/payer-factory-settings.php:173
+#: includes/payer-factory-settings.php:188
 msgid "Soap Password"
 msgstr ""
 
-#: includes/payer-factory-settings.php:175
+#: includes/payer-factory-settings.php:190
 msgid "Enter your Payer Password"
 msgstr ""
 
-#: includes/payer-factory-settings.php:181
+#: includes/payer-factory-settings.php:196
 msgid "Post key 1"
 msgstr ""
 
-#: includes/payer-factory-settings.php:183
+#: includes/payer-factory-settings.php:198
 msgid "Enter your Payer Post key 1"
 msgstr ""
 
-#: includes/payer-factory-settings.php:189
+#: includes/payer-factory-settings.php:204
 msgid "Post key 2"
 msgstr ""
 
-#: includes/payer-factory-settings.php:191
+#: includes/payer-factory-settings.php:206
 msgid "Enter your Payer Post key 2"
 msgstr ""
 
-#: includes/payer-factory-settings.php:197
+#: includes/payer-factory-settings.php:212
 msgid "Rest key"
 msgstr ""
 
-#: includes/payer-factory-settings.php:199
+#: includes/payer-factory-settings.php:214
 msgid "Enter your Payer Rest key"
 msgstr ""
 
-#: includes/payer-factory-settings.php:205
+#: includes/payer-factory-settings.php:220
 msgid "Enable order management"
 msgstr ""
 
-#: includes/payer-factory-settings.php:207
+#: includes/payer-factory-settings.php:222
 msgid "Enable order management for Payer."
 msgstr ""
 
-#: includes/payer-factory-settings.php:212
+#: includes/payer-factory-settings.php:227
 msgid "Enable get address"
 msgstr ""
 
-#: includes/payer-factory-settings.php:214
+#: includes/payer-factory-settings.php:229
 msgid "Enable get address for Payer (SE only)."
 msgstr ""
 
-#: includes/payer-factory-settings.php:219
+#: includes/payer-factory-settings.php:234
+msgid "Proxy"
+msgstr ""
+
+#: includes/payer-factory-settings.php:236
+msgid "Enable if you are using a proxy to prevent callback issues."
+msgstr ""
+
+#: includes/payer-factory-settings.php:241
+msgid "Skip IP Validation"
+msgstr ""
+
+#: includes/payer-factory-settings.php:243
+msgid ""
+"Enable if you want to skip IP Validation. Notice that turning off the "
+"validation may be a high security risk. Please contact Payer Administration "
+"for further recommendations."
+msgstr ""
+
+#: includes/payer-factory-settings.php:248
 msgid "Test Mode Settings"
 msgstr ""
 
-#: includes/payer-factory-settings.php:224
+#: includes/payer-factory-settings.php:253
 msgid "Test mode"
 msgstr ""
 
-#: includes/payer-factory-settings.php:226
+#: includes/payer-factory-settings.php:255
 msgid "Enable Test mode for Payer."
 msgstr ""
 
-#: includes/payer-factory-settings.php:231
+#: includes/payer-factory-settings.php:260
 msgid "Debug"
 msgstr ""
 
-#: includes/payer-factory-settings.php:233
+#: includes/payer-factory-settings.php:262
 msgid "Enable logging."
 msgstr ""
 
-#: includes/payer-factory-settings.php:234
-msgid "Log Payer events, in <code>%s</code>"
+#: includes/payer-factory-settings.php:263
+msgid "Log Payer events"
 msgstr ""
 
-#: includes/payer-factory-settings.php:239
+#: includes/payer-factory-settings.php:268
 msgid "Put credentials in the Payer Card Payments settings."
 msgstr ""
 
-#: payer-for-woocommerce.php:170
+#: payer-for-woocommerce.php:174
 msgid "Get Address"
+msgstr ""
+
+#: vendor/krokedil/krokedil-logger/src/krokedil-order-event-log.php:124
+msgid "Events"
+msgstr ""
+
+#: classes/gateways/payer-factory-gateway.php:133
+msgctxt "placeholder"
+msgid "xxxxxx-xxxx"
 msgstr ""

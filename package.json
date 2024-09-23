@@ -1,0 +1,37 @@
+{
+  "name": "payer-for-woocommerce",
+  "version": "1.2.1",
+  "repository": "git@github.com:krokedil/payer-for-woocommerce.git",
+  "author": "Krokedil <info@krokedil.se>",
+  "license": "GPL-3.0+",
+  "devDependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/plugin-transform-runtime": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@wordpress/eslint-plugin": "^16.0.13",
+    "babel-loader": "^8.3.0",
+    "eslint": "^8.57.0",
+    "file-loader": "^6.2.0",
+    "grunt": "^1.6.1",
+    "grunt-contrib-cssmin": "^4.0.0",
+    "grunt-contrib-uglify": "^5.2.2",
+    "grunt-move": "^1.0.3",
+    "grunt-wp-i18n": "^1.0.3",
+    "prettier": "npm:wp-prettier@latest",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^4.10.0"
+  },
+  "scripts": {
+    "makepot": "pnpm grunt makepot",
+    "cssmin": "pnpm grunt cssmin",
+    "jsmin": "pnpm webpack",
+    "lint": "pnpm prettier assets/js --paren-spacing --tab-width 4 --print-width 120 --no-semi --write",
+    "lint:check": "pnpm prettier assets/js --paren-spacing --tab-width 4 --print-width 120 --no-semi --debug-check",
+    "build": "pnpm makepot && pnpm cssmin && pnpm lint:check && pnpm lint && pnpm jsmin"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "grunt-cli": "^1.4.3",
+    "grunt-zip": "^0.18.2"
+  }
+}
